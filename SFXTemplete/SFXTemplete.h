@@ -27,6 +27,9 @@ public:
 	void CreateSFX();
 	BOOL ExtractEmbeddedZip(LPCTSTR outputPath);
 
+protected:
+	INT32 Parse(LPTSTR m_lpCmdLine);
+
 // Implementation
 
 	DECLARE_MESSAGE_MAP()
