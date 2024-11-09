@@ -5,6 +5,9 @@
 #include "stdafx.h"
 #include "SFXTemplete.h"
 
+#include <fstream>
+#include <vector>
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
