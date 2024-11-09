@@ -29,8 +29,6 @@ BOOL CSFXTempleteApp::InitInstance()
 {
 	CWinApp::InitInstance();
 
-	CMFCVisualManager::SetDefaultManager(RUNTIME_CLASS(CMFCVisualManagerWindows));
-
 	SetRegistryKey(_T("SFX Templete App"));
 
 	return FALSE;
