@@ -45,10 +45,11 @@ void CSFXTempleteApp::CreateSFX()
 	LPCTSTR outputPath = _T("extracted_data.zip");
 
 	// CreateZipFile 함수 호출
-	if (ExtractEmbeddedZip(outputPath))
-		AfxMessageBox(_T("압축 파일 추출 성공."));
-	else
-		AfxMessageBox(_T("압축 파일 추출에 실패했습니다."));
+	ExtractEmbeddedZip(outputPath);
+	//if (ExtractEmbeddedZip(outputPath))
+	//	AfxMessageBox(_T("압축 파일 추출 성공."));
+	//else
+	//	AfxMessageBox(_T("압축 파일 추출에 실패했습니다."));
 }
 
 BOOL CSFXTempleteApp::ExtractEmbeddedZip(LPCTSTR outputPath)
