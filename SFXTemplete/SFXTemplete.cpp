@@ -75,6 +75,12 @@ BOOL CSFXTempleteApp::ExtractEmbeddedZip(LPCTSTR outputPath)
 
 	// 압축 데이터 위치로 이동하여 읽기
 	exeFile.seekg(exeSize - zipSize - sizeof(zipSize), std::ios::beg);
+	if (zipSize <= 0)
+	{
+		exeFile.close();
+		return FALSE;
+	}
+
 	std::vector<char> zipData(zipSize);
 	exeFile.read(zipData.data(), zipSize);
 	exeFile.close();
