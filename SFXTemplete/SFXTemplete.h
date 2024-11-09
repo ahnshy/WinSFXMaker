@@ -24,6 +24,7 @@ public:
 public:
 	virtual BOOL InitInstance();
 
+	void CreateSFX();
 	BOOL ExtractEmbeddedZip(LPCTSTR outputPath);
 
 // Implementation

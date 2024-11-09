@@ -34,7 +34,7 @@ BOOL CSFXTempleteApp::InitInstance()
 	return FALSE;
 }
 
-void CreateSFX()
+void CSFXTempleteApp::CreateSFX()
 {
 	// 압축 파일을 추출할 경로 설정 (LPCTSTR)
 	LPCTSTR outputPath = _T("extracted_data.zip");
