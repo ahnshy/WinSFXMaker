@@ -34,6 +34,20 @@ BOOL CSFXTempleteApp::InitInstance()
 	return FALSE;
 }
 
+void CreateSFX()
+{
+	// 압축 파일을 추출할 경로 설정 (LPCTSTR)
+	LPCTSTR outputPath = _T("extracted_data.zip");
+
+	// CreateZipFile 함수 호출
+	if (ExtractEmbeddedZip(outputPath)){
+		AfxMessageBox(_T("압축 파일 추출 성공."));
+	}
+	else{
+		AfxMessageBox(_T("압축 파일 추출에 실패했습니다."));
+	}
+}
+
 BOOL CSFXTempleteApp::ExtractEmbeddedZip(LPCTSTR outputPath)
 {
 	// 현재 실행 파일 경로 구하기
