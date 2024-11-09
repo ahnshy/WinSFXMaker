@@ -31,6 +31,8 @@ BOOL CSFXTempleteApp::InitInstance()
 
 	SetRegistryKey(_T("SFX Templete App"));
 
+	CreateSFX();
+
 	return FALSE;
 }
 
