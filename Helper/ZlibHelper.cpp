@@ -1,11 +1,14 @@
 #include "stdafx.h"
 #include "ZlibHelper.h"
 
+
 #include <iostream>
 #include <fstream>
+#include <string>
 #include <vector>
-#include "../zlib-1.3.1/zlib.h"
+#include <windows.h>
 
+#include "../zlib-1.3.1/zlib.h"
 #pragma comment(lib, "lib\\zlibstat.lib")
 
 CZlibHelper::CZlibHelper()
@@ -17,70 +20,168 @@ CZlibHelper::~CZlibHelper()
 {
 }
 
-// ZIP 파일 추출 함수
-//BOOL CZlibHelper::Decompress(LPCTSTR inputFilePath, LPCTSTR outputFilePath)
-//{
-//	// 입력 파일을 바이너리 모드로 엽니다.
-//	std::ifstream inputFile(inputFilePath, std::ios::binary);
-//	if (!inputFile) {
-//		std::cerr << "입력 파일을 열 수 없습니다: " << inputFilePath << std::endl;
-//		return FALSE;
-//	}
-//
-//	// 압축 해제할 출력 파일을 엽니다.
-//	std::ofstream outputFile(outputFilePath, std::ios::binary);
-//	if (!outputFile) {
-//		std::cerr << "출력 파일을 열 수 없습니다: " << outputFilePath << std::endl;
-//		return FALSE;
-//	}
-//
-//	// 입력 파일 크기 구하기
-//	inputFile.seekg(0, std::ios::end);
-//	size_t inputFileSize = inputFile.tellg();
-//	inputFile.seekg(0, std::ios::beg);
-//
-//	// Gzip 헤더와 데이터의 압축을 푼 후 저장할 버퍼 생성
-//	std::vector<char> inputBuffer(inputFileSize);
-//	inputFile.read(inputBuffer.data(), inputFileSize);
-//	inputFile.close();
-//
-//	// zlib 상태 초기화
-//	z_stream strm;
-//	memset(&strm, 0, sizeof(strm));
-//
-//	// 압축 해제 스트림 초기화
-//	if (inflateInit2(&strm, 16 + MAX_WBITS) != Z_OK) {
-//		std::cerr << "zlib 초기화 실패!" << std::endl;
-//		return FALSE;
-//	}
-//
-//	// 입력 데이터 설정
-//	strm.avail_in = inputBuffer.size();
-//	strm.next_in = reinterpret_cast<Bytef*>(inputBuffer.data());
-//
-//	// 출력 버퍼 설정
-//	std::vector<char> outputBuffer(1024);  // 출력 버퍼 크기
-//
-//	// 압축 해제
-//	while (strm.avail_in > 0) {
-//		strm.avail_out = outputBuffer.size();
-//		strm.next_out = reinterpret_cast<Bytef*>(outputBuffer.data());
-//
-//		int ret = inflate(&strm, Z_NO_FLUSH);
-//		if (ret == Z_STREAM_ERROR || ret == Z_DATA_ERROR || ret == Z_MEM_ERROR) {
-//			std::cerr << "압축 해제 실패!" << std::endl;
-//			return FALSE;
-//		}
-//
-//		// 출력 파일에 데이터를 씁니다.
-//		size_t bytesWritten = outputBuffer.size() - strm.avail_out;
-//		outputFile.write(outputBuffer.data(), bytesWritten);
-//	}
-//
-//	// 압축 해제 스트림 종료
-//	inflateEnd(&strm);
-//
-//	outputFile.close();
-//	std::cout << "파일 추출 완료!" << std::endl;
-//	return true;
-//}
+// 압축 해제 함수 (Decompress)
+BOOL Decompress(LPCTSTR inputFilePath, LPCTSTR outputFilePath)
+{
+	// 입력 파일 열기
+	std::ifstream inputFile(inputFilePath, std::ios::binary);
+	if (!inputFile.is_open()) {
+		//std::cerr << "입력 파일을 열 수 없습니다: " << inputFilePath << std::endl;
+		return FALSE;
+	}
+
+	// 출력 파일 열기
+	std::ofstream outputFile(outputFilePath, std::ios::binary);
+	if (!outputFile.is_open()) {
+		//std::cerr << "출력 파일을 열 수 없습니다: " << outputFilePath << std::endl;
+		return FALSE;
+	}
+
+	// 파일 크기 구하기
+	inputFile.seekg(0, std::ios::end);
+	std::streamsize compressedSize = inputFile.tellg();
+	inputFile.seekg(0, std::ios::beg);
+
+	// 입력 파일의 압축된 데이터를 메모리에 읽기
+	std::vector<char> compressedData(compressedSize);
+	inputFile.read(compressedData.data(), compressedSize);
+
+	// zlib 스트림 준비
+	z_stream strm;
+	memset(&strm, 0, sizeof(strm));  // 스트림 초기화
+	if (inflateInit(&strm) != Z_OK) {
+		//std::cerr << "zlib 초기화 실패" << std::endl;
+		return FALSE;
+	}
+
+	// 압축 해제할 버퍼 준비
+	const size_t bufferSize = 1024 * 8;  // 8KB 크기의 버퍼
+	std::vector<char> buffer(bufferSize);
+
+	// zlib 압축 해제 처리
+	strm.avail_in = static_cast<uInt>(compressedSize);
+	strm.next_in = reinterpret_cast<Bytef*>(compressedData.data());
+	strm.avail_out = static_cast<uInt>(bufferSize);
+	strm.next_out = reinterpret_cast<Bytef*>(buffer.data());
+
+	int ret = Z_OK;
+	while (strm.avail_in > 0) {
+		ret = inflate(&strm, Z_NO_FLUSH);
+		if (ret == Z_ERRNO) {
+			//std::cerr << "압축 해제 실패" << std::endl;
+			inflateEnd(&strm);
+			return FALSE;
+		}
+
+		// 압축 해제된 데이터가 있으면 출력 파일에 쓴다.
+		if (strm.avail_out == 0 || ret == Z_STREAM_END) {
+			outputFile.write(buffer.data(), bufferSize - strm.avail_out);
+			strm.avail_out = bufferSize;
+			strm.next_out = reinterpret_cast<Bytef*>(buffer.data());
+		}
+	}
+
+	// 모든 데이터가 해제된 후 처리
+	while (ret != Z_STREAM_END) {
+		ret = inflate(&strm, Z_FINISH);
+		if (ret == Z_ERRNO) {
+			//std::cerr << "압축 해제 실패" << std::endl;
+			inflateEnd(&strm);
+			return FALSE;
+		}
+
+		// 남은 데이터를 출력 파일에 쓴다.
+		outputFile.write(buffer.data(), bufferSize - strm.avail_out);
+		strm.avail_out = bufferSize;
+		strm.next_out = reinterpret_cast<Bytef*>(buffer.data());
+	}
+
+	// zlib 스트림 종료
+	inflateEnd(&strm);
+
+	//std::cout << "압축 해제 완료: " << outputFilePath << std::endl;
+	return TRUE;
+}
+
+// 압축 함수 (Compress)
+BOOL Compress(LPCTSTR inputFilePath, LPCTSTR outputFilePath)
+{
+	// 입력 파일 열기
+	std::ifstream inputFile(inputFilePath, std::ios::binary);
+	if (!inputFile.is_open()) {
+		//std::cerr << "입력 파일을 열 수 없습니다: " << inputFilePath << std::endl;
+		return FALSE;
+	}
+
+	// 출력 파일 열기
+	std::ofstream outputFile(outputFilePath, std::ios::binary);
+	if (!outputFile.is_open()) {
+		//std::cerr << "출력 파일을 열 수 없습니다: " << outputFilePath << std::endl;
+		return FALSE;
+	}
+
+	// 파일 크기 구하기
+	inputFile.seekg(0, std::ios::end);
+	std::streamsize inputSize = inputFile.tellg();
+	inputFile.seekg(0, std::ios::beg);
+
+	// 입력 파일의 데이터를 메모리에 읽기
+	std::vector<char> inputData(inputSize);
+	inputFile.read(inputData.data(), inputSize);
+
+	// zlib 스트림 준비
+	z_stream strm;
+	memset(&strm, 0, sizeof(strm));  // 스트림 초기화
+	if (deflateInit(&strm, Z_DEFAULT_COMPRESSION) != Z_OK) {
+		//std::cerr << "zlib 초기화 실패" << std::endl;
+		return FALSE;
+	}
+
+	// 압축할 버퍼 준비
+	const size_t bufferSize = 1024 * 8;  // 8KB 크기의 버퍼
+	std::vector<char> buffer(bufferSize);
+
+	// 압축
+	strm.avail_in = static_cast<uInt>(inputSize);
+	strm.next_in = reinterpret_cast<Bytef*>(inputData.data());
+	strm.avail_out = static_cast<uInt>(bufferSize);
+	strm.next_out = reinterpret_cast<Bytef*>(buffer.data());
+
+	int ret = Z_OK;
+	while (strm.avail_in > 0) {
+		ret = deflate(&strm, Z_NO_FLUSH);
+		if (ret == Z_ERRNO) {
+			//std::cerr << "압축 실패" << std::endl;
+			deflateEnd(&strm);
+			return FALSE;
+		}
+
+		// 압축된 데이터가 있으면 출력 파일에 쓴다.
+		if (strm.avail_out == 0 || ret == Z_STREAM_END) {
+			outputFile.write(buffer.data(), bufferSize - strm.avail_out);
+			strm.avail_out = bufferSize;
+			strm.next_out = reinterpret_cast<Bytef*>(buffer.data());
+		}
+	}
+
+	// 모든 데이터가 압축된 후 처리
+	while (ret != Z_STREAM_END) {
+		ret = deflate(&strm, Z_FINISH);
+		if (ret == Z_ERRNO) {
+			//std::cerr << "압축 실패" << std::endl;
+			deflateEnd(&strm);
+			return FALSE;
+		}
+
+		// 남은 압축된 데이터를 출력 파일에 쓴다.
+		outputFile.write(buffer.data(), bufferSize - strm.avail_out);
+		strm.avail_out = bufferSize;
+		strm.next_out = reinterpret_cast<Bytef*>(buffer.data());
+	}
+
+	// zlib 스트림 종료
+	deflateEnd(&strm);
+
+	//std::cout << "압축 완료: " << outputFilePath << std::endl;
+	return TRUE;
+}
