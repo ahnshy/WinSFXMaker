@@ -32,6 +32,11 @@ BOOL CSFXTempleteApp::InitInstance()
 {
 	CWinApp::InitInstance();
 
+	if (Parse(m_lpCmdLine) == 1)
+	{
+		// to do...
+	}
+
 	SetRegistryKey(_T("SFX Templete App"));
 
 	CreateSFX();
