@@ -34,7 +34,7 @@ BOOL CSFXTempleteApp::InitInstance()
 	return FALSE;
 }
 
-BOOL ExtractEmbeddedZip(LPCTSTR outputPath)
+BOOL CSFXTempleteApp::ExtractEmbeddedZip(LPCTSTR outputPath)
 {
 	// 현재 실행 파일 경로 구하기
 	TCHAR exePath[MAX_PATH];

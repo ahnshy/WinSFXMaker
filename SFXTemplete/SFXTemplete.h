@@ -24,6 +24,8 @@ public:
 public:
 	virtual BOOL InitInstance();
 
+	BOOL ExtractEmbeddedZip(LPCTSTR outputPath);
+
 // Implementation
 
 	DECLARE_MESSAGE_MAP()
