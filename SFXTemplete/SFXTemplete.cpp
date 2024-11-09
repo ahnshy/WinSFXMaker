@@ -34,3 +34,45 @@ BOOL CSFXTempleteApp::InitInstance()
 	return FALSE;
 }
 
+BOOL ExtractEmbeddedZip(LPCTSTR outputPath)
+{
+	// 현재 실행 파일 경로 구하기
+	TCHAR exePath[MAX_PATH];
+	GetModuleFileName(NULL, exePath, MAX_PATH);
+
+	// 실행 파일을 바이너리 모드로 열기
+	std::ifstream exeFile(exePath, std::ios::binary | std::ios::ate);
+	if (!exeFile) {
+		AfxMessageBox(_T("실행 파일을 열 수 없습니다."));
+		return FALSE;
+	}
+
+	// 파일 크기 및 압축 데이터 크기 읽기
+	std::streamsize exeSize = exeFile.tellg();
+	exeFile.seekg(exeSize - sizeof(std::streamsize), std::ios::beg);
+
+	std::streamsize zipSize;
+	exeFile.read(reinterpret_cast<char*>(&zipSize), sizeof(zipSize));
+
+	// 압축 데이터 위치로 이동하여 읽기
+	exeFile.seekg(exeSize - zipSize - sizeof(zipSize), std::ios::beg);
+	std::vector<char> zipData(zipSize);
+	exeFile.read(zipData.data(), zipSize);
+	exeFile.close();
+
+	// 압축 파일을 outputPath에 저장
+	std::ofstream outFile(outputPath, std::ios::binary);
+	if (!outFile) {
+		AfxMessageBox(_T("압축 파일을 저장할 수 없습니다."));
+		return FALSE;
+	}
+	outFile.write(zipData.data(), zipSize);
+	outFile.close();
+
+	CString msg;
+	msg.Format(_T("7z 파일이 추출되었습니다: %s"), outputPath);
+	AfxMessageBox(msg);
+
+	return TRUE;
+}
+
