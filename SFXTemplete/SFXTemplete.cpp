@@ -4,7 +4,6 @@
 
 #include "stdafx.h"
 #include "SFXTemplete.h"
-#include "SFXTempleteDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
