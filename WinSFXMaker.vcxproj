@@ -148,6 +148,7 @@
     <ResourceCompile Include="WinSFXMaker.rc" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="res\SFXTemplete.bin" />
     <None Include="res\WinSFXMaker.rc2" />
     <None Include="zlib-1.3.1\ChangeLog" />
     <None Include="zlib-1.3.1\configure" />
