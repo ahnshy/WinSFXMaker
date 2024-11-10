@@ -236,7 +236,7 @@ BOOL CWinSFXMakerDlg::CreateSFXFile(LPCTSTR templatePath, LPCTSTR zipPath, LPCTS
 	}
 	std::streamsize zipSize = (UINT)zipFile.tellg();
 	zipFile.seekg(0, std::ios::beg);
-	std::vector<char> zipData(zipSize);
+	std::vector<char> zipData((int)zipSize);
 	zipFile.read(zipData.data(), zipSize);
 	zipFile.close();
 
