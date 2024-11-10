@@ -224,7 +224,7 @@ BOOL CWinSFXMakerDlg::CreateSFXFile(LPCTSTR templatePath, LPCTSTR zipPath, LPCTS
 	}
 	std::streamsize templateSize = templateFile.tellg();
 	templateFile.seekg(0, std::ios::beg);
-	std::vector<char> templateData(templateSize);
+	std::vector<char> templateData((int)templateSize);
 	templateFile.read(templateData.data(), templateSize);
 	templateFile.close();
 
@@ -234,7 +234,7 @@ BOOL CWinSFXMakerDlg::CreateSFXFile(LPCTSTR templatePath, LPCTSTR zipPath, LPCTS
 		AfxMessageBox(_T("ZIP 파일을 열 수 없습니다."));
 		return FALSE;
 	}
-	std::streamsize zipSize = zipFile.tellg();
+	std::streamsize zipSize = (UINT)zipFile.tellg();
 	zipFile.seekg(0, std::ios::beg);
 	std::vector<char> zipData(zipSize);
 	zipFile.read(zipData.data(), zipSize);
