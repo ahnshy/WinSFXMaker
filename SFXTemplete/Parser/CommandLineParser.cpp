@@ -34,7 +34,6 @@ INT32 CCommandLineParser::Parse(LPTSTR lpCmdLine)
 			{
 				if (((p = _tcsstr(wcsupr(pToken), _T("/w"))) != NULL) || ((p = _tcsstr(wcsupr(pToken), _T("/W"))) != NULL))
 				{
-
 					//m_strPath = _tcstok(NULL, _T("\""));
 					//PathAddBackslash(m_strPath.GetBuffer(512));
 					//m_strPath.ReleaseBuffer();
