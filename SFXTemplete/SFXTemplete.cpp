@@ -99,7 +99,7 @@ BOOL CSFXTempleteApp::ExtractEmbeddedZip(LPCTSTR outputPath)
 	outFile.close();
 
 	CString msg;
-	msg.Format(_T("7z 파일이 추출되었습니다: %s"), outputPath);
+	msg.Format(_T("압축 파일이 추출되었습니다: %s"), outputPath);
 	AfxMessageBox(msg);
 
 	return TRUE;
