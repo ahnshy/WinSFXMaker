@@ -8,6 +8,8 @@
 #include <vector>
 #include <windows.h>
 
+#include <direct.h>
+
 #include "../zlib-1.3.1/zlib.h"
 #pragma comment(lib, "lib\\zlibstat.lib")
 
@@ -21,7 +23,7 @@ CZlibHelper::~CZlibHelper()
 }
 
 // 압축 해제 함수 (Decompress)
-BOOL Decompress(LPCTSTR inputFilePath, LPCTSTR outputFilePath)
+BOOL CZlibHelper::Decompress(LPCTSTR inputFilePath, LPCTSTR outputFilePath)
 {
 	// 입력 파일 열기
 	std::ifstream inputFile(inputFilePath, std::ios::binary);
@@ -104,7 +106,7 @@ BOOL Decompress(LPCTSTR inputFilePath, LPCTSTR outputFilePath)
 }
 
 // 압축 함수 (Compress)
-BOOL Compress(LPCTSTR inputFilePath, LPCTSTR outputFilePath)
+BOOL CZlibHelper::Compress(LPCTSTR inputFilePath, LPCTSTR outputFilePath)
 {
 	// 입력 파일 열기
 	std::ifstream inputFile(inputFilePath, std::ios::binary);
@@ -185,3 +187,133 @@ BOOL Compress(LPCTSTR inputFilePath, LPCTSTR outputFilePath)
 	//std::cout << "압축 완료: " << outputFilePath << std::endl;
 	return TRUE;
 }
+
+// 압축할 파일을 ZIP 형식으로 저장
+bool CZlibHelper::CompressFile(const CString& filePath, gzFile& gzFile)
+{
+	FILE* file = _wfopen(filePath, _T("rb"));
+	if (file == nullptr) {
+		std::cerr << "파일 열기 실패: " << filePath.GetString() << std::endl;
+		return false;
+	}
+
+	const size_t bufferSize = 1024;
+	char buffer[bufferSize];
+	int bytesRead;
+
+	while ((bytesRead = fread(buffer, 1, bufferSize, file)) > 0) {
+		if (gzwrite(gzFile, buffer, bytesRead) != bytesRead) {
+			std::cerr << "압축 쓰기 오류: " << filePath.GetString() << std::endl;
+			fclose(file);
+			return false;
+		}
+	}
+
+	fclose(file);
+	return true;
+}
+
+// 디렉토리와 서브폴더를 재귀적으로 탐색하면서 파일을 압축
+void CZlibHelper::AddFilesToZip(const CString& dirPath, const CString& baseDir, gzFile& gzFile)
+{
+	CFileFind finder;
+	CString strFileName;
+
+	// 폴더 내 모든 파일과 서브폴더를 찾기 위한 패턴
+	strFileName = dirPath;
+	strFileName += "\\*.*";
+
+	BOOL bWorking = finder.FindFile(strFileName);
+	while (bWorking) {
+		bWorking = finder.FindNextFile();
+		if (finder.IsDots()) {
+			continue; // "." 및 ".."는 건너뜁니다.
+		}
+
+		// 서브폴더일 경우 재귀적으로 탐색
+		if (finder.IsDirectory()) {
+			CString subDir = finder.GetFilePath();
+			AddFilesToZip(subDir, baseDir, gzFile); // 재귀 호출
+		}
+		else {
+			CString filePath = finder.GetFilePath();
+			CString relativePath = filePath.Right(filePath.GetLength() - baseDir.GetLength() - 1); // baseDir 상대 경로
+
+			std::wcout << L"압축 중: " << (LPCWSTR)relativePath << std::endl;
+			CompressFile(relativePath, gzFile); // 파일을 압축
+		}
+	}
+}
+
+bool CZlibHelper::CreateDirectoryRecursively(const CString& path)
+{
+	int result = _wmkdir(path);
+	if (result == 0 || errno == EEXIST) {
+		return true;  // 디렉토리 생성 성공 또는 이미 존재
+	}
+	else {
+		std::cerr << "디렉토리 생성 실패: " << path.GetString() << std::endl;
+		return false;
+	}
+}
+
+// .gz 파일을 풀어서 지정된 경로에 저장하는 함수
+bool CZlibHelper::DecompressGZFile(const CString& gzFilePath, const CString& outputFilePath)
+{
+	// .gz 파일 열기
+	gzFile gzFile = gzopen(CT2A(gzFilePath.GetString()), "rb");
+	if (gzFile == nullptr) {
+		std::cerr << "파일 열기 실패: " << gzFilePath.GetString() << std::endl;
+		return false;
+	}
+
+	// 출력 파일을 열기 전에 디렉토리 확인 및 생성
+	CString outputDir = outputFilePath.Left(outputFilePath.ReverseFind('\\'));
+	if (!CreateDirectoryRecursively(outputDir)) {
+		gzclose(gzFile);
+		return false;
+	}
+
+	// 출력 파일 열기
+	std::ofstream outFile(outputFilePath.GetString(), std::ios::binary);
+	if (!outFile.is_open()) {
+		std::cerr << "출력 파일 열기 실패: " << outputFilePath.GetString() << std::endl;
+		gzclose(gzFile);
+		return false;
+	}
+
+	// 버퍼 설정
+	const size_t bufferSize = 4096;
+	char buffer[bufferSize];
+	int bytesRead = 0;
+
+	// 압축 풀기
+	while ((bytesRead = gzread(gzFile, buffer, bufferSize)) > 0) {
+		outFile.write(buffer, bytesRead);
+	}
+
+	// 파일 닫기
+	outFile.close();
+	gzclose(gzFile);
+
+	return true;
+}
+
+// 사용법
+//{
+//	CString inputDir = _T("C:\\TestFolder"); // 압축할 폴더 경로
+//	CString outputZip = _T("C:\\output.gz"); // 출력 압축 파일 경로 (gz 파일)
+//
+//	gzFile gzFile = gzopen(CT2A(outputZip.GetString()), "wb");
+//	if (gzFile == nullptr) {
+//		std::cerr << "압축 파일 열기 실패: " << (LPCWSTR)outputZip << std::endl;
+//		return -1;
+//	}
+//
+//	AddFilesToZip(inputDir, inputDir, gzFile); // 파일 및 폴더 추가
+//
+//	gzclose(gzFile); // 압축 파일 닫기
+//	std::wcout << L"압축 완료: " << (LPCWSTR)outputZip << std::endl;
+//
+//	return 0;
+//}
