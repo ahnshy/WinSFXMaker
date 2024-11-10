@@ -193,7 +193,8 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
     </Lib>
     <PostBuildEvent>
-      <Command>copy "$(TargetPath)" "$(SolutionDir)lib\$(TargetFileName)"</Command>
+      <Command>if not exist "$(SolutionDir)lib" mkdir "$(SolutionDir)lib"
+copy "$(TargetPath)" "$(SolutionDir)lib\$(TargetFileName)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
