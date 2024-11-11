@@ -128,7 +128,7 @@ BOOL CZlibHelper::Compress(LPCTSTR inputFilePath, LPCTSTR outputFilePath)
 	inputFile.seekg(0, std::ios::beg);
 
 	// 입력 파일의 데이터를 메모리에 읽기
-	std::vector<char> inputData(inputSize);
+	std::vector<char> inputData((int)inputSize);
 	inputFile.read(inputData.data(), inputSize);
 
 	// zlib 스트림 준비
