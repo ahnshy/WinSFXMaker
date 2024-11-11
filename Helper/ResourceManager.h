@@ -7,5 +7,6 @@ public:
 	~CResourceManager();
 
 	BOOL ChangeExeIcon(LPCTSTR szExePath, LPCTSTR szIconFilePath);
+	BOOL GetVersionInfo(LPCTSTR szExePath, CString& fileVersion, CString& productName, CString& companyName);
 };
 
