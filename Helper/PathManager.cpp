@@ -17,7 +17,7 @@
 	%Root%
 	¦¦\Config\config.ini
 */
-#include "stdafx.h"
+#include "../stdafx.h"
 #include "PathManager.h"
 
 // static member initialize
