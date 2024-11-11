@@ -13,7 +13,7 @@ public:
 	//BOOL Decompress(LPCTSTR inputFilePath, LPCTSTR outputFilePath);
 
 	void AddFilesToZip(const CString& dirPath, const CString& baseDir, gzFile& gzFile);
-	BOOL CompressFile(const CString& filePath, gzFile& gzFile);
+	BOOL CompressFile(const CString& strPath, gzFile& gzFile);
 
 	bool DecompressGZFile(const CString& gzFilePath, const CString& outputFilePath);
 		bool CreateDirectoryRecursively(const CString& path);

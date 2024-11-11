@@ -189,30 +189,32 @@ BOOL CZlibHelper::Compress(LPCTSTR inputFilePath, LPCTSTR outputFilePath)
 }
 
 // 압축할 파일을 ZIP 형식으로 저장
-BOOL CZlibHelper::CompressFile(const CString& filePath, gzFile& gzFile)
+BOOL CZlibHelper::CompressFile(const CString& strPath, gzFile& gzFile)
 {
 	FILE* pFile = NULL;
-	_wfopen_s(&pFile, (LPCTSTR)filePath, _T("rb"));
+	_wfopen_s(&pFile, (LPCTSTR)strPath, _T("rb"));
 	if (pFile == nullptr)
 	{
-		std::cerr << "파일 열기 실패: " << filePath.GetString() << std::endl;
-		return false;
+		//std::cerr << "파일 열기 실패: " << filePath.GetString() << std::endl;
+		return FALSE;
 	}
 
 	const size_t bufferSize = 1024;
 	char buffer[bufferSize];
 	int bytesRead;
 
-	while ((bytesRead = fread(buffer, 1, bufferSize, pFile)) > 0) {
-		if (gzwrite(gzFile, buffer, bytesRead) != bytesRead) {
-			std::cerr << "압축 쓰기 오류: " << filePath.GetString() << std::endl;
+	while ((bytesRead = fread(buffer, 1, bufferSize, pFile)) > 0)
+	{
+		if (gzwrite(gzFile, buffer, bytesRead) != bytesRead)
+		{
+			//std::cerr << "압축 쓰기 오류: " << filePath.GetString() << std::endl;
 			fclose(pFile);
-			return false;
+			return FALSE;
 		}
 	}
 
 	fclose(pFile);
-	return true;
+	return TRUE;
 }
 
 // 디렉토리와 서브폴더를 재귀적으로 탐색하면서 파일을 압축
