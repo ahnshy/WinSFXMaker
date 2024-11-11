@@ -10,9 +10,6 @@
 #include <fstream>
 #include <vector>
 
-#include <winver.h>
-#pragma comment(lib, "Version.lib")
-
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
