@@ -21,8 +21,6 @@ public:
 	BOOL CreateSFXFile(LPCTSTR templatePath, LPCTSTR zipPath, LPCTSTR outputPath);
 	void SaveResourceToFile(CString& strPath);
 
-	BOOL UpdateVersionInfo(LPCTSTR szExePath, const CString& productName, const CString& fileVersion, const CString& companyName);
-
 // Implementation
 protected:
 	HICON m_hIcon;
