@@ -21,9 +21,8 @@
 
 // Default setting (all lowercase)
 #define			DEFAULT_LOG_DIRECTORY_NAME				TEXT("log")
-#define			DEFAULT_CONFIG_DIRECTORY_NAME				TEXT("config")
-#define			DEFAULT_TEMP_DIRECTORY_NAME				TEXT("temp")
-
+#define			DEFAULT_CONFIG_DIRECTORY_NAME			TEXT("config")
+#define			DEFAULT_TEMP_DIRECTORY_ROOTNAME			TEXT("winsfxmaker")
 #define			DEFAULT_CONFIG_FILE_NAME				TEXT("config.ini")
 
 class CPathManager
@@ -67,5 +66,5 @@ public:
 	static LPCTSTR			m_lpszDefaultConfigName;
 	static LPCTSTR			m_lpszDefaultConfigFileName;
 	static LPCTSTR			m_lpszDefaultDCConfigFileName;
-	static LPCTSTR			m_lpszDefaultTempPathName;
+	static LPCTSTR			m_lpszDefaultTempPathRootName;
 };
