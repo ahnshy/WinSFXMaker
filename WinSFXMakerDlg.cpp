@@ -300,51 +300,6 @@ BOOL CWinSFXMakerDlg::UpdateVersionInfo(LPCTSTR szExePath, const CString& produc
 	}
 }
 
-BOOL CWinSFXMakerDlg::GetVersionInfo(LPCTSTR szExePath, CString& fileVersion, CString& productName, CString& companyName)
-{
-	// EXE 파일의 버전 리소스 로드
-	DWORD dwHandle;
-	UINT uLen = GetFileVersionInfoSize(szExePath, &dwHandle);
-	if (uLen == 0) {
-		//MessageBox(NULL, _T("버전 정보 읽기 실패"), _T("Error"), MB_OK);
-		return FALSE;
-	}
-
-	// 버전 정보 메모리 할당
-	LPVOID pData = malloc(uLen);
-	if (pData == NULL) {
-		//MessageBox(NULL, _T("메모리 할당 실패"), _T("Error"), MB_OK);
-		return FALSE;
-	}
-
-	// 버전 리소스 읽기
-	if (!GetFileVersionInfo(szExePath, dwHandle, uLen, pData)) {
-		free(pData);
-		//MessageBox(NULL, _T("버전 정보 읽기 실패"), _T("Error"), MB_OK);
-		return FALSE;
-	}
-
-	// 버전 정보 파싱
-	LPVOID lpVersionInfo;
-	UINT uSize;
-	if (VerQueryValue(pData, _T("\\StringFileInfo\\040904b0\\FileVersion"), &lpVersionInfo, &uSize)) {
-		fileVersion = CString(static_cast<TCHAR*>(lpVersionInfo), uSize);
-	}
-
-	if (VerQueryValue(pData, _T("\\StringFileInfo\\040904b0\\ProductName"), &lpVersionInfo, &uSize)) {
-		productName = CString(static_cast<TCHAR*>(lpVersionInfo), uSize);
-	}
-
-	if (VerQueryValue(pData, _T("\\StringFileInfo\\040904b0\\CompanyName"), &lpVersionInfo, &uSize)) {
-		companyName = CString(static_cast<TCHAR*>(lpVersionInfo), uSize);
-	}
-
-	// 메모리 해제
-	free(pData);
-
-	return TRUE;
-}
-
 void CWinSFXMakerDlg::OnBnClickedOk()
 {
 
