@@ -67,11 +67,12 @@ BOOL CPathManager::Initialize()
 	PathAddBackslash(m_szConfigFile);
 	_tcscat_s(m_szConfigFile, _countof(m_szConfigFile), m_lpszDefaultConfigFileName);
 
-	// Set TempPath
-	_tcscpy_s(m_szTempPath, _countof(m_szTempPath), m_szRootPath);
+	// TempPath\\winsfxmaker
+	::GetTempPath(MAX_PATH-sizeof(TCHAR), m_szTempPath);
 	PathAddBackslash(m_szTempPath);
 	_tcscat_s(m_szTempPath, _countof(m_szTempPath), m_lpszDefaultTempPathRootName);
 	_tmkdir(m_szTempPath);
+	PathAddBackslash(m_szTempPath);
 
 	return TRUE;
 }
