@@ -24,7 +24,7 @@
 CPathManager*	CPathManager::m_pManager			= NULL;
 LPCTSTR	CPathManager::m_lpszDefaultLogName			= DEFAULT_LOG_DIRECTORY_NAME;
 LPCTSTR	CPathManager::m_lpszDefaultConfigName		= DEFAULT_CONFIG_DIRECTORY_NAME;
-LPCTSTR	CPathManager::m_lpszDefaultTempPathName		= DEFAULT_TEMP_DIRECTORY_NAME;
+LPCTSTR	CPathManager::m_lpszDefaultTempPathRootName = DEFAULT_TEMP_DIRECTORY_ROOTNAME;
 
 // File
 LPCTSTR	CPathManager::m_lpszDefaultConfigFileName	= DEFAULT_CONFIG_FILE_NAME;
@@ -70,7 +70,7 @@ BOOL CPathManager::Initialize()
 	// Set TempPath
 	_tcscpy_s(m_szTempPath, _countof(m_szTempPath), m_szRootPath);
 	PathAddBackslash(m_szTempPath);
-	_tcscat_s(m_szTempPath, _countof(m_szTempPath), m_lpszDefaultTempPathName);
+	_tcscat_s(m_szTempPath, _countof(m_szTempPath), m_lpszDefaultTempPathRootName);
 	_tmkdir(m_szTempPath);
 
 	return TRUE;
