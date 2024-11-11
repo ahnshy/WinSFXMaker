@@ -189,10 +189,12 @@ BOOL CZlibHelper::Compress(LPCTSTR inputFilePath, LPCTSTR outputFilePath)
 }
 
 // 압축할 파일을 ZIP 형식으로 저장
-bool CZlibHelper::CompressFile(const CString& filePath, gzFile& gzFile)
+BOOL CZlibHelper::CompressFile(const CString& filePath, gzFile& gzFile)
 {
-	FILE* file = _wfopen(filePath, _T("rb"));
-	if (file == nullptr) {
+	FILE* pFile = NULL;
+	_wfopen_s(&pFile, (LPCTSTR)filePath, _T("rb"));
+	if (pFile == nullptr)
+	{
 		std::cerr << "파일 열기 실패: " << filePath.GetString() << std::endl;
 		return false;
 	}
@@ -201,15 +203,15 @@ bool CZlibHelper::CompressFile(const CString& filePath, gzFile& gzFile)
 	char buffer[bufferSize];
 	int bytesRead;
 
-	while ((bytesRead = fread(buffer, 1, bufferSize, file)) > 0) {
+	while ((bytesRead = fread(buffer, 1, bufferSize, pFile)) > 0) {
 		if (gzwrite(gzFile, buffer, bytesRead) != bytesRead) {
 			std::cerr << "압축 쓰기 오류: " << filePath.GetString() << std::endl;
-			fclose(file);
+			fclose(pFile);
 			return false;
 		}
 	}
 
-	fclose(file);
+	fclose(pFile);
 	return true;
 }
 
