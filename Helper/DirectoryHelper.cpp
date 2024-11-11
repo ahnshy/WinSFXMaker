@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "../stdafx.h"
 #include "DirectoryHelper.h"
 #include <Shobjidl.h>
 #include <Tlhelp32.h>
