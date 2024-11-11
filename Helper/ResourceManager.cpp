@@ -4,7 +4,6 @@
 #include <winver.h>
 #pragma comment(lib, "Version.lib")
 
-
 CResourceManager::CResourceManager()
 {
 }
