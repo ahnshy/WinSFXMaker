@@ -14,7 +14,7 @@
 #    if defined (LOG4CPP_STLPORT_AND_BOOST_BUILD)
 #        include <log4cpp/config-win32-stlport-boost.h>
 #    else
-#        include <log4cpp/config-win32.h>
+#        include <../include/config-win32.h>
 #    endif
 
 #ifdef MSVC_MEMORY_LEAK_CHECK
@@ -43,7 +43,7 @@
 #endif
 #endif
 
-#include <log4cpp/Export.hh>
+#include <../include/Export.hh>
 
 #if defined(_MSC_VER)
 #    pragma warning( disable : 4786 ) // 255 char debug symbol limit
