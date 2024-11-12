@@ -9,9 +9,9 @@
 #if BOOST_VERSION >= 103500
 
 #define LOG4CPP_HAVE_INT64_T
-#include <log4cpp/SmtpAppender.hh>
-#include <log4cpp/FactoryParams.hh>
-#include <log4cpp/HierarchyMaintainer.hh>
+#include <../include/SmtpAppender.hh>
+#include <../include/FactoryParams.hh>
+#include <../include/HierarchyMaintainer.hh>
 #include <boost/asio/ip/tcp.hpp>
 #include <boost/thread/mutex.hpp>
 #include <boost/thread/once.hpp>
