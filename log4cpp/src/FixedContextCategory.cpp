@@ -8,7 +8,7 @@
  */
 
 #include "PortabilityImpl.hh"
-#include <log4cpp/FixedContextCategory.hh>
+#include <../include/FixedContextCategory.hh>
 
 namespace log4cpp {
 
