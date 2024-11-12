@@ -13,8 +13,8 @@
 #    include <unistd.h>
 #endif
 
-#include <log4cpp/CategoryStream.hh>
-#include <log4cpp/Category.hh>
+#include <../include/CategoryStream.hh>
+#include <../include/Category.hh>
 
 namespace log4cpp {
 
