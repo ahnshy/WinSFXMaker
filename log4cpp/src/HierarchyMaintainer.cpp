@@ -17,8 +17,8 @@
 #endif
 
 #include <cstdio>
-#include <log4cpp/HierarchyMaintainer.hh>
-#include <log4cpp/FileAppender.hh>
+#include <../include/HierarchyMaintainer.hh>
+#include <../include/FileAppender.hh>
 
 namespace log4cpp {
 
