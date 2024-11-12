@@ -14,8 +14,8 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <log4cpp/IdsaAppender.hh>
-#include <log4cpp/FactoryParams.hh>
+#include <../include/IdsaAppender.hh>
+#include <../include/FactoryParams.hh>
 #include <memory>
 
 namespace log4cpp {
