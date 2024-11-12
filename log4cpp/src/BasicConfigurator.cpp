@@ -15,10 +15,10 @@
 #endif
 
 #include <cstdio>
-#include <log4cpp/BasicConfigurator.hh>
-#include <log4cpp/Category.hh>
-#include <log4cpp/FileAppender.hh>
-#include <log4cpp/Priority.hh>
+#include <../include/BasicConfigurator.hh>
+#include <../include/Category.hh>
+#include <../include/FileAppender.hh>
+#include <../include/Priority.hh>
 
 namespace log4cpp {
 
