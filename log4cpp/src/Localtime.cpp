@@ -4,7 +4,7 @@
  * See the COPYING file for the terms of usage and distribution.
  */
 
-#include <log4cpp/Portability.hh>
+#include <../include/Portability.hh>
 #include "Localtime.hh"
 #include <time.h>
 #include <memory.h>
