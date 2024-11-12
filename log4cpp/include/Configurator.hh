@@ -8,8 +8,8 @@
 #ifndef _LOG4CPP_CONFIGURATOR_HH
 #define _LOG4CPP_CONFIGURATOR_HH
 
-#include <log4cpp/Portability.hh>
-#include <log4cpp/Export.hh>
+#include <../include/Portability.hh>
+#include <../include/Export.hh>
 #include <string>
 #include <stdexcept>
 
