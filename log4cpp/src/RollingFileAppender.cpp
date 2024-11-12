@@ -15,9 +15,9 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <log4cpp/RollingFileAppender.hh>
-#include <log4cpp/Category.hh>
-#include <log4cpp/FactoryParams.hh>
+#include <../include/RollingFileAppender.hh>
+#include <../include/Category.hh>
+#include <../include/FactoryParams.hh>
 #include <memory>
 #include <stdio.h>
 #include <math.h>
