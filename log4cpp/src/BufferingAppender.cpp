@@ -5,7 +5,7 @@
  */
 
 #include "PortabilityImpl.hh"
-#include <log4cpp/BufferingAppender.hh>
+#include <../include/BufferingAppender.hh>
 #include <algorithm>
 #include <sstream>
 #include <memory>
