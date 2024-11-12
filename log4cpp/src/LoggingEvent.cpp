@@ -8,8 +8,8 @@
  */
 
 #include "PortabilityImpl.hh"
-#include <log4cpp/LoggingEvent.hh>
-#include <log4cpp/threading/Threading.hh>
+#include <../include/LoggingEvent.hh>
+#include <../include/threading/Threading.hh>
 
 namespace log4cpp {
     
