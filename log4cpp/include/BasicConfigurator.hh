@@ -8,7 +8,7 @@
 #ifndef _LOG4CPP_BASICCONFIGURATOR_HH
 #define _LOG4CPP_BASICCONFIGURATOR_HH
 
-#include <log4cpp/Portability.hh>
+#include <../include/Portability.hh>
 
 namespace log4cpp {
 
