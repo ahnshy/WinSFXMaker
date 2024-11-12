@@ -8,11 +8,11 @@
 
 #include "PortabilityImpl.hh"
 
-#include <log4cpp/PatternLayout.hh>
-#include <log4cpp/Priority.hh>
-#include <log4cpp/NDC.hh>
-#include <log4cpp/TimeStamp.hh>
-#include <log4cpp/FactoryParams.hh>
+#include <../include/PatternLayout.hh>
+#include <../include/Priority.hh>
+#include <../include/NDC.hh>
+#include <../include/TimeStamp.hh>
+#include <../include/FactoryParams.hh>
 #include <memory>
 
 #ifdef LOG4CPP_HAVE_SSTREAM
