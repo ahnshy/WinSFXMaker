@@ -10,13 +10,13 @@
 #ifndef _LOG4CPP_CATEGORY_HH
 #define _LOG4CPP_CATEGORY_HH
 
-#include <log4cpp/Portability.hh>
-#include <log4cpp/Appender.hh>
-#include <log4cpp/LoggingEvent.hh>
-#include <log4cpp/Priority.hh>
-#include <log4cpp/CategoryStream.hh>
-#include <log4cpp/threading/Threading.hh>
-#include <log4cpp/convenience.h>
+#include <../include/Portability.hh>
+#include <../include/Appender.hh>
+#include <../include/LoggingEvent.hh>
+#include <../include/Priority.hh>
+#include <../include/CategoryStream.hh>
+#include <../include/threading/Threading.hh>
+#include <../include/convenience.h>
 
 #include <map>
 #include <vector>
