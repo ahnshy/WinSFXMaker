@@ -8,7 +8,7 @@
 #if !defined(h_fb88639f_85c9_481a_a3a0_f25ae8bac24c)
 #define h_fb88639f_85c9_481a_a3a0_f25ae8bac24c
 
-#include <log4cpp/LoggingEvent.hh>
+#include <../include/LoggingEvent.hh>
 
 namespace log4cpp
 {
