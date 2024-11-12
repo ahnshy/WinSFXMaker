@@ -4,7 +4,7 @@
  * See the COPYING file for the terms of usage and distribution.
  */
 
-#include <log4cpp/threading/Threading.hh>
+#include <../include/threading/Threading.hh>
 
 #ifndef LOG4CPP_HAVE_THREADING
 
