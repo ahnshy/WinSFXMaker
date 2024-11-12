@@ -5,7 +5,7 @@
  */
 
 
-#include <log4cpp/AppendersFactory.hh>
+#include <../include/AppendersFactory.hh>
 #include <stdexcept>
 
 namespace log4cpp
