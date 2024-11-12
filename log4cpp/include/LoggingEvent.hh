@@ -10,11 +10,11 @@
 #ifndef _LOG4CPP_LOGGINGEVENT_HH
 #define _LOG4CPP_LOGGINGEVENT_HH
 
-#include <log4cpp/Portability.hh>
+#include <../include/Portability.hh>
 #include <string>
 
-#include <log4cpp/Priority.hh>
-#include <log4cpp/TimeStamp.hh>
+#include <../include/Priority.hh>
+#include <../include/TimeStamp.hh>
 
 /**
  * The top level namespace for all 'Log for C++' types and classes.
