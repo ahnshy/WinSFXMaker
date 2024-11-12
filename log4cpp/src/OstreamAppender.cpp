@@ -14,7 +14,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <log4cpp/OstreamAppender.hh>
+#include <../include/OstreamAppender.hh>
 
 namespace log4cpp {
 
