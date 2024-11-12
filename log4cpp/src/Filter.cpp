@@ -8,7 +8,7 @@
  */
 
 #include "PortabilityImpl.hh"
-#include <log4cpp/Filter.hh>
+#include <../include/Filter.hh>
 
 namespace log4cpp {
 
