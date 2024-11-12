@@ -4,7 +4,7 @@
  * See the COPYING file for the terms of usage and distribution.
  */
 
-#include <log4cpp/FactoryParams.hh>
+#include <../include/FactoryParams.hh>
 #include <stdexcept>
 
 namespace log4cpp
