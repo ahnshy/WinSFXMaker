@@ -8,7 +8,7 @@
  */
 
 #include "PortabilityImpl.hh"
-#include <log4cpp/StringQueueAppender.hh>
+#include <../include/StringQueueAppender.hh>
 
 namespace log4cpp {
 
