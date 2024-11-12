@@ -4,7 +4,7 @@
  * See the COPYING file for the terms of usage and distribution.
  */
 
-#include <log4cpp/TriggeringEventEvaluatorFactory.hh>
+#include <../include/TriggeringEventEvaluatorFactory.hh>
 #include <stdexcept>
 
 namespace log4cpp
