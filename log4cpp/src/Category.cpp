@@ -13,9 +13,9 @@
 #    include <unistd.h>
 #endif
 
-#include <log4cpp/Category.hh>
-#include <log4cpp/HierarchyMaintainer.hh>
-#include <log4cpp/NDC.hh>
+#include <../include/Category.hh>
+#include <../include/HierarchyMaintainer.hh>
+#include <../include/NDC.hh>
 #include "StringUtil.hh"
 
 namespace log4cpp {
