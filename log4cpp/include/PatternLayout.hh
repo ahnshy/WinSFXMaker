@@ -9,9 +9,9 @@
 #ifndef _LOG4CPP_PATTERNLAYOUT_HH
 #define _LOG4CPP_PATTERNLAYOUT_HH
 
-#include <log4cpp/Portability.hh>
-#include <log4cpp/Layout.hh>
-#include <log4cpp/Configurator.hh>
+#include <../include/Portability.hh>
+#include <../include/Layout.hh>
+#include <../include/Configurator.hh>
 #include <vector>
 #ifdef LOG4CPP_HAVE_SSTREAM
 #include <sstream>
