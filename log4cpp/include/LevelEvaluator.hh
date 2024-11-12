@@ -8,7 +8,7 @@
 #if !defined(h_3491ecd0_3891_4902_b3ba_15b15d98ae49)
 #define h_3491ecd0_3891_4902_b3ba_15b15d98ae49
 
-#include <log4cpp/TriggeringEventEvaluator.hh>
+#include <../include/TriggeringEventEvaluator.hh>
 
 namespace log4cpp
 {
