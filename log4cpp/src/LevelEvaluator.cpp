@@ -4,8 +4,8 @@
  * See the COPYING file for the terms of usage and distribution.
  */
 
-#include <log4cpp/LevelEvaluator.hh>
-#include <log4cpp/FactoryParams.hh>
+#include <../include/LevelEvaluator.hh>
+#include <../include/FactoryParams.hh>
 #include <memory>
 
 namespace log4cpp
