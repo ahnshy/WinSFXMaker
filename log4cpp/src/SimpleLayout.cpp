@@ -8,15 +8,15 @@
  */
 
 #include "PortabilityImpl.hh"
-#include <log4cpp/SimpleLayout.hh>
-#include <log4cpp/Priority.hh>
+#include <../include/SimpleLayout.hh>
+#include <../include/Priority.hh>
 #include <ios>
 #ifdef LOG4CPP_HAVE_SSTREAM
 #include <sstream>
 #endif
 
 #include <memory>
-#include <log4cpp/FactoryParams.hh>
+#include <../include/FactoryParams.hh>
 
 namespace log4cpp {
 
