@@ -8,7 +8,7 @@
  */
 
 #include "PortabilityImpl.hh"
-#include <log4cpp/Priority.hh>
+#include <../include/Priority.hh>
 #include <cstdlib>
 
 namespace log4cpp {
