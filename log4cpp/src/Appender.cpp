@@ -8,7 +8,7 @@
  */
 
 #include "PortabilityImpl.hh"
-#include <log4cpp/Appender.hh>
+#include <../include/Appender.hh>
 #include <iostream>
 
 namespace log4cpp {
