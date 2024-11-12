@@ -6,7 +6,7 @@
  * See the COPYING file for the terms of usage and distribution.
  */
 #include "PortabilityImpl.hh"
-#include <log4cpp/Configurator.hh>
+#include <../include/Configurator.hh>
 
 namespace log4cpp {
 
