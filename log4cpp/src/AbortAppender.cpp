@@ -8,8 +8,8 @@
  */
 
 #include "PortabilityImpl.hh"
-#include <log4cpp/AbortAppender.hh>
-#include <log4cpp/FactoryParams.hh>
+#include <../include/AbortAppender.hh>
+#include <../include/FactoryParams.hh>
 #include <cstdlib>
 #include <memory>
 
