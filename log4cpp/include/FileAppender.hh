@@ -10,8 +10,8 @@
 #ifndef _LOG4CPP_FILEAPPENDER_HH
 #define _LOG4CPP_FILEAPPENDER_HH
 
-#include <log4cpp/Portability.hh>
-#include <log4cpp/LayoutAppender.hh>
+#include <../include/Portability.hh>
+#include <../include/LayoutAppender.hh>
 #include <string>
 #include <stdarg.h>
 
