@@ -20,27 +20,27 @@
 #include <fstream>
 #include <stdio.h>
 
-#include <log4cpp/Category.hh>
-#include <log4cpp/Appender.hh>
-#include <log4cpp/OstreamAppender.hh>
-#include <log4cpp/FileAppender.hh>
-#include <log4cpp/RollingFileAppender.hh>
-#include <log4cpp/DailyRollingFileAppender.hh>
-#include <log4cpp/Layout.hh>
-#include <log4cpp/BasicLayout.hh>
-#include <log4cpp/SimpleLayout.hh>
-#include <log4cpp/Priority.hh>
-#include <log4cpp/NDC.hh>
-#include <log4cpp/PatternLayout.hh>
-#include <log4cpp/SimpleConfigurator.hh>
+#include <../include/Category.hh>
+#include <../include/Appender.hh>
+#include <../include/OstreamAppender.hh>
+#include <../include/FileAppender.hh>
+#include <../include/RollingFileAppender.hh>
+#include <../include/DailyRollingFileAppender.hh>
+#include <../include/Layout.hh>
+#include <../include/BasicLayout.hh>
+#include <../include/SimpleLayout.hh>
+#include <../include/Priority.hh>
+#include <../include/NDC.hh>
+#include <../include/PatternLayout.hh>
+#include <../include/SimpleConfigurator.hh>
 #if LOG4CPP_HAVE_SYSLOG
-#include <log4cpp/SyslogAppender.hh>
+#include <../include/SyslogAppender.hh>
 #endif
 #ifndef LOG4CPP_DISABLE_REMOTE_SYSLOG
-#include <log4cpp/RemoteSyslogAppender.hh>
+#include <../include/RemoteSyslogAppender.hh>
 #endif
 #ifdef WIN32
-#include <log4cpp/NTEventLogAppender.hh>
+#include <../include/NTEventLogAppender.hh>
 #endif
 
 namespace log4cpp {
