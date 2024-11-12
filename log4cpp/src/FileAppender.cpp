@@ -18,9 +18,9 @@
 #include <memory>
 #include <stdio.h>
 #include <time.h>
-#include <log4cpp/FileAppender.hh>
-#include <log4cpp/Category.hh>
-#include <log4cpp/FactoryParams.hh>
+#include <../include/FileAppender.hh>
+#include <../include/Category.hh>
+#include <../include/FactoryParams.hh>
 
 namespace log4cpp {
 
