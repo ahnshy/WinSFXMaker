@@ -8,8 +8,8 @@
 #if !defined(h_ebd0ee89_622d_4af1_9a9d_d0e057debe86)
 #define h_ebd0ee89_622d_4af1_9a9d_d0e057debe86
 
-#include <log4cpp/LayoutAppender.hh>
-#include <log4cpp/TriggeringEventEvaluator.hh>
+#include <../include/LayoutAppender.hh>
+#include <../include/TriggeringEventEvaluator.hh>
 #include <list>
 #include <memory>
 
