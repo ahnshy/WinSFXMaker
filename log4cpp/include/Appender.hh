@@ -10,7 +10,7 @@
 #ifndef _LOG4CPP_APPENDER_HH
 #define _LOG4CPP_APPENDER_HH
 
-#include <log4cpp/Portability.hh>
+#include <../include/Portability.hh>
 #include <string>
 #include <map>
 #include <set>
@@ -19,10 +19,10 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <log4cpp/Priority.hh>
-#include <log4cpp/Layout.hh>
-#include <log4cpp/LoggingEvent.hh>
-#include <log4cpp/threading/Threading.hh>
+#include <../include/Priority.hh>
+#include <../include/Layout.hh>
+#include <../include/LoggingEvent.hh>
+#include <../include/threading/Threading.hh>
 
 namespace log4cpp {
     class LOG4CPP_EXPORT Filter;
