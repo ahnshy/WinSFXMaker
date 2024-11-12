@@ -10,10 +10,10 @@
 #ifndef _LOG4CPP_OSTREAMAPPENDER_HH
 #define _LOG4CPP_OSTREAMAPPENDER_HH
 
-#include <log4cpp/Portability.hh>
+#include <../include/Portability.hh>
 #include <string>
 #include <iostream>
-#include <log4cpp/LayoutAppender.hh>
+#include <../include/LayoutAppender.hh>
 
 namespace log4cpp {
 
