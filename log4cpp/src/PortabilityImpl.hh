@@ -9,7 +9,7 @@
 #ifndef _LOG4CPP_PORTABILITYIMPL_HH
 #define _LOG4CPP_PORTABILITYIMPL_HH
 
-#include <log4cpp/Portability.hh>
+#include <../include/Portability.hh>
 
 #ifdef LOG4CPP_CSTDLIB_NOT_IN_STD
 #include <cstdlib>
