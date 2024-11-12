@@ -8,8 +8,8 @@
 
 #ifdef WIN32    // only available on Win32
 
-#include <log4cpp/NTEventLogAppender.hh>
-#include <log4cpp/FactoryParams.hh>
+#include <../include/NTEventLogAppender.hh>
+#include <../include/FactoryParams.hh>
 #include <memory>
 
 namespace log4cpp {
