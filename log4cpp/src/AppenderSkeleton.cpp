@@ -8,7 +8,7 @@
  */
 
 #include "PortabilityImpl.hh"
-#include <log4cpp/AppenderSkeleton.hh>
+#include <../include/AppenderSkeleton.hh>
 
 namespace log4cpp {
 
