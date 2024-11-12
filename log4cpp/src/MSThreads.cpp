@@ -4,7 +4,7 @@
  * See the COPYING file for the terms of usage and distribution.
  */
 
-#include <log4cpp/threading/Threading.hh>
+#include <../include/threading/Threading.hh>
 #include <stdio.h>
 
 #if defined(LOG4CPP_HAVE_THREADING) && defined(LOG4CPP_USE_MSTHREADS)
