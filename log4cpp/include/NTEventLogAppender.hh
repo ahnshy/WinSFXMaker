@@ -35,8 +35,8 @@
 
 #endif // done dealing with ERROR #define
 
-#include <log4cpp/Portability.hh>
-#include <log4cpp/AppenderSkeleton.hh>
+#include <../include/Portability.hh>
+#include <../include/AppenderSkeleton.hh>
 
 namespace log4cpp {
 
