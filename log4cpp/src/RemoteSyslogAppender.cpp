@@ -18,8 +18,8 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <log4cpp/RemoteSyslogAppender.hh>
-#include <log4cpp/FactoryParams.hh>
+#include <../include/RemoteSyslogAppender.hh>
+#include <../include/FactoryParams.hh>
 #include <memory>
 
 #ifdef WIN32
