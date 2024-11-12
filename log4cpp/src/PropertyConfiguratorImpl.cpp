@@ -18,37 +18,37 @@
 #include <string>
 #include <fstream>
 
-#include <log4cpp/Category.hh>
+#include <../include/Category.hh>
 
 // appenders
-#include <log4cpp/Appender.hh>
-#include <log4cpp/OstreamAppender.hh>
-#include <log4cpp/FileAppender.hh>
-#include <log4cpp/RollingFileAppender.hh>
-#include <log4cpp/DailyRollingFileAppender.hh>
-#include <log4cpp/AbortAppender.hh>
+#include <../include/Appender.hh>
+#include <../include/OstreamAppender.hh>
+#include <../include/FileAppender.hh>
+#include <../include/RollingFileAppender.hh>
+#include <../include/DailyRollingFileAppender.hh>
+#include <../include/AbortAppender.hh>
 #ifdef WIN32
-#include <log4cpp/Win32DebugAppender.hh>
-#include <log4cpp/NTEventLogAppender.hh>
+#include <../include/Win32DebugAppender.hh>
+#include <../include/NTEventLogAppender.hh>
 #endif
 #ifndef LOG4CPP_DISABLE_REMOTE_SYSLOG
-#include <log4cpp/RemoteSyslogAppender.hh>
+#include <../include/RemoteSyslogAppender.hh>
 #endif // LOG4CPP_DISABLE_REMOTE_SYSLOG
 #ifdef LOG4CPP_HAVE_LIBIDSA
-#include <log4cpp/IdsaAppender.hh>
+#include <../include/IdsaAppender.hh>
 #endif	// LOG4CPP_HAVE_LIBIDSA
 #ifdef LOG4CPP_HAVE_SYSLOG
-#include <log4cpp/SyslogAppender.hh>
+#include <../include/SyslogAppender.hh>
 #endif
 
 // layouts
-#include <log4cpp/Layout.hh>
-#include <log4cpp/BasicLayout.hh>
-#include <log4cpp/SimpleLayout.hh>
-#include <log4cpp/PatternLayout.hh>
+#include <../include/Layout.hh>
+#include <../include/BasicLayout.hh>
+#include <../include/SimpleLayout.hh>
+#include <../include/PatternLayout.hh>
 
-#include <log4cpp/Priority.hh>
-#include <log4cpp/NDC.hh>
+#include <../include/Priority.hh>
+#include <../include/NDC.hh>
 
 #include <list>
 #include <vector>
