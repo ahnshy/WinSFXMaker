@@ -17,9 +17,9 @@
 #include <winbase.h>
 
 #include <stdio.h>
-#include "log4cpp/Category.hh"
-#include "log4cpp/Win32DebugAppender.hh"
-#include <log4cpp/FactoryParams.hh>
+#include "../include/Category.hh"
+#include "../include/Win32DebugAppender.hh"
+#include <../include/FactoryParams.hh>
 #include <memory>
 
 namespace log4cpp {
