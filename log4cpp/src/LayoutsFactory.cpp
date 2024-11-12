@@ -4,7 +4,7 @@
  * See the COPYING file for the terms of usage and distribution.
  */
 
-#include <log4cpp/LayoutsFactory.hh>
+#include <../include/LayoutsFactory.hh>
 #include <stdexcept>
 
 namespace log4cpp
