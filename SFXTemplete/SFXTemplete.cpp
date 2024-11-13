@@ -85,7 +85,7 @@ BOOL CSFXTempleteApp::ExtractEmbeddedZip(LPCTSTR outputPath)
 		return FALSE;
 	}
 
-	std::vector<char> zipData(zipSize);
+	std::vector<char> zipData((int)zipSize);
 	exeFile.read(zipData.data(), zipSize);
 	exeFile.close();
 
