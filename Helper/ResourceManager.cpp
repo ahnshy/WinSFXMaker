@@ -44,7 +44,7 @@ BOOL CResourceManager::ChangeExeIcon(LPCTSTR lpszExePath, LPCTSTR lpszIconFilePa
 	return TRUE;
 }
 
-BOOL CResourceManager::GetVersionInfo(LPCTSTR szExePath, CString& fileVersion, CString& productName, CString& companyName)
+BOOL CResourceManager::GetVersionInfo(LPCTSTR lpszExePath, CString& strFileVersion, CString& strProductName, CString& strCompanyName)
 {
 	// EXE 파일의 버전 리소스 로드
 	DWORD dwHandle = 0;
