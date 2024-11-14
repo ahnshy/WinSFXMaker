@@ -15,7 +15,7 @@ public:
 	void AddFilesToZip(const CString& dirPath, const CString& baseDir, gzFile& gzFile);
 	BOOL CompressFile(const CString& strPath, gzFile& gzFile);
 
-	bool DecompressGZFile(const CString& gzFilePath, const CString& outputFilePath);
-		bool CreateDirectoryRecursively(const CString& path);
+	BOOL DecompressGZFile(const CString& gzFilePath, const CString& outputFilePath);
+	BOOL CreateDirectoryRecursively(const CString& path);
 };
 
