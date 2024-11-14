@@ -71,17 +71,14 @@ BOOL CResourceManager::GetVersionInfo(LPCTSTR szExePath, CString& fileVersion, C
 	// 버전 정보 파싱
 	LPVOID lpVersionInfo;
 	UINT uSize;
-	if (VerQueryValue(pData, _T("\\StringFileInfo\\040904b0\\FileVersion"), &lpVersionInfo, &uSize)) {
+	if (VerQueryValue(pData, _T("\\StringFileInfo\\040904b0\\FileVersion"), &lpVersionInfo, &uSize))
 		fileVersion = CString(static_cast<TCHAR*>(lpVersionInfo), uSize);
-	}
 
-	if (VerQueryValue(pData, _T("\\StringFileInfo\\040904b0\\ProductName"), &lpVersionInfo, &uSize)) {
+	if (VerQueryValue(pData, _T("\\StringFileInfo\\040904b0\\ProductName"), &lpVersionInfo, &uSize))
 		productName = CString(static_cast<TCHAR*>(lpVersionInfo), uSize);
-	}
 
-	if (VerQueryValue(pData, _T("\\StringFileInfo\\040904b0\\CompanyName"), &lpVersionInfo, &uSize)) {
+	if (VerQueryValue(pData, _T("\\StringFileInfo\\040904b0\\CompanyName"), &lpVersionInfo, &uSize))
 		companyName = CString(static_cast<TCHAR*>(lpVersionInfo), uSize);
-	}
 
 	// 메모리 해제
 	free(pData);
