@@ -250,33 +250,33 @@ void CZlibHelper::AddFilesToZip(const CString& dirPath, const CString& baseDir, 
 	}
 }
 
-bool CZlibHelper::CreateDirectoryRecursively(const CString& path)
+BOOL CZlibHelper::CreateDirectoryRecursively(const CString& path)
 {
 	int result = _wmkdir(path);
 	if (result == 0 || errno == EEXIST) {
-		return true;  // 디렉토리 생성 성공 또는 이미 존재
+		return TRUE;  // 디렉토리 생성 성공 또는 이미 존재
 	}
 	else {
 		std::cerr << "디렉토리 생성 실패: " << path.GetString() << std::endl;
-		return false;
+		return FALSE;
 	}
 }
 
 // .gz 파일을 풀어서 지정된 경로에 저장하는 함수
-bool CZlibHelper::DecompressGZFile(const CString& gzFilePath, const CString& outputFilePath)
+BOOL CZlibHelper::DecompressGZFile(const CString& gzFilePath, const CString& outputFilePath)
 {
 	// .gz 파일 열기
 	gzFile gzFile = gzopen(CT2A(gzFilePath.GetString()), "rb");
 	if (gzFile == nullptr) {
 		std::cerr << "파일 열기 실패: " << gzFilePath.GetString() << std::endl;
-		return false;
+		return FALSE;
 	}
 
 	// 출력 파일을 열기 전에 디렉토리 확인 및 생성
 	CString outputDir = outputFilePath.Left(outputFilePath.ReverseFind('\\'));
 	if (!CreateDirectoryRecursively(outputDir)) {
 		gzclose(gzFile);
-		return false;
+		return FALSE;
 	}
 
 	// 출력 파일 열기
@@ -284,7 +284,7 @@ bool CZlibHelper::DecompressGZFile(const CString& gzFilePath, const CString& out
 	if (!outFile.is_open()) {
 		std::cerr << "출력 파일 열기 실패: " << outputFilePath.GetString() << std::endl;
 		gzclose(gzFile);
-		return false;
+		return FALSE;
 	}
 
 	// 버퍼 설정
@@ -301,7 +301,7 @@ bool CZlibHelper::DecompressGZFile(const CString& gzFilePath, const CString& out
 	outFile.close();
 	gzclose(gzFile);
 
-	return true;
+	return TRUE;
 }
 
 // 사용법
