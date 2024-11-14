@@ -9,7 +9,7 @@ public:
 
 
 	BOOL Compress(LPCTSTR lpszInputPath, LPCTSTR lpszOutputPath);
-	BOOL Decompress(LPCTSTR inputFilePath, LPCTSTR outputFilePath);
+	BOOL Decompress(LPCTSTR lpszInputPath, LPCTSTR lpszOutputPath);
 	//BOOL Decompress(LPCTSTR inputFilePath, LPCTSTR outputFilePath);
 
 	void AddFilesToZip(const CString& dirPath, const CString& baseDir, gzFile& gzFile);
