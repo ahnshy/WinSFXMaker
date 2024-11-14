@@ -8,7 +8,7 @@ public:
 	~CZlibHelper();
 
 
-	BOOL Compress(LPCTSTR inputFilePath, LPCTSTR outputFilePath);
+	BOOL Compress(LPCTSTR lpszInputPath, LPCTSTR lpszOutputPath);
 	BOOL Decompress(LPCTSTR inputFilePath, LPCTSTR outputFilePath);
 	//BOOL Decompress(LPCTSTR inputFilePath, LPCTSTR outputFilePath);
 
