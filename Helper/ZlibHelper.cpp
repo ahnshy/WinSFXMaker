@@ -105,18 +105,19 @@ BOOL CZlibHelper::Decompress(LPCTSTR inputFilePath, LPCTSTR outputFilePath)
 	return TRUE;
 }
 
+
 // 압축 함수 (Compress)
-BOOL CZlibHelper::Compress(LPCTSTR inputFilePath, LPCTSTR outputFilePath)
+BOOL CZlibHelper::Compress(LPCTSTR lpszInputPath, LPCTSTR lpszOutputPath)
 {
 	// 입력 파일 열기
-	std::ifstream inputFile(inputFilePath, std::ios::binary);
+	std::ifstream inputFile(lpszInputPath, std::ios::binary);
 	if (!inputFile.is_open()) {
 		//std::cerr << "입력 파일을 열 수 없습니다: " << inputFilePath << std::endl;
 		return FALSE;
 	}
 
 	// 출력 파일 열기
-	std::ofstream outputFile(outputFilePath, std::ios::binary);
+	std::ofstream outputFile(lpszOutputPath, std::ios::binary);
 	if (!outputFile.is_open()) {
 		//std::cerr << "출력 파일을 열 수 없습니다: " << outputFilePath << std::endl;
 		return FALSE;
