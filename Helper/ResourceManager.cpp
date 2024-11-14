@@ -69,8 +69,8 @@ BOOL CResourceManager::GetVersionInfo(LPCTSTR szExePath, CString& fileVersion, C
 	}
 
 	// 버전 정보 파싱
-	LPVOID lpVersionInfo;
-	UINT uSize;
+	LPVOID lpVersionInfo = NULL;
+	UINT uSize = 0;
 	if (VerQueryValue(pData, _T("\\StringFileInfo\\040904b0\\FileVersion"), &lpVersionInfo, &uSize))
 		fileVersion = CString(static_cast<TCHAR*>(lpVersionInfo), uSize);
 
