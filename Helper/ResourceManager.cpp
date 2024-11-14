@@ -35,12 +35,12 @@ BOOL CResourceManager::ChangeExeIcon(LPCTSTR lpszExePath, LPCTSTR lpszIconFilePa
 
 	if (!bResult) {
 		//MessageBox(NULL, _T("리소스를 업데이트할 수 없습니다."), _T("Error"), MB_OK);
-		EndUpdateResource(hUpdate, TRUE);
+		EndUpdateResource(hResource, TRUE);
 		return FALSE;
 	}
 
 	// 리소스 업데이트 완료
-	EndUpdateResource(hUpdate, FALSE);
+	EndUpdateResource(hResource, FALSE);
 	return TRUE;
 }
 
@@ -48,7 +48,7 @@ BOOL CResourceManager::GetVersionInfo(LPCTSTR lpszExePath, CString& strFileVersi
 {
 	// EXE 파일의 버전 리소스 로드
 	DWORD dwHandle = 0;
-	UINT uLen = GetFileVersionInfoSize(szExePath, &dwHandle);
+	UINT uLen = GetFileVersionInfoSize(lpszExePath, &dwHandle);
 	if (uLen == 0) {
 		//MessageBox(NULL, _T("버전 정보 읽기 실패"), _T("Error"), MB_OK);
 		return FALSE;
@@ -62,7 +62,7 @@ BOOL CResourceManager::GetVersionInfo(LPCTSTR lpszExePath, CString& strFileVersi
 	}
 
 	// 버전 리소스 읽기
-	if (!GetFileVersionInfo(szExePath, dwHandle, uLen, pData)) {
+	if (!GetFileVersionInfo(lpszExePath, dwHandle, uLen, pData)) {
 		free(pData);
 		//MessageBox(NULL, _T("버전 정보 읽기 실패"), _T("Error"), MB_OK);
 		return FALSE;
@@ -72,13 +72,13 @@ BOOL CResourceManager::GetVersionInfo(LPCTSTR lpszExePath, CString& strFileVersi
 	LPVOID lpVersionInfo = NULL;
 	UINT uSize = 0;
 	if (VerQueryValue(pData, _T("\\StringFileInfo\\040904b0\\FileVersion"), &lpVersionInfo, &uSize))
-		fileVersion = CString(static_cast<TCHAR*>(lpVersionInfo), uSize);
+		strFileVersion = CString(static_cast<TCHAR*>(lpVersionInfo), uSize);
 
 	if (VerQueryValue(pData, _T("\\StringFileInfo\\040904b0\\ProductName"), &lpVersionInfo, &uSize))
-		productName = CString(static_cast<TCHAR*>(lpVersionInfo), uSize);
+		strProductName = CString(static_cast<TCHAR*>(lpVersionInfo), uSize);
 
 	if (VerQueryValue(pData, _T("\\StringFileInfo\\040904b0\\CompanyName"), &lpVersionInfo, &uSize))
-		companyName = CString(static_cast<TCHAR*>(lpVersionInfo), uSize);
+		strCompanyName = CString(static_cast<TCHAR*>(lpVersionInfo), uSize);
 
 	// 메모리 해제
 	free(pData);
