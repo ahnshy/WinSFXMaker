@@ -86,39 +86,39 @@ BOOL CResourceManager::GetVersionInfo(LPCTSTR lpszExePath, CString& strFileVersi
 	return TRUE;
 }
 
-BOOL CResourceManager::UpdateVersionInfo(LPCTSTR szExePath, const CString& productName, const CString& fileVersion, const CString& companyName)
+BOOL CResourceManager::UpdateVersionInfo(LPCTSTR lpszExePath, const CString& strFileVersion, const CString& strProductName, const CString& strCompanyName)
 {
 	// EXE 파일 열기
-	HANDLE hUpdate = BeginUpdateResource(szExePath, FALSE);
-	if (hUpdate == NULL) {
+	HANDLE hResource = BeginUpdateResource(lpszExePath, FALSE);
+	if (hResource == NULL) {
 		//MessageBox(NULL, _T("EXE 파일을 열 수 없습니다."), _T("Error"), MB_OK);
 		return FALSE;
 	}
 
 	// 버전 리소스 업데이트 (VS_VERSION_INFO)
 	struct {
-		VS_FIXEDFILEINFO vsFileInfo;
+		VS_FIXEDFILEINFO fileinfo;
 		TCHAR szFileVersion[128];
 		TCHAR szProductName[128];
 		TCHAR szCompanyName[128];
-	} versionData = {};
+	} versioninfo = { NULL, };
 
 	// 버전 정보 채우기 (CString을 TCHAR 배열로 복사)
-	_tcscpy_s(versionData.szFileVersion, (LPCTSTR)fileVersion);
-	_tcscpy_s(versionData.szProductName, (LPCTSTR)productName);
-	_tcscpy_s(versionData.szCompanyName, (LPCTSTR)companyName);
+	_tcscpy_s(versioninfo.szFileVersion, (LPCTSTR)strFileVersion);
+	_tcscpy_s(versioninfo.szProductName, (LPCTSTR)strProductName);
+	_tcscpy_s(versioninfo.szCompanyName, (LPCTSTR)strCompanyName);
 
 	// VS_VERSION_INFO 리소스 업데이트
-	BOOL bResult = UpdateResource(hUpdate, RT_VERSION, MAKEINTRESOURCE(1), MAKELANGID(LANG_NEUTRAL, SUBLANG_NEUTRAL),
-		&versionData, sizeof(versionData));
+	BOOL bResult = UpdateResource(hResource, RT_VERSION, MAKEINTRESOURCE(1), MAKELANGID(LANG_NEUTRAL, SUBLANG_NEUTRAL),
+		&versioninfo, sizeof(versioninfo));
 	if (!bResult) {
 		//MessageBox(NULL, _T("버전 리소스를 업데이트할 수 없습니다."), _T("Error"), MB_OK);
-		EndUpdateResource(hUpdate, TRUE);
+		EndUpdateResource(hResource, TRUE);
 		return FALSE;
 	}
 
 	// 리소스 업데이트 완료
-	if (EndUpdateResource(hUpdate, FALSE)) {
+	if (EndUpdateResource(hResource, FALSE)) {
 		//MessageBox(NULL, _T("버전 정보 및 제품 정보 업데이트 완료"), _T("Success"), MB_OK);
 		return TRUE;
 	}
