@@ -105,7 +105,7 @@ local int gz_comp(gz_statep state, int flush) {
             while (strm->next_out > state->x.next) {
                 put = strm->next_out - state->x.next > (int)max ? max :
                       (unsigned)(strm->next_out - state->x.next);
-                writ = write(state->fd, state->x.next, put);
+                writ = _write(state->fd, state->x.next, put);
                 if (writ < 0) {
                     gz_error(state, Z_ERRNO, zstrerror());
                     return -1;
