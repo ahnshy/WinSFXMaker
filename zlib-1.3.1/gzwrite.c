@@ -624,7 +624,7 @@ int ZEXPORT gzclose_w(gzFile file) {
     }
     gz_error(state, Z_OK, NULL);
     free(state->path);
-    if (close(state->fd) == -1)
+    if (_close(state->fd) == -1)
         ret = Z_ERRNO;
     free(state);
     return ret;
