@@ -14,8 +14,24 @@
 #define new DEBUG_NEW
 #endif
 
-// CAboutDlg dialog used for App About
+int CFileListCtrl::OnCompareItems(LPARAM lParam1, LPARAM lParam2, int iColumn)
+{
+		return 0;
+}
 
+COLORREF CFileListCtrl::OnGetCellBkColor(int nRow, int nColum)
+{
+	//if (nColum == m_iSortedColumn)
+	//{
+	//	//return(nRow % 2) == 0 ? RGB(233, 221, 229) : RGB(176, 218, 234);
+	//}
+
+	//return(nRow % 2) == 0 ? RGB(253, 241, 249) : RGB(196, 238, 254);
+	return(nRow % 2) == 0 ? RGB(241, 244, 247) : RGB(250, 250, 250);
+	//return(nRow % 2) == 0 ? RGB(250, 250, 250) : RGB(223, 230, 238);
+}
+
+// CAboutDlg dialog used for App About
 class CAboutDlg : public CDialogEx
 {
 public:
@@ -58,7 +74,7 @@ CWinSFXMakerDlg::CWinSFXMakerDlg(CWnd* pParent /*=NULL*/)
 void CWinSFXMakerDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_LIST_ARCHIVE, m_listFiles);
+	DDX_Control(pDX, IDC_LIST_ARCHIVE, m_wndList);
 }
 
 BEGIN_MESSAGE_MAP(CWinSFXMakerDlg, CDialogEx)
@@ -102,11 +118,11 @@ BOOL CWinSFXMakerDlg::OnInitDialog()
 	
 	SetBackgroundColor(RGB(255, 255, 255));
 
-	m_listFiles.SetBkColor(RGB(0xe0, 0xff, 0xff));
-	m_listFiles.SetTextBkColor(RGB(0xe0, 0xff, 0xff));
-	m_listFiles.SetExtendedStyle(LVS_EX_GRIDLINES | LVS_EX_FULLROWSELECT | LVS_EX_SUBITEMIMAGES);
+	//m_listFiles.SetBkColor(RGB(0xe0, 0xff, 0xff));
+	//m_listFiles.SetTextBkColor(RGB(0xe0, 0xff, 0xff));
+	//m_listFiles.SetExtendedStyle(LVS_EX_GRIDLINES | LVS_EX_FULLROWSELECT | LVS_EX_SUBITEMIMAGES);
 
-	m_listFiles.InsertColumn(0, _T("전체 경로"), LVCFMT_LEFT, 300, -1);
+	Initialize();
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
@@ -272,4 +288,38 @@ void CWinSFXMakerDlg::OnBnClickedOk()
 	//CreateSFXFile(_T("F:\\MFC\\WinSFXMaker\\SfxTemplate.exe"), _T("F:\\MFC\\WinSFXMaker\\bin.zip"), _T("F:\\MFC\\WinSFXMaker\\1.exe"));
 
 	CDialogEx::OnOK();
+}
+
+void CWinSFXMakerDlg::Initialize()
+{
+	CRect rt;
+	GetClientRect(&rt);
+
+	LVCOLUMN item;
+	item.mask = LVCF_FMT | LVCF_WIDTH | LVCF_TEXT | LVCF_SUBITEM;
+
+	item.fmt = LVCFMT_LEFT;
+	item.cx = int(rt.Width() * 0.3);
+	item.pszText = _T("Path");
+	item.iSubItem = 0;
+	m_wndList.InsertColumn(0, &item);
+
+	item.cx = int(rt.Width() * 0.26);
+	item.pszText = _T("Modified Date");
+	item.iSubItem = 1;
+	m_wndList.InsertColumn(1, &item);
+
+	item.fmt = LVCFMT_RIGHT;
+	item.cx = int(rt.Width() * 0.14);
+	item.pszText = _T("Size");
+	item.iSubItem = 2;
+	m_wndList.InsertColumn(2, &item);
+
+	item.cx = int(rt.Width() * 0.12);
+	item.pszText = _T("Line(s)");
+	item.iSubItem = 3;
+	m_wndList.InsertColumn(3, &item);
+
+	m_wndList.SetExtendedStyle(LVS_EX_FULLROWSELECT | LVS_EX_HEADERDRAGDROP);
+
 }
