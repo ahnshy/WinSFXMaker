@@ -58,6 +58,7 @@ CWinSFXMakerDlg::CWinSFXMakerDlg(CWnd* pParent /*=NULL*/)
 void CWinSFXMakerDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+	DDX_Control(pDX, IDC_LIST_ARCHIVE, m_listFiles);
 }
 
 BEGIN_MESSAGE_MAP(CWinSFXMakerDlg, CDialogEx)
@@ -100,6 +101,12 @@ BOOL CWinSFXMakerDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 	
 	SetBackgroundColor(RGB(255, 255, 255));
+
+	m_listFiles.SetBkColor(RGB(0xe0, 0xff, 0xff));
+	m_listFiles.SetTextBkColor(RGB(0xe0, 0xff, 0xff));
+	m_listFiles.SetExtendedStyle(LVS_EX_GRIDLINES | LVS_EX_FULLROWSELECT | LVS_EX_SUBITEMIMAGES);
+
+	m_listFiles.InsertColumn(0, _T("전체 경로"), LVCFMT_LEFT, 300, -1);
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
