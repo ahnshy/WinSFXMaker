@@ -5,6 +5,13 @@
 #pragma once
 #include "UI/DragListCtrl.h"
 
+class CFileListCtrl : public CMFCListCtrl
+{
+	virtual int OnCompareItems(LPARAM lParam1, LPARAM lParam2, int iColumn);
+	virtual COLORREF OnGetCellBkColor(int nRow, int nColum);
+};
+
+
 // CWinSFXMakerDlg dialog
 class CWinSFXMakerDlg : public CDialogEx
 {
@@ -25,7 +32,9 @@ public:
 protected:
 	HICON m_hIcon;
 
-	CDragListCtrl	m_listFiles;
+	CFileListCtrl	m_wndList;
+
+	void Initialize();
 
 	// Generated message map functions
 	virtual BOOL OnInitDialog();
