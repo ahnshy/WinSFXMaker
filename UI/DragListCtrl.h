@@ -2,7 +2,6 @@
 
 
 // CDragListCtrl
-
 class CDragListCtrl : public CListCtrl
 {
 	DECLARE_DYNAMIC(CDragListCtrl)
