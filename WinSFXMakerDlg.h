@@ -3,7 +3,7 @@
 //
 
 #pragma once
-
+#include "UI/DragListCtrl.h"
 
 // CWinSFXMakerDlg dialog
 class CWinSFXMakerDlg : public CDialogEx
@@ -24,6 +24,8 @@ public:
 // Implementation
 protected:
 	HICON m_hIcon;
+
+	CDragListCtrl	m_listFiles;
 
 	// Generated message map functions
 	virtual BOOL OnInitDialog();
