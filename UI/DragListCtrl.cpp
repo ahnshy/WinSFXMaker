@@ -2,7 +2,6 @@
 #include "DragListCtrl.h"
 
 // CDragListCtrl
-
 IMPLEMENT_DYNAMIC(CDragListCtrl, CListCtrl)
 CDragListCtrl::CDragListCtrl()
 {
@@ -19,14 +18,14 @@ END_MESSAGE_MAP()
 
 void CDragListCtrl::OnDropFiles(HDROP hDropInfo)
 {
-	TCHAR szPath[1024];
-	UINT uiFileNum;
+	TCHAR szPath[BUFSIZ] = { NULL, };
+	UINT uCount = 0;
 
-	uiFileNum = DragQueryFile(hDropInfo, 0xffffffff, NULL, 0);
-	for ( UINT i = 0 ; i < uiFileNum ; i++ )
+	uCount = DragQueryFile(hDropInfo, 0xffffffff, NULL, 0);
+	for (UINT i = 0; i < uCount ; i++)
 	{
-		DragQueryFile(hDropInfo, i, (LPTSTR)szPath, 1023);
-		//InsertItem(i, szPath);
+		DragQueryFile(hDropInfo, i, (LPTSTR)szPath, BUFSIZ-sizeof(TCHAR));
+		InsertItem(i, szPath);
 	}
 
 	CListCtrl::OnDropFiles(hDropInfo);
