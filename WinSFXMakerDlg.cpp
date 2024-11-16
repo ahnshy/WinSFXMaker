@@ -321,5 +321,4 @@ void CWinSFXMakerDlg::Initialize()
 	m_wndList.InsertColumn(3, &item);
 
 	m_wndList.SetExtendedStyle(LVS_EX_FULLROWSELECT | LVS_EX_HEADERDRAGDROP);
-
 }
