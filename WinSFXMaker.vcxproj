@@ -110,6 +110,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="UI\DragListCtrl.h" />
     <ClInclude Include="WinSFXMaker.h" />
     <ClInclude Include="WinSFXMakerDlg.h" />
     <ClInclude Include="zlib-1.3.1\crc32.h" />
@@ -133,6 +134,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="UI\DragListCtrl.cpp" />
     <ClCompile Include="WinSFXMaker.cpp" />
     <ClCompile Include="WinSFXMakerDlg.cpp" />
     <ClCompile Include="zlib-1.3.1\adler32.c" />
