@@ -289,7 +289,7 @@ BOOL CZlibHelper::DecompressGZFile(const CString& gzFilePath, const CString& out
 
 	// 버퍼 설정
 	const size_t bufferSize = 4096;
-	char buffer[bufferSize];
+	char buffer[bufferSize] = { NULL, };
 	int bytesRead = 0;
 
 	// 압축 풀기
