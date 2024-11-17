@@ -1,15 +1,15 @@
 #pragma once
 
-#include "SheelTreeCtrlEx.h"
+#include <afxshelltreectrl.h>
 
-// CSheelTreeCtrlEx
-class CSheelTreeCtrlEx : public CMFCShellTreeCtrl
+// CShellTreeCtrlEx
+class CShellTreeCtrlEx : public CMFCShellTreeCtrl
 {
-	DECLARE_DYNAMIC(CSheelTreeCtrlEx)
+	DECLARE_DYNAMIC(CShellTreeCtrlEx)
 
 public:
-	CSheelTreeCtrlEx();
-	virtual ~CSheelTreeCtrlEx();
+	CShellTreeCtrlEx();
+	virtual ~CShellTreeCtrlEx();
 	void				SetNotifyContainer(CWnd* pContainer);
 
 protected:
