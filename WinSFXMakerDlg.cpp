@@ -82,6 +82,7 @@ BEGIN_MESSAGE_MAP(CWinSFXMakerDlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDOK, &CWinSFXMakerDlg::OnBnClickedOk)
+	ON_WM_CTLCOLOR()
 	ON_WM_WINDOWPOSCHANGED()
 END_MESSAGE_MAP()
 
@@ -331,4 +332,14 @@ void CWinSFXMakerDlg::OnWindowPosChanged(WINDOWPOS* lpwndpos)
 
 void CWinSFXMakerDlg::MoveWindow()
 {
+}
+
+HBRUSH CWinSFXMakerDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
+{
+	HBRUSH hbr = CDialogEx::OnCtlColor(pDC, pWnd, nCtlColor);
+	HWND hWnd = pWnd->GetSafeHwnd();
+	if (GetDlgItem(IDOK)->GetSafeHwnd() == hWnd || GetDlgItem(IDCANCEL)->GetSafeHwnd() == hWnd)
+		return (HBRUSH)GetStockObject(NULL_BRUSH);
+
+	return hbr;
 }
