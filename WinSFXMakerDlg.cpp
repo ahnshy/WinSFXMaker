@@ -302,7 +302,7 @@ void CWinSFXMakerDlg::Initialize()
 	item.mask = LVCF_FMT | LVCF_WIDTH | LVCF_TEXT | LVCF_SUBITEM;
 
 	item.fmt = LVCFMT_LEFT;
-	item.cx = int(rt.Width() * 0.26);
+	item.cx = int(rt.Width() * 0.25);
 	item.pszText = _T("File");
 	item.iSubItem = 0;
 	m_wndList.InsertColumn(0, &item);
