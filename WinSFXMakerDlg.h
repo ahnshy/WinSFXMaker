@@ -36,6 +36,8 @@ protected:
 
 	void Initialize();
 
+	void					MoveWindow();
+
 	// Generated message map functions
 	virtual BOOL OnInitDialog();
 	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
