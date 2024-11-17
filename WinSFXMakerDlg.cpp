@@ -302,12 +302,12 @@ void CWinSFXMakerDlg::Initialize()
 	item.mask = LVCF_FMT | LVCF_WIDTH | LVCF_TEXT | LVCF_SUBITEM;
 
 	item.fmt = LVCFMT_LEFT;
-	item.cx = int(rt.Width() * 0.28);
+	item.cx = int(rt.Width() * 0.27);
 	item.pszText = _T("File");
 	item.iSubItem = 0;
 	m_wndList.InsertColumn(0, &item);
 
-	item.cx = int(rt.Width() * 0.55);
+	item.cx = int(rt.Width() * 0.54);
 	item.pszText = _T("Path");
 	item.iSubItem = 1;
 	m_wndList.InsertColumn(1, &item);
