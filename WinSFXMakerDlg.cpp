@@ -82,6 +82,7 @@ BEGIN_MESSAGE_MAP(CWinSFXMakerDlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDOK, &CWinSFXMakerDlg::OnBnClickedOk)
+	ON_WM_WINDOWPOSCHANGED()
 END_MESSAGE_MAP()
 
 
@@ -321,4 +322,9 @@ void CWinSFXMakerDlg::Initialize()
 	m_wndList.InsertColumn(3, &item);
 
 	m_wndList.SetExtendedStyle(LVS_EX_FULLROWSELECT | LVS_EX_HEADERDRAGDROP);
+}
+
+void CWinSFXMakerDlg::OnWindowPosChanged(WINDOWPOS* lpwndpos)
+{
+	CDialogEx::OnWindowPosChanged(lpwndpos);
 }
