@@ -2,6 +2,8 @@
 
 #include <afxshelltreectrl.h>
 
+#define		WM_SELCHANGED_FOLER		WM_USER + 0x301
+
 // CShellTreeCtrlEx
 class CShellTreeCtrlEx : public CMFCShellTreeCtrl
 {
