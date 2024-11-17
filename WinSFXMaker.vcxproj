@@ -103,6 +103,7 @@
     <Text Include="zlib-1.3.1\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Dialog\DlgShellTreeExplore.h" />
     <ClInclude Include="Helper\DirectoryHelper.h" />
     <ClInclude Include="Helper\PathManager.h" />
     <ClInclude Include="Helper\ResourceManager.h" />
@@ -127,6 +128,7 @@
     <ClInclude Include="zlib-1.3.1\zutil.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Dialog\DlgShellTreeExplore.cpp" />
     <ClCompile Include="Helper\DirectoryHelper.cpp" />
     <ClCompile Include="Helper\PathManager.cpp" />
     <ClCompile Include="Helper\ResourceManager.cpp" />
