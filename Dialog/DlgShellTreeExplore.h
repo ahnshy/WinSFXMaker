@@ -12,7 +12,7 @@
 #pragma once
 
 #include "../resource.h"
-#include "../Control/SheelTreeCtrlEx.h"
+#include "../UI/ShellTreeCtrlEx.h"
 
 // CDlgShellTreeExplore dialog
 class CDlgShellTreeExplore : public CDialog
@@ -34,7 +34,7 @@ public:
 protected:
 	CRect				m_rcPrev;
 	HICON				m_hIcon;
-	CSheelTreeCtrlEx	m_wndShellTree;
+	CShellTreeCtrlEx	m_wndShellTree;
 
 	CString				m_strPath;
 	CString				m_strDescript;
