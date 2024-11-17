@@ -296,18 +296,19 @@ void CWinSFXMakerDlg::Initialize()
 {
 	CRect rt;
 	GetClientRect(&rt);
+	//m_wndList.SetWindowPos(&wndTop, rt.left, rt.top, rt.right, rt.bottom -300, SWP_SHOWWINDOW);
 
 	LVCOLUMN item;
 	item.mask = LVCF_FMT | LVCF_WIDTH | LVCF_TEXT | LVCF_SUBITEM;
 
 	item.fmt = LVCFMT_LEFT;
-	item.cx = int(rt.Width() * 0.3);
-	item.pszText = _T("Path");
+	item.cx = int(rt.Width() * 0.28);
+	item.pszText = _T("File");
 	item.iSubItem = 0;
 	m_wndList.InsertColumn(0, &item);
 
-	item.cx = int(rt.Width() * 0.26);
-	item.pszText = _T("Modified Date");
+	item.cx = int(rt.Width() * 0.55);
+	item.pszText = _T("Path");
 	item.iSubItem = 1;
 	m_wndList.InsertColumn(1, &item);
 
@@ -317,10 +318,7 @@ void CWinSFXMakerDlg::Initialize()
 	item.iSubItem = 2;
 	m_wndList.InsertColumn(2, &item);
 
-	item.cx = int(rt.Width() * 0.12);
-	item.pszText = _T("Line(s)");
-	item.iSubItem = 3;
-	m_wndList.InsertColumn(3, &item);
+	m_wndList.GetHeaderCtrl().SetFont(&afxGlobalData.fontRegular);
 
 	m_wndList.SetExtendedStyle(LVS_EX_FULLROWSELECT | LVS_EX_HEADERDRAGDROP);
 }
