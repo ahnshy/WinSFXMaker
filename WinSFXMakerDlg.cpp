@@ -328,3 +328,7 @@ void CWinSFXMakerDlg::OnWindowPosChanged(WINDOWPOS* lpwndpos)
 {
 	CDialogEx::OnWindowPosChanged(lpwndpos);
 }
+
+void CWinSFXMakerDlg::MoveWindow()
+{
+}
