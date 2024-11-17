@@ -43,6 +43,7 @@ protected:
 	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
+	afx_msg					HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 	afx_msg					void OnWindowPosChanged(WINDOWPOS* lpwndpos);
 	DECLARE_MESSAGE_MAP()
 public:
