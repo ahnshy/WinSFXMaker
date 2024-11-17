@@ -345,4 +345,9 @@ HBRUSH CWinSFXMakerDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 void CWinSFXMakerDlg::OnBnClickedButtonPath()
 {
 	CWaitCursor cw;
+	//CDlgShellTreeExplore dlg;
+	//if (IDOK != dlg.DoModal())
+	//	return;
+
+	//GetDlgItem(IDC_COMBO_PATH)->SetWindowText(dlg.GetPath());
 }
