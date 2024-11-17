@@ -344,4 +344,5 @@ HBRUSH CWinSFXMakerDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 
 void CWinSFXMakerDlg::OnBnClickedButtonPath()
 {
+	CWaitCursor cw;
 }
