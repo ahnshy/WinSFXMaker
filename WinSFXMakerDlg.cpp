@@ -10,6 +10,8 @@
 #include <fstream>
 #include <vector>
 
+#include "Dialog/DlgShellTreeExplore.h"
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -345,9 +347,10 @@ HBRUSH CWinSFXMakerDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 void CWinSFXMakerDlg::OnBnClickedButtonPath()
 {
 	CWaitCursor cw;
-	//CDlgShellTreeExplore dlg;
-	//if (IDOK != dlg.DoModal())
-	//	return;
+	
+	CDlgShellTreeExplore dlg;
+	if (IDOK != dlg.DoModal())
+		return;
 
-	//GetDlgItem(IDC_COMBO_PATH)->SetWindowText(dlg.GetPath());
+	GetDlgItem(IDC_COMBO_PATH)->SetWindowText(dlg.GetPath());
 }
