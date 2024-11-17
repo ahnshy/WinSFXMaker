@@ -84,6 +84,7 @@ BEGIN_MESSAGE_MAP(CWinSFXMakerDlg, CDialogEx)
 	ON_BN_CLICKED(IDOK, &CWinSFXMakerDlg::OnBnClickedOk)
 	ON_WM_CTLCOLOR()
 	ON_WM_WINDOWPOSCHANGED()
+	ON_BN_CLICKED(ID_BUTTON_PATH, &CWinSFXMakerDlg::OnBnClickedButtonPath)
 END_MESSAGE_MAP()
 
 
@@ -339,4 +340,8 @@ HBRUSH CWinSFXMakerDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 		return (HBRUSH)GetStockObject(NULL_BRUSH);
 
 	return hbr;
+}
+
+void CWinSFXMakerDlg::OnBnClickedButtonPath()
+{
 }
