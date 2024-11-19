@@ -37,6 +37,7 @@ protected:
 	void Initialize();
 
 	void					MoveWindow();
+	void					UpdateResult();
 
 	// Generated message map functions
 	virtual BOOL OnInitDialog();
