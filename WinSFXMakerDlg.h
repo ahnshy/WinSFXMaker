@@ -40,7 +40,8 @@ protected:
 
 	void					MoveWindow();
 	void					UpdateResult();
-	BOOL					FindFiles(CString strPath);
+	BOOL					BeginFindFiles(CString strPath);
+	void					FindFiles(CString strPath);
 	void					AddFiles();
 
 	// Generated message map functions
