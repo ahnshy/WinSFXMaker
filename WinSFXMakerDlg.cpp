@@ -395,3 +395,7 @@ void CWinSFXMakerDlg::OnTimer(UINT_PTR nIDEvent)
 void CWinSFXMakerDlg::UpdateResult()
 {
 }
+
+void CWinSFXMakerDlg::AddFiles()
+{
+}
