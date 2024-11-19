@@ -424,6 +424,5 @@ void CWinSFXMakerDlg::FindFiles(CString strPath)
 		if (ff.IsDirectory())
 			FindFiles(ff.GetFilePath());
 
-		strExt = PathFindExtension(ff.GetFileName());
 	}
 }
