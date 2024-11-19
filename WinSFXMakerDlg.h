@@ -32,12 +32,14 @@ public:
 protected:
 	HICON m_hIcon;
 
+	CWinThread*		m_pThread;
 	CFileListCtrl	m_wndList;
 
 	void Initialize();
 
 	void					MoveWindow();
 	void					UpdateResult();
+	BOOL					FindFiles(CString strPath);
 
 	// Generated message map functions
 	virtual BOOL OnInitDialog();
