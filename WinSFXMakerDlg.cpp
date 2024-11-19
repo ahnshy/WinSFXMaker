@@ -24,6 +24,11 @@ UINT TaskFindFilesFunc(LPVOID pParam)
 	return 1;
 }
 
+void CWinSFXMakerDlg::AddFiles()
+{
+	FindFiles(m_strPath);
+}
+
 BOOL CWinSFXMakerDlg::FindFiles(CString strPath)
 {
 	if (!strPath.IsEmpty())
@@ -91,6 +96,9 @@ CWinSFXMakerDlg::CWinSFXMakerDlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(CWinSFXMakerDlg::IDD, pParent)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+	
+	m_pThread = NULL;
+	m_strPath.Empty();
 }
 
 void CWinSFXMakerDlg::DoDataExchange(CDataExchange* pDX)
