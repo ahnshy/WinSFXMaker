@@ -26,10 +26,10 @@ UINT TaskFindFilesFunc(LPVOID pParam)
 
 void CWinSFXMakerDlg::AddFiles()
 {
-	FindFiles(m_strPath);
+	BeginFindFiles(m_strPath);
 }
 
-BOOL CWinSFXMakerDlg::FindFiles(CString strPath)
+BOOL CWinSFXMakerDlg::BeginFindFiles(CString strPath)
 {
 	if (!strPath.IsEmpty())
 		return FALSE;
@@ -399,4 +399,56 @@ void CWinSFXMakerDlg::UpdateResult()
 void CWinSFXMakerDlg::AddFiles()
 {
 	FindFiles(m_strPath);
+}
+
+void CWinSFXMakerDlg::FindFiles(CString strPath)
+{
+	if (strPath.IsEmpty() || m_bTaskFinish)
+		return;
+
+	PathAddBackslash(strPath.GetBuffer(BUFSIZ));
+	strPath.ReleaseBuffer();
+	strPath.Append(_T("*.*"));
+
+	CTime ct;
+	CFileFind ff;
+	CFileInfo *pItem = NULL;
+
+	BOOL bContinue = ff.FindFile(strPath);
+
+	CString strExt, strBuffer;
+	while (bContinue)
+	{
+		if (m_bTaskFinish)
+			return;
+
+		bContinue = ff.FindNextFile();
+		if (ff.IsDots())
+			continue;
+
+		if (m_bIncludeSubPath && ff.IsDirectory())
+			FindFiles(ff.GetFilePath());
+
+		strExt = PathFindExtension(ff.GetFileName());
+		for (int nCnt = 0; nCnt < m_arFileExt.GetCount(); nCnt++)
+		{
+			if (m_arFileExt.GetAt(nCnt).CompareNoCase(strExt) != 0 || m_bTaskFinish)
+				continue;
+
+			pItem = new CFileInfo;
+			if (!pItem)
+				continue;
+
+			pItem->m_strPath = ff.GetFilePath();
+			pItem->m_strFileName = ff.GetFileName();
+
+			ff.GetLastAccessTime(ct);
+			pItem->m_strModifiedTime = ct.Format(_T("%Y-%m-%d %p %I:%M"));
+
+			m_arFiles.Add(pItem);
+
+			if (m_bTaskFinish)
+				return;
+		}
+	}
 }
