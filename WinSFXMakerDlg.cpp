@@ -16,6 +16,19 @@
 #define new DEBUG_NEW
 #endif
 
+BOOL CWinSFXMakerDlg::FindFiles(CString strPath)
+{
+	if (!strPath.IsEmpty())
+		return FALSE;
+
+	if (m_pThread)
+		m_pThread = NULL;
+
+	//m_pThread = (CWinThread*)AfxBeginThread(TaskFindFilesFunc, (LPVOID)this);
+	return TRUE;
+}
+
+
 int CFileListCtrl::OnCompareItems(LPARAM lParam1, LPARAM lParam2, int iColumn)
 {
 		return 0;
