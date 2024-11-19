@@ -35,6 +35,7 @@ protected:
 	CWinThread*		m_pThread;
 	CFileListCtrl	m_wndList;
 	CString			m_strPath;
+	BOOL			m_bTaskFinish;
 
 	void Initialize();
 
