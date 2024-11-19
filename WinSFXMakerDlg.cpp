@@ -358,5 +358,12 @@ void CWinSFXMakerDlg::OnBnClickedButtonPath()
 
 void CWinSFXMakerDlg::OnTimer(UINT_PTR nIDEvent)
 {
+	if (nIDEvent == IDT_UPDATE_SCREEN)
+		UpdateResult();
+
 	CDialogEx::OnTimer(nIDEvent);
+}
+
+void CWinSFXMakerDlg::UpdateResult()
+{
 }
