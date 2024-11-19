@@ -97,6 +97,7 @@ CWinSFXMakerDlg::CWinSFXMakerDlg(CWnd* pParent /*=NULL*/)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 	
+	m_bTaskFinish = FALSE;
 	m_pThread = NULL;
 	m_strPath.Empty();
 }
@@ -396,11 +397,6 @@ void CWinSFXMakerDlg::UpdateResult()
 {
 }
 
-void CWinSFXMakerDlg::AddFiles()
-{
-	FindFiles(m_strPath);
-}
-
 void CWinSFXMakerDlg::FindFiles(CString strPath)
 {
 	if (strPath.IsEmpty() || m_bTaskFinish)
@@ -412,7 +408,6 @@ void CWinSFXMakerDlg::FindFiles(CString strPath)
 
 	CTime ct;
 	CFileFind ff;
-	CFileInfo *pItem = NULL;
 
 	BOOL bContinue = ff.FindFile(strPath);
 
@@ -426,29 +421,9 @@ void CWinSFXMakerDlg::FindFiles(CString strPath)
 		if (ff.IsDots())
 			continue;
 
-		if (m_bIncludeSubPath && ff.IsDirectory())
+		if (ff.IsDirectory())
 			FindFiles(ff.GetFilePath());
 
 		strExt = PathFindExtension(ff.GetFileName());
-		for (int nCnt = 0; nCnt < m_arFileExt.GetCount(); nCnt++)
-		{
-			if (m_arFileExt.GetAt(nCnt).CompareNoCase(strExt) != 0 || m_bTaskFinish)
-				continue;
-
-			pItem = new CFileInfo;
-			if (!pItem)
-				continue;
-
-			pItem->m_strPath = ff.GetFilePath();
-			pItem->m_strFileName = ff.GetFileName();
-
-			ff.GetLastAccessTime(ct);
-			pItem->m_strModifiedTime = ct.Format(_T("%Y-%m-%d %p %I:%M"));
-
-			m_arFiles.Add(pItem);
-
-			if (m_bTaskFinish)
-				return;
-		}
 	}
 }
