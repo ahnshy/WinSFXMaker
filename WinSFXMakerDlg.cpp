@@ -82,6 +82,7 @@ void CWinSFXMakerDlg::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CWinSFXMakerDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
+	ON_WM_TIMER()
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDOK, &CWinSFXMakerDlg::OnBnClickedOk)
 	ON_WM_CTLCOLOR()
@@ -353,4 +354,9 @@ void CWinSFXMakerDlg::OnBnClickedButtonPath()
 		return;
 
 	GetDlgItem(IDC_COMBO_PATH)->SetWindowText(dlg.GetPath());
+}
+
+void CWinSFXMakerDlg::OnTimer(UINT_PTR nIDEvent)
+{
+	CDialogEx::OnTimer(nIDEvent);
 }
