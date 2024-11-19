@@ -398,4 +398,5 @@ void CWinSFXMakerDlg::UpdateResult()
 
 void CWinSFXMakerDlg::AddFiles()
 {
+	FindFiles(m_strPath);
 }
