@@ -11,9 +11,7 @@ class CFileListCtrl : public CMFCListCtrl
 	virtual COLORREF OnGetCellBkColor(int nRow, int nColum);
 };
 
-void AddFiles(CString strPath);
 UINT TaskFindFilesFunc(LPVOID pParam);
-
 // CWinSFXMakerDlg dialog
 class CWinSFXMakerDlg : public CDialogEx
 {
@@ -36,12 +34,14 @@ protected:
 
 	CWinThread*		m_pThread;
 	CFileListCtrl	m_wndList;
+	CString			m_strPath;
 
 	void Initialize();
 
 	void					MoveWindow();
 	void					UpdateResult();
 	BOOL					FindFiles(CString strPath);
+	void					AddFiles();
 
 	// Generated message map functions
 	virtual BOOL OnInitDialog();
