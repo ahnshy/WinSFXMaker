@@ -18,11 +18,11 @@
 
 UINT TaskFindFilesFunc(LPVOID pParam)
 {
-	CFileListCtrl *pDlg = (CFileListCtrl*)pParam;
+	CWinSFXMakerDlg *pDlg = (CWinSFXMakerDlg*)pParam;
 	if (pDlg == NULL)
 		return 0;
 
-	//pDlg->FindFiles()
+	pDlg->FindFiles(pDlg->GetPath());
 
 
 	return 1;
