@@ -439,6 +439,7 @@ void CWinSFXMakerDlg::FindFiles(CString strPath)
 
 	BOOL bContinue = ff.FindFile(strPath);
 	CString strExt, strBuffer;
+	CFileInfo* pItem = NULL;
 	while (bContinue)
 	{
 		if (m_bTaskFinish)
@@ -450,6 +451,18 @@ void CWinSFXMakerDlg::FindFiles(CString strPath)
 
 		if (ff.IsDirectory())
 			FindFiles(ff.GetFilePath());
+
+		pItem = new CFileInfo;
+		if (!pItem)
+			continue;
+
+		pItem->m_strPath = ff.GetFilePath();
+		pItem->m_strFileName = ff.GetFileName();
+
+		//ff.GetLastAccessTime(ct);
+		//pItem->m_strModifiedTime = ct.Format(_T("%Y-%m-%d %p %I:%M"));
+
+		m_arFiles.Add(pItem);
 	}
 }
 
