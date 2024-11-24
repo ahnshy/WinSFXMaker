@@ -388,7 +388,11 @@ void CWinSFXMakerDlg::OnBnClickedButtonPath()
 	if (IDOK != dlg.DoModal())
 		return;
 
-	GetDlgItem(IDC_COMBO_PATH)->SetWindowText(dlg.GetPath());
+	m_strPath = dlg.GetPath();
+	if (m_strPath.IsEmpty())
+		return;
+
+	GetDlgItem(IDC_COMBO_PATH)->SetWindowText(m_strPath);
 }
 
 void CWinSFXMakerDlg::OnTimer(UINT_PTR nIDEvent)
