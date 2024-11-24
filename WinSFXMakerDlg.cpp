@@ -24,7 +24,7 @@ UINT TaskFindFilesFunc(LPVOID pParam)
 
 	pDlg->InitFileInfo();
 	pDlg->FindFiles(pDlg->GetPath());
-
+	pDlg->AddFiles();
 
 	return 1;
 }
@@ -478,11 +478,45 @@ void CWinSFXMakerDlg::InitFileInfo()
 
 void CWinSFXMakerDlg::AddFiles()
 {
+	if (!m_wndList.GetSafeHwnd())
+		return;
+
+	m_wndList.DeleteAllItems();
+
+	CString strBuffer;
+	DWORD dwColumn = 0;
+
 	CFileInfo* pItem = NULL;
 	for (int nCnt = 0; nCnt < (int)m_arFiles.GetCount(); nCnt++)
 	{
+		if (m_bTaskFinish)
+			return;
+
 		pItem = (CFileInfo*)m_arFiles.GetAt(nCnt);
 		if (!pItem)
 			continue;
+
+		LVITEM item;
+		item.iItem = nCnt;
+		item.iSubItem = dwColumn;
+		item.pszText = (LPTSTR)(LPCTSTR)pItem->m_strFileName;
+		item.mask = LVIF_TEXT;
+		if (m_wndList.GetSafeHwnd())
+			m_wndList.InsertItem(&item);
+
+		if (m_bTaskFinish)
+			return;
+
+		strBuffer = pItem->m_strPath;
+		PathRemoveFileSpec(strBuffer.GetBuffer(BUFSIZ));
+		strBuffer.ReleaseBuffer();
+		item.iSubItem = ++dwColumn;
+		item.pszText = (LPTSTR)(LPCTSTR)strBuffer;
+
+		if (m_wndList.GetSafeHwnd())
+			m_wndList.SetItem(&item);
+		
+		if (m_bTaskFinish)
+			return;
 	}
 }
