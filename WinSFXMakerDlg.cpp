@@ -29,11 +29,6 @@ UINT TaskFindFilesFunc(LPVOID pParam)
 	return 1;
 }
 
-void CWinSFXMakerDlg::AddFiles()
-{
-	BeginFindFiles(m_strPath);
-}
-
 BOOL CWinSFXMakerDlg::BeginFindFiles(CString strPath)
 {
 	if (strPath.IsEmpty())
@@ -407,7 +402,7 @@ void CWinSFXMakerDlg::OnBnClickedButtonPath()
 		return;
 
 	GetDlgItem(IDC_COMBO_PATH)->SetWindowText(m_strPath);
-	AddFiles();
+	BeginFindFiles(m_strPath);
 }
 
 void CWinSFXMakerDlg::OnTimer(UINT_PTR nIDEvent)
@@ -479,4 +474,15 @@ void CWinSFXMakerDlg::InitFileInfo()
 		pItem = NULL;
 	}
 	m_arFiles.RemoveAll();
+}
+
+void CWinSFXMakerDlg::AddFiles()
+{
+	CFileInfo* pItem = NULL;
+	for (int nCnt = 0; nCnt < (int)m_arFiles.GetCount(); nCnt++)
+	{
+		pItem = (CFileInfo*)m_arFiles.GetAt(nCnt);
+		if (!pItem)
+			continue;
+	}
 }
