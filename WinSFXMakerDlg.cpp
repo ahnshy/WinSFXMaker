@@ -417,6 +417,9 @@ void CWinSFXMakerDlg::FindFiles(CString strPath)
 	if (strPath.IsEmpty() || m_bTaskFinish)
 		return;
 
+	if (m_bTaskFinish)
+		return;
+
 	PathAddBackslash(strPath.GetBuffer(BUFSIZ));
 	strPath.ReleaseBuffer();
 	strPath.Append(_T("*.*"));
@@ -425,7 +428,6 @@ void CWinSFXMakerDlg::FindFiles(CString strPath)
 	CFileFind ff;
 
 	BOOL bContinue = ff.FindFile(strPath);
-
 	CString strExt, strBuffer;
 	while (bContinue)
 	{
@@ -437,6 +439,7 @@ void CWinSFXMakerDlg::FindFiles(CString strPath)
 			continue;
 
 		if (ff.IsDirectory())
-			FindFiles(ff.GetFilePath());
+			FindFiles(ff.GetFilePath()); 
+
 	}
 }
