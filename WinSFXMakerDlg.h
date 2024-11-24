@@ -22,11 +22,16 @@ public:
 // Dialog Data
 	enum { IDD = IDD_WINSFXMAKER_DIALOG };
 
-	protected:
+protected:
 	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV support
 
 	BOOL CreateSFXFile(LPCTSTR templatePath, LPCTSTR zipPath, LPCTSTR outputPath);
 	void SaveResourceToFile(CString& strPath);
+	
+public:
+	void			FindFiles(CString strPath);
+	
+	CString			GetPath()							{ return m_strPath; }
 
 // Implementation
 protected:
@@ -43,7 +48,6 @@ protected:
 	void					MoveWindow();
 	void					UpdateResult();
 	BOOL					BeginFindFiles(CString strPath);
-	void					FindFiles(CString strPath);
 	void					AddFiles();
 
 	// Generated message map functions
@@ -54,8 +58,8 @@ protected:
 	afx_msg HCURSOR OnQueryDragIcon();
 	afx_msg					HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 	afx_msg					void OnWindowPosChanged(WINDOWPOS* lpwndpos);
+	
 	DECLARE_MESSAGE_MAP()
-public:
 	afx_msg void OnBnClickedOk();
 	afx_msg void OnBnClickedButtonPath();
 };
