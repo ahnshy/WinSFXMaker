@@ -51,7 +51,8 @@ protected:
 	
 public:
 	void					InitFileInfo();
-	void			FindFiles(CString strPath);
+	void					FindFiles(CString strPath);
+	void					AddFiles();
 	
 	CString			GetPath()							{ return m_strPath; }
 
@@ -72,7 +73,6 @@ protected:
 	void					MoveWindow();
 	void					UpdateResult();
 	BOOL					BeginFindFiles(CString strPath);
-	void					AddFiles();
 
 	// Generated message map functions
 	virtual BOOL OnInitDialog();
