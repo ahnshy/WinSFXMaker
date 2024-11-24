@@ -36,6 +36,7 @@ protected:
 	CFileListCtrl	m_wndList;
 	CString			m_strPath;
 	BOOL			m_bTaskFinish;
+	CMFCButton				m_btnDirectory;
 
 	void Initialize();
 
