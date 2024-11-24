@@ -104,21 +104,13 @@ CWinSFXMakerDlg::CWinSFXMakerDlg(CWnd* pParent /*=NULL*/)
 	m_bTaskFinish = FALSE;
 	m_pThread = NULL;
 	m_strPath.Empty();
+
+	InitFileInfo();
 }
 
 CWinSFXMakerDlg::~CWinSFXMakerDlg()
 {
-	CFileInfo* pItem = NULL;
-	for (int nCnt = 0; nCnt < (int)m_arFiles.GetCount(); nCnt++)
-	{
-		pItem = (CFileInfo*)m_arFiles.GetAt(nCnt);
-		if (!pItem)
-			continue;
-
-		delete pItem;
-		pItem = NULL;
-	}
-	m_arFiles.RemoveAll();
+	InitFileInfo();
 }
 
 void CWinSFXMakerDlg::DoDataExchange(CDataExchange* pDX)
@@ -347,6 +339,8 @@ void CWinSFXMakerDlg::OnBnClickedOk()
 
 void CWinSFXMakerDlg::Initialize()
 {
+	InitFileInfo();
+
 	m_btnDirectory.SetImage(IDB_BITMAP_DIRECTORY, IDB_BITMAP_DIRECTORY_HOT);
 	m_btnDirectory.SetMouseCursorHand();
 	m_btnDirectory.SetWindowText(_T(""));
@@ -456,4 +450,19 @@ void CWinSFXMakerDlg::FindFiles(CString strPath)
 		if (ff.IsDirectory())
 			FindFiles(ff.GetFilePath());
 	}
+}
+
+void CWinSFXMakerDlg::InitFileInfo()
+{
+	CFileInfo* pItem = NULL;
+	for (int nCnt = 0; nCnt < (int)m_arFiles.GetCount(); nCnt++)
+	{
+		pItem = (CFileInfo*)m_arFiles.GetAt(nCnt);
+		if (!pItem)
+			continue;
+
+		delete pItem;
+		pItem = NULL;
+	}
+	m_arFiles.RemoveAll();
 }
