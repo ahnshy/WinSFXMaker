@@ -329,6 +329,7 @@ void CWinSFXMakerDlg::OnBnClickedOk()
 void CWinSFXMakerDlg::Initialize()
 {
 	m_btnDirectory.SetImage(IDB_BITMAP_DIRECTORY, IDB_BITMAP_DIRECTORY_HOT);
+	m_btnDirectory.SetMouseCursorHand();
 	m_btnDirectory.SetWindowText(_T(""));
 	m_btnDirectory.Invalidate();
 
