@@ -18,8 +18,12 @@
 
 UINT TaskFindFilesFunc(LPVOID pParam)
 {
-	if (pParam == NULL)
+	CFileListCtrl *pDlg = (CFileListCtrl*)pParam;
+	if (pDlg == NULL)
 		return 0;
+
+	//pDlg->FindFiles()
+
 
 	return 1;
 }
@@ -393,7 +397,7 @@ void CWinSFXMakerDlg::OnBnClickedButtonPath()
 		return;
 
 	GetDlgItem(IDC_COMBO_PATH)->SetWindowText(m_strPath);
-	BeginFindFiles(m_strPath);
+	AddFiles();
 }
 
 void CWinSFXMakerDlg::OnTimer(UINT_PTR nIDEvent)
