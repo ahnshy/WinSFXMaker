@@ -31,7 +31,7 @@ void CWinSFXMakerDlg::AddFiles()
 
 BOOL CWinSFXMakerDlg::BeginFindFiles(CString strPath)
 {
-	if (!strPath.IsEmpty())
+	if (strPath.IsEmpty())
 		return FALSE;
 
 	if (m_pThread)
