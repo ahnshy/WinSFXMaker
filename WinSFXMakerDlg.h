@@ -11,6 +11,12 @@ class CFileListCtrl : public CMFCListCtrl
 	virtual COLORREF OnGetCellBkColor(int nRow, int nColum);
 };
 
+class CFileInfo
+{
+public:
+	CString				m_strPath;
+};
+
 UINT TaskFindFilesFunc(LPVOID pParam);
 // CWinSFXMakerDlg dialog
 class CWinSFXMakerDlg : public CDialogEx
@@ -18,6 +24,7 @@ class CWinSFXMakerDlg : public CDialogEx
 // Construction
 public:
 	CWinSFXMakerDlg(CWnd* pParent = NULL);	// standard constructor
+	~CWinSFXMakerDlg();
 
 // Dialog Data
 	enum { IDD = IDD_WINSFXMAKER_DIALOG };
