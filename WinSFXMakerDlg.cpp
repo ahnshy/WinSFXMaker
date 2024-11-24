@@ -492,8 +492,6 @@ void CWinSFXMakerDlg::FindFiles(CString strPath)
 			CloseHandle(hFile);
 		}
 
-		pItem->m_dwSize = GetFileSize(hFile, NULL);
-
 		//ff.GetLastAccessTime(ct);
 		//pItem->m_strModifiedTime = ct.Format(_T("%Y-%m-%d %p %I:%M"));
 
@@ -536,6 +534,8 @@ void CWinSFXMakerDlg::AddFiles()
 		if (!pItem)
 			continue;
 
+		dwColumn = 0;
+
 		LVITEM item;
 		item.iItem = nCnt;
 		item.iSubItem = dwColumn;
@@ -544,28 +544,21 @@ void CWinSFXMakerDlg::AddFiles()
 		if (m_wndList.GetSafeHwnd())
 			m_wndList.InsertItem(&item);
 
-		if (m_bTaskFinish)
-			return;
-
 		strBuffer = pItem->m_strPath;
 		PathRemoveFileSpec(strBuffer.GetBuffer(BUFSIZ));
 		strBuffer.ReleaseBuffer();
 		item.iSubItem = ++dwColumn;
 		item.pszText = (LPTSTR)(LPCTSTR)strBuffer;
-
 		if (m_wndList.GetSafeHwnd())
 			m_wndList.SetItem(&item);
-		
-		if (m_bTaskFinish)
-			return;
 
 		item.iSubItem = ++dwColumn;
 		strBuffer.Format(_T("%d"), pItem->m_dwSize);
 		CastByte(strBuffer);
 		item.pszText = (LPTSTR)(LPCTSTR)strBuffer;
-
 		if (m_wndList.GetSafeHwnd())
 			m_wndList.SetItem(&item);
+
 		if (m_bTaskFinish)
 			return;
 	}
