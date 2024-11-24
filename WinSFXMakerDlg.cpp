@@ -22,6 +22,7 @@ UINT TaskFindFilesFunc(LPVOID pParam)
 	if (pDlg == NULL)
 		return 0;
 
+	pDlg->InitFileInfo();
 	pDlg->FindFiles(pDlg->GetPath());
 
 
