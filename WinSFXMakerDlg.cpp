@@ -106,6 +106,21 @@ CWinSFXMakerDlg::CWinSFXMakerDlg(CWnd* pParent /*=NULL*/)
 	m_strPath.Empty();
 }
 
+CWinSFXMakerDlg::~CWinSFXMakerDlg()
+{
+	CFileInfo* pItem = NULL;
+	for (int nCnt = 0; nCnt < (int)m_arFiles.GetCount(); nCnt++)
+	{
+		pItem = (CFileInfo*)m_arFiles.GetAt(nCnt);
+		if (!pItem)
+			continue;
+
+		delete pItem;
+		pItem = NULL;
+	}
+	m_arFiles.RemoveAll();
+}
+
 void CWinSFXMakerDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
@@ -439,7 +454,6 @@ void CWinSFXMakerDlg::FindFiles(CString strPath)
 			continue;
 
 		if (ff.IsDirectory())
-			FindFiles(ff.GetFilePath()); 
-
+			FindFiles(ff.GetFilePath());
 	}
 }
