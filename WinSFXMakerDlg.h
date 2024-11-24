@@ -73,6 +73,7 @@ protected:
 	void					MoveWindow();
 	void					UpdateResult();
 	BOOL					BeginFindFiles(CString strPath);
+	void					CastByte(CString& strValue);
 
 	// Generated message map functions
 	virtual BOOL OnInitDialog();
