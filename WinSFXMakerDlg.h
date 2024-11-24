@@ -73,6 +73,8 @@ protected:
 	BOOL					BeginFindFiles(CString strPath);
 	void					AddFiles();
 
+	void					InitFileInfo();
+
 	// Generated message map functions
 	virtual BOOL OnInitDialog();
 	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
