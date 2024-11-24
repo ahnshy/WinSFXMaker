@@ -417,6 +417,36 @@ void CWinSFXMakerDlg::UpdateResult()
 {
 }
 
+void CWinSFXMakerDlg::CastByte(CString& strValue)
+{
+	DWORD dwSize = _ttoi(strValue);
+	if (dwSize < 1024)
+	{
+		CString strBytes;
+		strBytes.Format(_T("%d"), dwSize);
+		strValue.Format(_T("%s B"), strBytes);
+	}
+	else if (dwSize < 1048576)
+	{
+		CString strKiloBytes;
+		strKiloBytes.Format(_T("%0.1f"), dwSize / 1024.0);
+		strValue.Format(_T("%s KB"), strKiloBytes);
+	}
+	else if (dwSize < 1073741824.0)
+	{
+		CString strMegaBytes;
+		strMegaBytes.Format(_T("%0.2f"), dwSize / 1048576.0);
+		strValue.Format(_T("%s MB"), strMegaBytes);
+	}
+	else
+	{
+		CString strGigaBytes;
+		strGigaBytes.Format(_T("%0.2f"), dwSize / 1073741824.0);
+		strValue.Format(_T("%s GB"), strGigaBytes);
+	}
+
+}
+
 void CWinSFXMakerDlg::FindFiles(CString strPath)
 {
 	if (strPath.IsEmpty() || m_bTaskFinish)
@@ -453,6 +483,16 @@ void CWinSFXMakerDlg::FindFiles(CString strPath)
 
 		pItem->m_strPath = ff.GetFilePath();
 		pItem->m_strFileName = ff.GetFileName();
+
+		HANDLE hFile = NULL;
+		hFile = CreateFile(pItem->m_strPath, GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+		if (hFile != INVALID_HANDLE_VALUE)
+		{
+			pItem->m_dwSize = GetFileSize(hFile, NULL);
+			CloseHandle(hFile);
+		}
+
+		pItem->m_dwSize = GetFileSize(hFile, NULL);
 
 		//ff.GetLastAccessTime(ct);
 		//pItem->m_strModifiedTime = ct.Format(_T("%Y-%m-%d %p %I:%M"));
@@ -516,6 +556,16 @@ void CWinSFXMakerDlg::AddFiles()
 		if (m_wndList.GetSafeHwnd())
 			m_wndList.SetItem(&item);
 		
+		if (m_bTaskFinish)
+			return;
+
+		item.iSubItem = ++dwColumn;
+		strBuffer.Format(_T("%d"), pItem->m_dwSize);
+		CastByte(strBuffer);
+		item.pszText = (LPTSTR)(LPCTSTR)strBuffer;
+
+		if (m_wndList.GetSafeHwnd())
+			m_wndList.SetItem(&item);
 		if (m_bTaskFinish)
 			return;
 	}
