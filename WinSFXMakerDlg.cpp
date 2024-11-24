@@ -393,6 +393,7 @@ void CWinSFXMakerDlg::OnBnClickedButtonPath()
 		return;
 
 	GetDlgItem(IDC_COMBO_PATH)->SetWindowText(m_strPath);
+	BeginFindFiles(m_strPath);
 }
 
 void CWinSFXMakerDlg::OnTimer(UINT_PTR nIDEvent)
