@@ -15,6 +15,20 @@ class CFileInfo
 {
 public:
 	CString				m_strPath;
+	CString				m_strFileName;
+	DWORD				m_dwSize;
+
+	CFileInfo::CFileInfo()
+	{
+		SetEmpty();
+	}
+
+	void CFileInfo::SetEmpty()
+	{
+		m_strPath.Empty();
+		m_strFileName.Empty();
+		m_dwSize = 0;
+	}
 };
 
 UINT TaskFindFilesFunc(LPVOID pParam);
