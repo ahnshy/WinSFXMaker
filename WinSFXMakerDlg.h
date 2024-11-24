@@ -33,6 +33,8 @@ public:
 	
 	CString			GetPath()							{ return m_strPath; }
 
+	CPtrArray		m_arFiles;
+
 // Implementation
 protected:
 	HICON m_hIcon;
