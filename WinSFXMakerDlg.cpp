@@ -106,6 +106,7 @@ void CWinSFXMakerDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_LIST_ARCHIVE, m_wndList);
+	DDX_Control(pDX, ID_BUTTON_PATH, m_btnDirectory);
 }
 
 BEGIN_MESSAGE_MAP(CWinSFXMakerDlg, CDialogEx)
@@ -327,6 +328,12 @@ void CWinSFXMakerDlg::OnBnClickedOk()
 
 void CWinSFXMakerDlg::Initialize()
 {
+	m_btnDirectory.SetImage(IDB_BITMAP_DIRECTORY, IDB_BITMAP_DIRECTORY_HOT);
+	//m_btnDirectory.SizeToContent();
+	m_btnDirectory.SetMouseCursorHand();
+	m_btnDirectory.SetWindowText(_T(""));
+	m_btnDirectory.Invalidate();
+
 	CRect rt;
 	GetClientRect(&rt);
 	//m_wndList.SetWindowPos(&wndTop, rt.left, rt.top, rt.right, rt.bottom -300, SWP_SHOWWINDOW);
