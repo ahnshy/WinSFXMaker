@@ -10,6 +10,8 @@
 #include <fstream>
 #include <vector>
 
+//#include "Helper/ZlibHelper.h"
+#include "Helper/ShellZipHelper.h"
 #include "Dialog/DlgShellTreeExplore.h"
 
 #ifdef _DEBUG
@@ -324,13 +326,60 @@ BOOL CWinSFXMakerDlg::CreateSFXFile(LPCTSTR templatePath, LPCTSTR zipPath, LPCTS
 void CWinSFXMakerDlg::OnBnClickedOk()
 {
 
+	CShellZipHelper zipHelper;
+
+	// 압축 파일 경로
+	CString zipFilePath = _T("c:\\1234.zip");
+
+	CStringArray filesToCompress;
+	CFileInfo* pItem = NULL;
+	for (int nCnt = 0; nCnt < (int)m_arFiles.GetCount(); nCnt++)
+	{
+		pItem = (CFileInfo*)m_arFiles.GetAt(nCnt);
+		if (!pItem)
+			continue;
+
+		filesToCompress.Add(pItem->m_strPath);
+	}
+
+	// ZIP 파일 생성 및 파일 압축
+	if (zipHelper.CreateZip(zipFilePath, filesToCompress))
+		AfxMessageBox(_T("파일이 성공적으로 압축되었습니다!"));
+	else
+		AfxMessageBox(_T("파일 압축에 실패했습니다."));
+
 	//CString str = _T("C:\\SFXTemplate.exe");
 	//SaveResourceToFile(str);
 
+	
+	//USES_CONVERSION;
+	//CZlibHelper compress;
+	////compress.Compress(m_strPath, _T("c:\\1234.zip"));
+	//CString outputZip(_T("c:\\1234.zip"));
+	//gzFile gzFile = gzopen(CT2A(outputZip.GetString()), "wb");
+	//compress.AddFilesToZip(m_strPath, m_strPath, gzFile); // 파일 및 폴더 추가
+	//gzclose(gzFile); // 압축 파일 닫기
+
+	//	CString inputDir = _T("C:\\TestFolder"); // 압축할 폴더 경로
+	//	CString outputZip = _T("C:\\output.gz"); // 출력 압축 파일 경로 (gz 파일)
+	//
+	//	gzFile gzFile = gzopen(CT2A(outputZip.GetString()), "wb");
+	//	if (gzFile == nullptr) {
+	//		std::cerr << "압축 파일 열기 실패: " << (LPCWSTR)outputZip << std::endl;
+	//		return -1;
+	//	}
+	//
+	//	AddFilesToZip(inputDir, inputDir, gzFile); // 파일 및 폴더 추가
+	//
+	//	gzclose(gzFile); // 압축 파일 닫기
+	//	std::wcout << L"압축 완료: " << (LPCWSTR)outputZip << std::endl;
+	//
+	//	return 0;
+
+
 
 	//CreateSFXFile(_T("F:\\MFC\\WinSFXMaker\\SfxTemplate.exe"), _T("F:\\MFC\\WinSFXMaker\\bin.zip"), _T("F:\\MFC\\WinSFXMaker\\1.exe"));
-
-	CDialogEx::OnOK();
+	//CDialogEx::OnOK();
 }
 
 void CWinSFXMakerDlg::Initialize()
