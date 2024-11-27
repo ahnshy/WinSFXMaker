@@ -524,7 +524,10 @@ void CWinSFXMakerDlg::FindFiles(CString strPath)
 			continue;
 
 		if (ff.IsDirectory())
+		{
 			FindFiles(ff.GetFilePath());
+			continue;
+		}
 
 		pItem = new CFileInfo;
 		if (!pItem)
