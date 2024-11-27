@@ -13,17 +13,17 @@ CShellZipHelper::~CShellZipHelper()
 	CoUninitialize();
 }
 
-bool CShellZipHelper::CreateZip(const CString& zipFilePath, const CStringArray& filesToCompress)
+BOOL CShellZipHelper::CreateZip(const CString& zipFilePath, const CStringArray& filesToCompress)
 {
 		if (filesToCompress.IsEmpty()) {
 			AfxMessageBox(_T("압축할 파일이 없습니다."));
-			return false;
+			return FALSE;
 		}
 
 		// ZIP 파일 생성
 		if (!CreateEmptyZip(zipFilePath)) {
 			AfxMessageBox(_T("ZIP 파일을 생성하지 못했습니다."));
-			return false;
+			return FALSE;
 		}
 
 		// 압축 추가
@@ -31,7 +31,7 @@ bool CShellZipHelper::CreateZip(const CString& zipFilePath, const CStringArray& 
 		HRESULT hr = CoCreateInstance(CLSID_Shell, nullptr, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&pShellDispatch));
 		if (FAILED(hr) || !pShellDispatch) {
 			AfxMessageBox(_T("IShellDispatch 초기화 실패"));
-			return false;
+			return FALSE;
 		}
 
 		CComVariant zipFile(zipFilePath);
@@ -39,7 +39,7 @@ bool CShellZipHelper::CreateZip(const CString& zipFilePath, const CStringArray& 
 		hr = pShellDispatch->NameSpace(zipFile, &pZipFolder);
 		if (FAILED(hr) || !pZipFolder) {
 			AfxMessageBox(_T("ZIP 파일 열기 실패"));
-			return false;
+			return FALSE;
 		}
 
 		for (int i = 0; i < filesToCompress.GetSize(); ++i) {
@@ -48,20 +48,20 @@ bool CShellZipHelper::CreateZip(const CString& zipFilePath, const CStringArray& 
 				CString msg;
 				msg.Format(_T("파일 추가 실패: %s"), filePath);
 				AfxMessageBox(msg);
-				return false;
+				return FALSE;
 			}
 		}
 
-		return true;
+		return TRUE;
 }
 
-bool CShellZipHelper::ExtractZip(const CString& zipFilePath, const CString& extractToFolder)
+BOOL CShellZipHelper::ExtractZip(const CString& zipFilePath, const CString& extractToFolder)
 {
 	CComPtr<IShellDispatch> pShellDispatch;
 	HRESULT hr = CoCreateInstance(CLSID_Shell, nullptr, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&pShellDispatch));
 	if (FAILED(hr) || !pShellDispatch) {
 		AfxMessageBox(_T("IShellDispatch 초기화 실패"));
-		return false;
+		return FALSE;
 	}
 
 	CComVariant zipFile(zipFilePath);
@@ -69,7 +69,7 @@ bool CShellZipHelper::ExtractZip(const CString& zipFilePath, const CString& extr
 	hr = pShellDispatch->NameSpace(zipFile, &pZipFolder);
 	if (FAILED(hr) || !pZipFolder) {
 		AfxMessageBox(_T("ZIP 파일 열기 실패"));
-		return false;
+		return FALSE;
 	}
 
 	CComVariant extractFolder(extractToFolder);
@@ -77,7 +77,7 @@ bool CShellZipHelper::ExtractZip(const CString& zipFilePath, const CString& extr
 	hr = pShellDispatch->NameSpace(extractFolder, &pExtractFolder);
 	if (FAILED(hr) || !pExtractFolder) {
 		AfxMessageBox(_T("추출할 폴더 열기 실패"));
-		return false;
+		return FALSE;
 	}
 
 	CComVariant options(0); // 두 번째 매개변수에 기본 옵션 전달
@@ -85,7 +85,7 @@ bool CShellZipHelper::ExtractZip(const CString& zipFilePath, const CString& extr
 	return SUCCEEDED(hr);
 }
 
-bool CShellZipHelper::CreateEmptyZip(const CString& zipFilePath)
+BOOL CShellZipHelper::CreateEmptyZip(const CString& zipFilePath)
 {
 		HANDLE hFile = CreateFile(zipFilePath, GENERIC_WRITE, 0, nullptr, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);
 		if (hFile == INVALID_HANDLE_VALUE)
@@ -101,7 +101,7 @@ bool CShellZipHelper::CreateEmptyZip(const CString& zipFilePath)
 		return bytesWritten == sizeof(zipHeader);
 }
 
-bool CShellZipHelper::AddFileToZip(CComPtr<Folder>& pZipFolder, const CString& filePath)
+BOOL CShellZipHelper::AddFileToZip(CComPtr<Folder>& pZipFolder, const CString& filePath)
 {
 	CComVariant file(filePath);   // 첫 번째 매개변수: 추가할 파일의 경로
 	CComVariant options(0);       // 두 번째 매개변수: 옵션 (0은 기본 옵션)
