@@ -4,6 +4,8 @@
 #include <shlwapi.h>
 #include "FileFinderHelper.h"
 
+#pragma comment(lib, "lib\\ZipArchive.lib")
+
 const long	MAX_VOLUME_SIZE_BYTES	= 100000000;
 const int	ZIP_COMPRESS_LEVEL		= 9;
 /////////////////////////////////////////////////////////////////////////////
