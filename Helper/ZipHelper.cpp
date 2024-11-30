@@ -66,7 +66,7 @@ BOOL CZipHelper::Compress(CString strOutputName)
 			//m_zip.AddNewFile((LPCTSTR)strPath, nLevel);
 			if(::PathIsDirectory((LPCTSTR)strPath))
 			{
-				CFileFinder finder;
+				CFileFinderHelper finder;
 				finder.m_fileTypeToSearch.push_back(_T("*.*"));
 				int nCount = finder.Search(strPath, TRUE);
 
