@@ -1,9 +1,8 @@
-// Zip.cpp : Implementation of CZip
 #include "stdafx.h"
 //#include "CompressLib.h"
 #include "ZipHelper.h"
 #include <shlwapi.h>
-#include "FileFinder.h"
+#include "../ZipArchive/FileFinder.h"
 
 const long	MAX_VOLUME_SIZE_BYTES	= 100000000;
 const int	ZIP_COMPRESS_LEVEL		= 9;
