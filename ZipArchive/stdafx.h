@@ -23,6 +23,9 @@
 
 //#define WINVER 0x701
 
+#define _WIN32_WINNT 0x0601
+#include <SDKDDKVer.h>
+
 #include "_features.h"
 #include "_platform.h"
 
