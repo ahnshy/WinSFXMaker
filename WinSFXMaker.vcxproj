@@ -100,11 +100,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
-    <Text Include="zlib-1.3.1\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Dialog\DlgShellTreeExplore.h" />
     <ClInclude Include="Helper\DirectoryHelper.h" />
+    <ClInclude Include="Helper\FileFinderHelper.h" />
     <ClInclude Include="Helper\PathManager.h" />
     <ClInclude Include="Helper\ResourceManager.h" />
     <ClInclude Include="Helper\ShellZipHelper.h" />
@@ -176,21 +176,11 @@
     <ClInclude Include="ZipArchive\zlib\zutil.h" />
     <ClInclude Include="ZipArchive\_features.h" />
     <ClInclude Include="ZipArchive\_platform.h" />
-    <ClInclude Include="zlib-1.3.1\crc32.h" />
-    <ClInclude Include="zlib-1.3.1\deflate.h" />
-    <ClInclude Include="zlib-1.3.1\gzguts.h" />
-    <ClInclude Include="zlib-1.3.1\inffast.h" />
-    <ClInclude Include="zlib-1.3.1\inffixed.h" />
-    <ClInclude Include="zlib-1.3.1\inflate.h" />
-    <ClInclude Include="zlib-1.3.1\inftrees.h" />
-    <ClInclude Include="zlib-1.3.1\trees.h" />
-    <ClInclude Include="zlib-1.3.1\zconf.h" />
-    <ClInclude Include="zlib-1.3.1\zlib.h" />
-    <ClInclude Include="zlib-1.3.1\zutil.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Dialog\DlgShellTreeExplore.cpp" />
     <ClCompile Include="Helper\DirectoryHelper.cpp" />
+    <ClCompile Include="Helper\FileFinderHelper.cpp" />
     <ClCompile Include="Helper\PathManager.cpp" />
     <ClCompile Include="Helper\ResourceManager.cpp" />
     <ClCompile Include="Helper\ShellZipHelper.cpp" />
@@ -244,21 +234,6 @@
     <ClCompile Include="ZipArchive\zlib\trees.c" />
     <ClCompile Include="ZipArchive\zlib\uncompr.c" />
     <ClCompile Include="ZipArchive\zlib\zutil.c" />
-    <ClCompile Include="zlib-1.3.1\adler32.c" />
-    <ClCompile Include="zlib-1.3.1\compress.c" />
-    <ClCompile Include="zlib-1.3.1\crc32.c" />
-    <ClCompile Include="zlib-1.3.1\deflate.c" />
-    <ClCompile Include="zlib-1.3.1\gzclose.c" />
-    <ClCompile Include="zlib-1.3.1\gzlib.c" />
-    <ClCompile Include="zlib-1.3.1\gzread.c" />
-    <ClCompile Include="zlib-1.3.1\gzwrite.c" />
-    <ClCompile Include="zlib-1.3.1\infback.c" />
-    <ClCompile Include="zlib-1.3.1\inffast.c" />
-    <ClCompile Include="zlib-1.3.1\inflate.c" />
-    <ClCompile Include="zlib-1.3.1\inftrees.c" />
-    <ClCompile Include="zlib-1.3.1\trees.c" />
-    <ClCompile Include="zlib-1.3.1\uncompr.c" />
-    <ClCompile Include="zlib-1.3.1\zutil.c" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="WinSFXMaker.rc" />
@@ -269,30 +244,11 @@
     <None Include="res\WinSFXMaker.rc2" />
     <None Include="ZipArchive\ZipArchive.aps" />
     <None Include="ZipArchive\ZipArchive.vcproj" />
-    <None Include="zlib-1.3.1\ChangeLog" />
-    <None Include="zlib-1.3.1\configure" />
-    <None Include="zlib-1.3.1\FAQ" />
-    <None Include="zlib-1.3.1\INDEX" />
-    <None Include="zlib-1.3.1\LICENSE" />
-    <None Include="zlib-1.3.1\Makefile" />
-    <None Include="zlib-1.3.1\Makefile.in" />
-    <None Include="zlib-1.3.1\make_vms.com" />
-    <None Include="zlib-1.3.1\README" />
-    <None Include="zlib-1.3.1\zconf.h.cmakein" />
-    <None Include="zlib-1.3.1\zconf.h.in" />
-    <None Include="zlib-1.3.1\zlib.3" />
-    <None Include="zlib-1.3.1\zlib.3.pdf" />
-    <None Include="zlib-1.3.1\zlib.map" />
-    <None Include="zlib-1.3.1\zlib.pc.cmakein" />
-    <None Include="zlib-1.3.1\zlib.pc.in" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\Folder.bmp" />
     <Image Include="res\Folder_Hot.bmp" />
     <Image Include="res\WinSFXMaker.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Xml Include="zlib-1.3.1\treebuild.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
