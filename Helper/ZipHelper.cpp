@@ -2,7 +2,7 @@
 //#include "CompressLib.h"
 #include "ZipHelper.h"
 #include <shlwapi.h>
-#include "../ZipArchive/FileFinder.h"
+#include "FileFinderHelper.h"
 
 const long	MAX_VOLUME_SIZE_BYTES	= 100000000;
 const int	ZIP_COMPRESS_LEVEL		= 9;
