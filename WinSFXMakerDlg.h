@@ -54,7 +54,8 @@ public:
 	void					FindFiles(CString strPath);
 	void					AddFiles();
 
-	BOOL					Initialize();
+	INT32					Initialize();
+	INT32					UnInitialize();
 	
 	CString			GetPath()							{ return m_strPath; }
 
