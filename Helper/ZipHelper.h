@@ -1,10 +1,6 @@
-// Zip.h : Declaration of the CZip
+#pragma once
 
-#ifndef __ZIPWRAPPER_H_
-#define __ZIPWRAPPER_H_
-
-#include "resource.h"       // main symbols
-#include "ZipArchive.h"
+#include "../ZipArchive/ZipArchive.h"
 /////////////////////////////////////////////////////////////////////////////
 // CZip
 
@@ -25,5 +21,3 @@ private:
 
 	CZipArchive m_zip;
 };
-
-#endif //__ZIP_H_
