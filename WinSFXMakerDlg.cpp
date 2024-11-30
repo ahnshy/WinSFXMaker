@@ -556,12 +556,15 @@ void CWinSFXMakerDlg::AddFiles()
 	}
 }
 
-BOOL CWinSFXMakerDlg::Initialize()
+INT32 CWinSFXMakerDlg::Initialize()
 {
-	return FALSE;
+	return 0;
 }
 
-
+INT32 CWinSFXMakerDlg::UnInitialize()
+{
+	return 0;
+}
 
 void CWinSFXMakerDlg::OnBnClickedOk()
 {
