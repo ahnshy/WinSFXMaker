@@ -66,6 +66,7 @@ BOOL CWinSFXMakerApp::InitInstance()
 	SetRegistryKey(_T("WinSFXMaker"));
 
 	CWinSFXMakerDlg dlg;
+	dlg.Initialize();
 	m_pMainWnd = &dlg;
 	INT_PTR nResponse = dlg.DoModal();
 	if (nResponse == IDOK)
@@ -83,6 +84,8 @@ BOOL CWinSFXMakerApp::InitInstance()
 		TRACE(traceAppMsg, 0, "Warning: dialog creation failed, so application is terminating unexpectedly.\n");
 		TRACE(traceAppMsg, 0, "Warning: if you are using MFC controls on the dialog, you cannot #define _AFX_NO_MFC_CONTROLS_IN_DIALOGS.\n");
 	}
+
+	dlg.UnInitialize();
 
 	// Delete the shell manager created above.
 	if (pShellManager != NULL)
