@@ -16,12 +16,12 @@
 	#error Do not include this file directly. Include stdafx.h instead
 #endif
 
-#if _MSC_VER > 1000
-#ifndef WINVER
-	#define WINVER 0x0400
-#endif
-#pragma once
-#endif
+//#if _MSC_VER > 1000
+//#ifndef WINVER
+//	#define WINVER 0x0400
+//#endif
+//#pragma once
+//#endif
 
 #define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
 #define _ATL_CSTRING_EXPLICIT_CONSTRUCTORS	// some CString constructors will be explicit
