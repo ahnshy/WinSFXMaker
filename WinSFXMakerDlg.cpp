@@ -166,7 +166,7 @@ BOOL CWinSFXMakerDlg::OnInitDialog()
 	//m_listFiles.SetTextBkColor(RGB(0xe0, 0xff, 0xff));
 	//m_listFiles.SetExtendedStyle(LVS_EX_GRIDLINES | LVS_EX_FULLROWSELECT | LVS_EX_SUBITEMIMAGES);
 
-	Initialize();
+	InitControls();
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
@@ -322,7 +322,7 @@ BOOL CWinSFXMakerDlg::CreateSFXFile(LPCTSTR templatePath, LPCTSTR zipPath, LPCTS
 	return TRUE;
 }
 
-void CWinSFXMakerDlg::Initialize()
+void CWinSFXMakerDlg::InitControls()
 {
 	InitFileInfo();
 
@@ -555,6 +555,13 @@ void CWinSFXMakerDlg::AddFiles()
 			return;
 	}
 }
+
+BOOL CWinSFXMakerDlg::Initialize()
+{
+	return FALSE;
+}
+
+
 
 void CWinSFXMakerDlg::OnBnClickedOk()
 {

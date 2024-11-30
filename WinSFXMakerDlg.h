@@ -53,6 +53,8 @@ public:
 	void					InitFileInfo();
 	void					FindFiles(CString strPath);
 	void					AddFiles();
+
+	BOOL					Initialize();
 	
 	CString			GetPath()							{ return m_strPath; }
 
@@ -68,7 +70,7 @@ protected:
 	BOOL			m_bTaskFinish;
 	CMFCButton				m_btnDirectory;
 
-	void Initialize();
+	void					InitControls();
 
 	void					MoveWindow();
 	void					UpdateResult();
