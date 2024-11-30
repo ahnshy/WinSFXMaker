@@ -160,9 +160,7 @@ BOOL CZipHelper::IsTargetExist(LPCTSTR lpszTarget)
 	{
 		CString strTemp = m_arrTarget.GetAt(i);
 		if(!strTemp.CompareNoCase(lpszTarget))
-		{
 			return TRUE;
-		}
 	}
 
 	return FALSE;
