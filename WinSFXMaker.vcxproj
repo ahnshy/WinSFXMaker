@@ -107,7 +107,6 @@
     <ClInclude Include="Helper\FileFinderHelper.h" />
     <ClInclude Include="Helper\PathManager.h" />
     <ClInclude Include="Helper\ResourceManager.h" />
-    <ClInclude Include="Helper\ShellZipHelper.h" />
     <ClInclude Include="Helper\ZipHelper.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
@@ -183,7 +182,6 @@
     <ClCompile Include="Helper\FileFinderHelper.cpp" />
     <ClCompile Include="Helper\PathManager.cpp" />
     <ClCompile Include="Helper\ResourceManager.cpp" />
-    <ClCompile Include="Helper\ShellZipHelper.cpp" />
     <ClCompile Include="Helper\ZipHelper.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
