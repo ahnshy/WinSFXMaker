@@ -21,6 +21,8 @@
 #if !defined(ZIPARCHIVE_STDAFX_DOT_H)
 #define ZIPARCHIVE_STDAFX_DOT_H
 
+#define WINVER 0x701
+
 #include "_features.h"
 #include "_platform.h"
 
