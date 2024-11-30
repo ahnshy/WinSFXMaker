@@ -85,63 +85,6 @@ CString CFileHelper::GetTimeBaseFileName(LPCTSTR lpBasePath, LPCTSTR lpExt)
 	return CString(szFullPath);
 }
 
-BOOL CFileHelper::IsSupportMedia(CString strPath)
-{
-	if (strPath.IsEmpty())
-		return FALSE;
-
-	TCHAR* pszExt = NULL;
-	pszExt = PathFindExtension(strPath);
-
-	if (pszExt == NULL)
-		return FALSE;
-
-	const TCHAR* pszPreDefExt[9] = { _T(".avi"), _T(".m4v"), _T(".mov"), _T(".mp4"), _T(".wmv"), _T(".asf"), _T(".3g2"), _T(".3gp"), _T(".3gp2")};
-	for (int nIdx = 0 ; nIdx < _countof(pszPreDefExt); nIdx++)
-	{
-		if (_tcsicmp(pszExt, pszPreDefExt[nIdx]) == 0)
-			return TRUE;
-	}
-
-	return FALSE;
-}
-
-BOOL CFileHelper::IsSupportImage(CString strPath)
-{
-	if (strPath.IsEmpty())
-		return FALSE;
-
-	TCHAR* pszExt = NULL;
-	pszExt = PathFindExtension(strPath);
-
-	if (pszExt == NULL)
-		return FALSE;
-
-	const TCHAR* pszPreDefExt[] = {  _T(".jpg"), _T(".gif"), _T(".jpeg"), _T(".bmp"), _T(".png"), _T(".tiff"), _T(".tif"), _T(".wmf"), _T(".emf") };
-	for (int nIdx = 0 ; nIdx < _countof(pszPreDefExt); nIdx++)
-	{
-		if (_tcsicmp(pszExt, pszPreDefExt[nIdx]) == 0)
-			return TRUE;
-	}
-
-	return FALSE;
-}
-
-BOOL CFileHelper::IsSupportThumbnail(LPCTSTR lpExt)
-{
-	if (!lpExt || !lpExt[0])
-		return FALSE;
-
-	const TCHAR* pszPreDefExt[] = {  _T(".dcm"), _T(".jpg"), _T(".gif"), _T(".jpeg"), _T(".bmp"), _T(".png"), _T(".tiff"), _T(".tif"), _T(".wmf"), _T(".emf") };
-	for (int nIdx = 0 ; nIdx < _countof(pszPreDefExt); nIdx++)
-	{
-		if (_tcsicmp(lpExt, pszPreDefExt[nIdx]) == 0)
-			return TRUE;
-	}
-
-	return FALSE;
-}
-
 CString CFileHelper::GetGuidBaseFileName(CString strPath, CString strExt)
 {
 	strPath.Append(GetGUID());
