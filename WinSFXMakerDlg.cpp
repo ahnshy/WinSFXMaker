@@ -571,6 +571,8 @@ void CWinSFXMakerDlg::OnBnClickedOk()
 	CZipHelper zipHelper;
 	zipHelper.AddCompressTarget(m_strPath);
 
+	//CDirectoryHelper::GetTempPath()
+
 	//_tcscpy_s(lpszDestPath, sizeDest * sizeof(TCHAR), lpszSrcPath);
 	//_tcscat_s(lpszDestPath, sizeDest * sizeof(TCHAR), _T(".zip"));
 
