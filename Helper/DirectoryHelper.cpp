@@ -121,7 +121,7 @@ CString CDirectoryHelper::GetTempPath()
 
 	::ZeroMemory(szTempPath, 2048);
 	::GetTempPath(2048, szTempPath);
-	::lstrcat(szTempPath, _T("V-ceph7"));
+	::lstrcat(szTempPath, _T("WinSFXMaker"));
 
 	::CreateDirectory(szTempPath, NULL);
 
