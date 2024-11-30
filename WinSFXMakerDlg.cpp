@@ -322,33 +322,6 @@ BOOL CWinSFXMakerDlg::CreateSFXFile(LPCTSTR templatePath, LPCTSTR zipPath, LPCTS
 	return TRUE;
 }
 
-void CWinSFXMakerDlg::OnBnClickedOk()
-{
-	CZipHelper zipHelper;
-	zipHelper.AddCompressTarget(m_strPath);
-
-	//_tcscpy_s(lpszDestPath, sizeDest * sizeof(TCHAR), lpszSrcPath);
-	//_tcscat_s(lpszDestPath, sizeDest * sizeof(TCHAR), _T(".zip"));
-
-	zipHelper.Compress(_T("c:\\1234.zip"));
-
-
-	//CStringArray filesToCompress;
-	//CFileInfo* pItem = NULL;
-	//for (int nCnt = 0; nCnt < (int)m_arFiles.GetCount(); nCnt++)
-	//{
-	//	pItem = (CFileInfo*)m_arFiles.GetAt(nCnt);
-	//	if (!pItem)
-	//		continue;
-
-	//	filesToCompress.Add(pItem->m_strPath);
-	//}
-
-	
-	//CreateSFXFile(_T("F:\\MFC\\WinSFXMaker\\SfxTemplate.exe"), _T("F:\\MFC\\WinSFXMaker\\bin.zip"), _T("F:\\MFC\\WinSFXMaker\\1.exe"));
-	//CDialogEx::OnOK();
-}
-
 void CWinSFXMakerDlg::Initialize()
 {
 	InitFileInfo();
@@ -581,4 +554,31 @@ void CWinSFXMakerDlg::AddFiles()
 		if (m_bTaskFinish)
 			return;
 	}
+}
+
+void CWinSFXMakerDlg::OnBnClickedOk()
+{
+	CZipHelper zipHelper;
+	zipHelper.AddCompressTarget(m_strPath);
+
+	//_tcscpy_s(lpszDestPath, sizeDest * sizeof(TCHAR), lpszSrcPath);
+	//_tcscat_s(lpszDestPath, sizeDest * sizeof(TCHAR), _T(".zip"));
+
+	zipHelper.Compress(_T("c:\\1234.zip"));
+
+
+	//CStringArray filesToCompress;
+	//CFileInfo* pItem = NULL;
+	//for (int nCnt = 0; nCnt < (int)m_arFiles.GetCount(); nCnt++)
+	//{
+	//	pItem = (CFileInfo*)m_arFiles.GetAt(nCnt);
+	//	if (!pItem)
+	//		continue;
+
+	//	filesToCompress.Add(pItem->m_strPath);
+	//}
+
+
+	//CreateSFXFile(_T("F:\\MFC\\WinSFXMaker\\SfxTemplate.exe"), _T("F:\\MFC\\WinSFXMaker\\bin.zip"), _T("F:\\MFC\\WinSFXMaker\\1.exe"));
+	//CDialogEx::OnOK();
 }
