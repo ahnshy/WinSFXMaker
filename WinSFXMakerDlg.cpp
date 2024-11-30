@@ -10,6 +10,8 @@
 #include <fstream>
 #include <vector>
 
+#include "Helper/FileHelper.h"
+#include "Helper/DirectoryHelper.h"
 #include "Helper/ZipHelper.h"
 #include "Dialog/DlgShellTreeExplore.h"
 
@@ -571,12 +573,12 @@ void CWinSFXMakerDlg::OnBnClickedOk()
 	CZipHelper zipHelper;
 	zipHelper.AddCompressTarget(m_strPath);
 
-	//CDirectoryHelper::GetTempPath()
+	CString strPath = CDirectoryHelper::GetTempPath();
+	PathAddBackslash(strPath.GetBuffer(BUFSIZ));
+	strPath.ReleaseBuffer();
 
-	//_tcscpy_s(lpszDestPath, sizeDest * sizeof(TCHAR), lpszSrcPath);
-	//_tcscat_s(lpszDestPath, sizeDest * sizeof(TCHAR), _T(".zip"));
-
-	zipHelper.Compress(_T("c:\\1234.zip"));
+	CString strZipFile = CFileHelper::GetTimeBaseFileName(strPath, _T("zip"));
+	zipHelper.Compress(strZipFile);
 
 
 	//CStringArray filesToCompress;
