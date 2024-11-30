@@ -105,6 +105,7 @@
     <ClInclude Include="Dialog\DlgShellTreeExplore.h" />
     <ClInclude Include="Helper\DirectoryHelper.h" />
     <ClInclude Include="Helper\FileFinderHelper.h" />
+    <ClInclude Include="Helper\FileHelper.h" />
     <ClInclude Include="Helper\PathManager.h" />
     <ClInclude Include="Helper\ResourceManager.h" />
     <ClInclude Include="Helper\ZipHelper.h" />
@@ -180,6 +181,7 @@
     <ClCompile Include="Dialog\DlgShellTreeExplore.cpp" />
     <ClCompile Include="Helper\DirectoryHelper.cpp" />
     <ClCompile Include="Helper\FileFinderHelper.cpp" />
+    <ClCompile Include="Helper\FileHelper.cpp" />
     <ClCompile Include="Helper\PathManager.cpp" />
     <ClCompile Include="Helper\ResourceManager.cpp" />
     <ClCompile Include="Helper\ZipHelper.cpp" />
