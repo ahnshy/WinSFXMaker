@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "../stdafx.h"
 //#include "CompressLib.h"
 #include "ZipHelper.h"
 #include <shlwapi.h>
