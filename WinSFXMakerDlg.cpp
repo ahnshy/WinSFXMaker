@@ -26,7 +26,7 @@ UINT TaskFindFilesFunc(LPVOID pParam)
 		return 0;
 
 	pDlg->InitFileInfo();
-	pDlg->FindFiles(pDlg->GetPath());
+	pDlg->FindFiles(pDlg->GetInputPath());
 	pDlg->AddFiles();
 
 	return 1;
@@ -105,7 +105,8 @@ CWinSFXMakerDlg::CWinSFXMakerDlg(CWnd* pParent /*=NULL*/)
 
 	m_bTaskFinish = FALSE;
 	m_pThread = NULL;
-	m_strPath.Empty();
+	m_strInputPath.Empty();
+	m_strOutputPath.Empty();
 
 	InitFileInfo();
 }
@@ -131,6 +132,7 @@ BEGIN_MESSAGE_MAP(CWinSFXMakerDlg, CDialogEx)
 	ON_WM_CTLCOLOR()
 	ON_WM_WINDOWPOSCHANGED()
 	ON_BN_CLICKED(ID_BUTTON_INPUT_PATH, &CWinSFXMakerDlg::OnBnClickedButtonPath)
+	ON_BN_CLICKED(ID_BUTTON_OUPUT_PATH, &CWinSFXMakerDlg::OnBnClickedButtonOuputPath)
 END_MESSAGE_MAP()
 
 
@@ -411,12 +413,12 @@ void CWinSFXMakerDlg::OnBnClickedButtonPath()
 	if (IDOK != dlg.DoModal())
 		return;
 
-	m_strPath = dlg.GetPath();
-	if (m_strPath.IsEmpty())
+	m_strInputPath = dlg.GetPath();
+	if (m_strInputPath.IsEmpty())
 		return;
 
-	GetDlgItem(IDC_COMBO_INPUT_PATH)->SetWindowText(m_strPath);
-	BeginFindFiles(m_strPath);
+	GetDlgItem(IDC_COMBO_INPUT_PATH)->SetWindowText(m_strInputPath);
+	BeginFindFiles(m_strInputPath);
 }
 
 void CWinSFXMakerDlg::OnTimer(UINT_PTR nIDEvent)
@@ -594,7 +596,7 @@ INT32 CWinSFXMakerDlg::UnInitialize()
 void CWinSFXMakerDlg::OnBnClickedOk()
 {
 	CZipHelper zipHelper;
-	zipHelper.AddCompressTarget(m_strPath);
+	zipHelper.AddCompressTarget(m_strInputPath);
 
 	CString strPath = CDirectoryHelper::GetTempPath();
 	PathAddBackslash(strPath.GetBuffer(BUFSIZ));
@@ -626,4 +628,10 @@ void CWinSFXMakerDlg::OnBnClickedOk()
 
 	//CreateSFXFile(_T("F:\\MFC\\WinSFXMaker\\SfxTemplate.exe"), _T("F:\\MFC\\WinSFXMaker\\bin.zip"), _T("F:\\MFC\\WinSFXMaker\\1.exe"));
 	//CDialogEx::OnOK();
+}
+
+
+void CWinSFXMakerDlg::OnBnClickedButtonOuputPath()
+{
+
 }
