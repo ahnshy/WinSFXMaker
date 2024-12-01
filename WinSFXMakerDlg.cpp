@@ -280,7 +280,6 @@ void CWinSFXMakerDlg::SaveResourceToFile(CString& strPath)
 	UnlockResource(hGlobal);
 }
 
-// SFX 템플릿 파일과 7z 파일을 합쳐 새로운 SFX 생성
 BOOL CWinSFXMakerDlg::CreateSFXFile(LPCTSTR templatePath, LPCTSTR zipPath, LPCTSTR outputPath) {
 	// 템플릿 파일 읽기
 	std::ifstream templateFile(templatePath, std::ios::binary | std::ios::ate);
@@ -579,6 +578,14 @@ void CWinSFXMakerDlg::OnBnClickedOk()
 
 	CString strZipFile = CFileHelper::GetTimeBaseFileName(strPath, _T("zip"));
 	zipHelper.Compress(strZipFile);
+
+	CString strTemplateFile = CFileHelper::GetTimeBaseFileName(strPath, _T("exe"));
+	SaveResourceToFile(strTemplateFile);
+
+	CreateSFXFile(strTemplateFile, strZipFile, _T("C:\\1.exe"));
+
+	if (!PathIsRoot(strPath))
+		CDirectoryHelper::ShellRemoveDirectory(strPath);
 
 
 	//CStringArray filesToCompress;
