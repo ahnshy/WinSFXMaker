@@ -72,6 +72,7 @@ protected:
 	BOOL			m_bTaskFinish;
 	CMFCButton				m_btnDirectory;
 
+	CRect					m_rtTab;
 	CDlgPrgress*			m_pDlgProgress;
 
 	void					InitControls();
