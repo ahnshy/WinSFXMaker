@@ -377,7 +377,7 @@ void CWinSFXMakerDlg::InitControls()
 	GetClientRect(&m_rtTab);
 	rtScreen.CopyRect(m_rtTab);
 	this->ClientToScreen(rtScreen);
-	m_pDlgProgress->SetWindowPos(&wndTop, rtScreen.left, rtScreen.top, m_rtTab.right, m_rtTab.bottom, SWP_SHOWWINDOW);
+	m_pDlgProgress->SetWindowPos(&wndTop, rtScreen.left, rtScreen.top, m_rtTab.right, m_rtTab.bottom, SWP_HIDEWINDOW);
 }
 
 void CWinSFXMakerDlg::OnWindowPosChanged(WINDOWPOS* lpwndpos)
