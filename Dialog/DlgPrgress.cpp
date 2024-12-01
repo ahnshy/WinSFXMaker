@@ -5,7 +5,6 @@
 
 #include <afxdialogex.h>
 #include "DlgPrgress.h"
-#include "../Narcissus.h"
 
 #include "afxdatarecovery.h"
 #include "afxglobals.h"
