@@ -3,6 +3,7 @@
 //
 
 #pragma once
+#include "Dialog/DlgPrgress.h"
 #include "UI/DragListCtrl.h"
 
 class CFileListCtrl : public CMFCListCtrl
@@ -70,6 +71,8 @@ protected:
 	CString			m_strPath;
 	BOOL			m_bTaskFinish;
 	CMFCButton				m_btnDirectory;
+
+	CDlgPrgress*			m_pDlgProgress;
 
 	void					InitControls();
 
