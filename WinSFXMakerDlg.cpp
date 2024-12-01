@@ -100,6 +100,9 @@ CWinSFXMakerDlg::CWinSFXMakerDlg(CWnd* pParent /*=NULL*/)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 	
+	m_rtTab.SetRectEmpty();
+	m_pDlgProgress = NULL;
+
 	m_bTaskFinish = FALSE;
 	m_pThread = NULL;
 	m_strPath.Empty();
@@ -358,6 +361,20 @@ void CWinSFXMakerDlg::InitControls()
 
 	m_wndList.GetHeaderCtrl().SetFont(&afxGlobalData.fontRegular);
 	m_wndList.SetExtendedStyle(LVS_EX_FULLROWSELECT | LVS_EX_HEADERDRAGDROP);
+
+	if (m_pDlgProgress)
+	{
+		delete m_pDlgProgress;
+		m_pDlgProgress = NULL;
+	}
+
+	m_pDlgProgress->Create(CDlgPrgress::IDD);
+	
+	CRect rtScreen;
+	GetClientRect(&m_rtTab);
+	rtScreen.CopyRect(m_rtTab);
+	this->ClientToScreen(rtScreen);
+	m_pDlgProgress->SetWindowPos(&wndTop, rtScreen.left, rtScreen.top, m_rtTab.right, m_rtTab.bottom, SWP_SHOWWINDOW);
 }
 
 void CWinSFXMakerDlg::OnWindowPosChanged(WINDOWPOS* lpwndpos)
