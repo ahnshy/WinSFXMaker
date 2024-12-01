@@ -373,26 +373,32 @@ void CWinSFXMakerDlg::InitControls()
 	m_pDlgProgress = new CDlgPrgress;
 	m_pDlgProgress->Create(CDlgPrgress::IDD);
 	
-	CRect rtScreen;
-	GetClientRect(&m_rtTab);
-	rtScreen.CopyRect(m_rtTab);
-	this->ClientToScreen(rtScreen);
-	m_pDlgProgress->SetWindowPos(&wndTop, rtScreen.left, rtScreen.top, m_rtTab.right, m_rtTab.bottom, SWP_HIDEWINDOW);
+	//CRect rtScreen;
+	//GetClientRect(&m_rtTab);
+	//rtScreen.CopyRect(m_rtTab);
+	//this->ClientToScreen(rtScreen);
+	//m_pDlgProgress->SetWindowPos(&wndTop, rtScreen.left, rtScreen.top, m_rtTab.right, m_rtTab.bottom, SWP_HIDEWINDOW);
+	MoveWindow(FALSE);
 }
 
 void CWinSFXMakerDlg::OnWindowPosChanged(WINDOWPOS* lpwndpos)
 {
+	MoveWindow(FALSE);
+	CDialogEx::OnWindowPosChanged(lpwndpos);
+}
+
+void CWinSFXMakerDlg::MoveWindow(BOOL bShow)
+{
 	CRect rtScreen;
 	GetClientRect(&m_rtTab);
 	rtScreen.CopyRect(m_rtTab);
 	this->ClientToScreen(rtScreen);
-	//m_pDlgProgress->SetWindowPos(&wndTop, rtScreen.left, rtScreen.top, m_rtTab.right, m_rtTab.bottom, SWP_SHOWWINDOW);
 
-	CDialogEx::OnWindowPosChanged(lpwndpos);
-}
+	DWORD dwFlag = SWP_HIDEWINDOW;
+	if (bShow)
+		dwFlag = SWP_SHOWWINDOW;
 
-void CWinSFXMakerDlg::MoveWindow()
-{
+	m_pDlgProgress->SetWindowPos(&wndTop, rtScreen.left, rtScreen.top, m_rtTab.right, m_rtTab.bottom, dwFlag);
 }
 
 HBRUSH CWinSFXMakerDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
