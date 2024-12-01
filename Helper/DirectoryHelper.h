@@ -8,6 +8,7 @@ public:
 	static	CString			GetDocumentPath();
 	static	CString			GetProgramFilesPath();
 	static	BOOL			GetCurrentDirectory(CString& strCurrentPath);
+	static	BOOL			ShellRemoveDirectory(LPCTSTR lpszPath);
 	static	void			RemoveDir(CString strDir);
 	static	BOOL			IsExistDirectory(const TCHAR *pszDirPath);
 	static	CString			MakePath(TCHAR *pszFullPath, int nBufSiz);
