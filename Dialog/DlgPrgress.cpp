@@ -1,7 +1,7 @@
 // DlgPrgress.cpp : implementation file
 //
 
-#include "stdafx.h"
+#include "../stdafx.h"
 
 #include <afxdialogex.h>
 #include "DlgPrgress.h"
