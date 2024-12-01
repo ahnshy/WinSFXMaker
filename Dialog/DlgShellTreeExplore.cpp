@@ -11,7 +11,7 @@
 // DlgShellTreeExplore.cpp : implementation file
 //
 
-#include "stdafx.h"
+#include "../stdafx.h"
 #include "DlgShellTreeExplore.h"
 
 //#include "../../Share/Definition.h"
