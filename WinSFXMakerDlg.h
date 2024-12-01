@@ -58,7 +58,8 @@ public:
 	INT32					Initialize();
 	INT32					UnInitialize();
 	
-	CString			GetPath()							{ return m_strPath; }
+	CString			GetInputPath()							{ return m_strInputPath; }
+	CString			GetOutputPath()							{ return m_strOutputPath; }
 
 	CPtrArray		m_arFiles;
 
@@ -68,7 +69,9 @@ protected:
 
 	CWinThread*		m_pThread;
 	CFileListCtrl	m_wndList;
-	CString			m_strPath;
+	CString			m_strInputPath;
+	CString			m_strOutputPath;
+
 	BOOL			m_bTaskFinish;
 	CMFCButton				m_btnDirectory;
 
@@ -94,4 +97,6 @@ protected:
 	DECLARE_MESSAGE_MAP()
 	afx_msg void OnBnClickedOk();
 	afx_msg void OnBnClickedButtonPath();
+public:
+	afx_msg void OnBnClickedButtonOuputPath();
 };
