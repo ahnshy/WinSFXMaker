@@ -368,6 +368,7 @@ void CWinSFXMakerDlg::InitControls()
 		m_pDlgProgress = NULL;
 	}
 
+	m_pDlgProgress = new CDlgPrgress;
 	m_pDlgProgress->Create(CDlgPrgress::IDD);
 	
 	CRect rtScreen;
@@ -379,6 +380,12 @@ void CWinSFXMakerDlg::InitControls()
 
 void CWinSFXMakerDlg::OnWindowPosChanged(WINDOWPOS* lpwndpos)
 {
+	CRect rtScreen;
+	GetClientRect(&m_rtTab);
+	rtScreen.CopyRect(m_rtTab);
+	this->ClientToScreen(rtScreen);
+	m_pDlgProgress->SetWindowPos(&wndTop, rtScreen.left, rtScreen.top, m_rtTab.right, m_rtTab.bottom, SWP_SHOWWINDOW);
+
 	CDialogEx::OnWindowPosChanged(lpwndpos);
 }
 
