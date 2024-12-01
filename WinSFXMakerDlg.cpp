@@ -53,11 +53,11 @@ COLORREF CFileListCtrl::OnGetCellBkColor(int nRow, int nColum)
 {
 	//if (nColum == m_iSortedColumn)
 	//{
-	//	//return(nRow % 2) == 0 ? RGB(233, 221, 229) : RGB(176, 218, 234);
+		return(nRow % 2) == 0 ? RGB(233, 221, 229) : RGB(176, 218, 234);
 	//}
 
 	//return(nRow % 2) == 0 ? RGB(253, 241, 249) : RGB(196, 238, 254);
-	return(nRow % 2) == 0 ? RGB(241, 244, 247) : RGB(250, 250, 250);
+	//return(nRow % 2) == 0 ? RGB(241, 244, 247) : RGB(250, 250, 250);
 	//return(nRow % 2) == 0 ? RGB(250, 250, 250) : RGB(223, 230, 238);
 }
 
@@ -116,7 +116,7 @@ void CWinSFXMakerDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_LIST_ARCHIVE, m_wndList);
-	DDX_Control(pDX, ID_BUTTON_PATH, m_btnDirectory);
+	DDX_Control(pDX, ID_BUTTON_INPUT_PATH, m_btnDirectory);
 }
 
 BEGIN_MESSAGE_MAP(CWinSFXMakerDlg, CDialogEx)
@@ -127,7 +127,7 @@ BEGIN_MESSAGE_MAP(CWinSFXMakerDlg, CDialogEx)
 	ON_BN_CLICKED(IDOK, &CWinSFXMakerDlg::OnBnClickedOk)
 	ON_WM_CTLCOLOR()
 	ON_WM_WINDOWPOSCHANGED()
-	ON_BN_CLICKED(ID_BUTTON_PATH, &CWinSFXMakerDlg::OnBnClickedButtonPath)
+	ON_BN_CLICKED(ID_BUTTON_INPUT_PATH, &CWinSFXMakerDlg::OnBnClickedButtonPath)
 END_MESSAGE_MAP()
 
 
@@ -391,7 +391,7 @@ void CWinSFXMakerDlg::OnBnClickedButtonPath()
 	if (m_strPath.IsEmpty())
 		return;
 
-	GetDlgItem(IDC_COMBO_PATH)->SetWindowText(m_strPath);
+	GetDlgItem(IDC_COMBO_INPUT_PATH)->SetWindowText(m_strPath);
 	BeginFindFiles(m_strPath);
 }
 
