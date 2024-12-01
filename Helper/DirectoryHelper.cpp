@@ -165,6 +165,27 @@ BOOL CDirectoryHelper::IsExistDirectory(const TCHAR *pszDirPath)
 	return bIsFolder;
 }
 
+BOOL CDirectoryHelper::ShellRemoveDirectory(LPCTSTR lpszPath)
+{
+	if (!lpszPath || !lpszPath[0])
+		return FALSE;
+
+	INT32 nPathLen = _tcslen(lpszPath);
+	
+	TCHAR szPath[BUFSIZ] = { NULL, };
+	_tcscpy_s(szPath, lpszPath);
+	szPath[++nPathLen] = NULL;
+
+	SHFILEOPSTRUCT shell = { NULL, };
+	shell.wFunc = FO_DELETE;
+	shell.pFrom = szPath;
+	shell.fFlags = FOF_NO_UI;
+
+	INT32 nResult = SHFileOperation(&shell);
+
+	return nResult == 0;
+}
+
 void CDirectoryHelper::RemoveDir(CString strDir)
 {
 	if (!strDir.IsEmpty())
