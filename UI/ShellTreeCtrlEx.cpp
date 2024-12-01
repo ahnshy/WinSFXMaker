@@ -1,6 +1,6 @@
 // ShellTreeCtrlEx.cpp : implementation file
 //
-#include "stdafx.h"
+#include "../stdafx.h"
 #include "ShellTreeCtrlEx.h"
 //#include "../Share/Definition.h"
 
