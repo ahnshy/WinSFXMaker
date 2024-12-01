@@ -102,6 +102,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Dialog\DlgPrgress.h" />
     <ClInclude Include="Dialog\DlgShellTreeExplore.h" />
     <ClInclude Include="Helper\DirectoryHelper.h" />
     <ClInclude Include="Helper\FileFinderHelper.h" />
@@ -178,6 +179,7 @@
     <ClInclude Include="ZipArchive\_platform.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Dialog\DlgPrgress.cpp" />
     <ClCompile Include="Dialog\DlgShellTreeExplore.cpp" />
     <ClCompile Include="Helper\DirectoryHelper.cpp" />
     <ClCompile Include="Helper\FileFinderHelper.cpp" />
