@@ -648,9 +648,10 @@ void CWinSFXMakerDlg::OnBnClickedButtonOuputPath()
 	GetDlgItem(IDC_COMBO_OUTPUT_PATH)->SetWindowText(m_strOutputPath);
 
 	CFileDialog dlg(FALSE, _T("exe"), _T("*.exe"), OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, _T("Executable File(*.exe)|*.exe|All Files(*.*)|*.*||"));
-	//CString strAppPath = CPathManager::GetInstance()->GetBinPath();
-	//CString reportPath = strAppPath + _T("\\Export");
-	//dlg.m_ofn.lpstrInitialDir = reportPath;
+
+	TCHAR szPath[BUFSIZ] = { NULL, };
+	GetCurrentDirectory(BUFSIZ - sizeof(TCHAR), szPath);
+	dlg.m_ofn.lpstrInitialDir = szPath;
 	
 	if (IDOK != dlg.DoModal())
 		return;
