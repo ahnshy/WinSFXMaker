@@ -57,7 +57,7 @@ BOOL CDlgPrgress::OnInitDialog()
 	CRect rt;
 	GetClientRect(&rt);
 
-	m_wndProgress.SetWindowPos(NULL, rt.left + 10, rt.top + (rt.Height()/2 - 50), rt.Width() - 17,  20, SWP_SHOWWINDOW);
+	m_wndProgress.SetWindowPos(NULL, rt.left + 25, rt.top + (rt.Height()/2), rt.Width(),  17, SWP_SHOWWINDOW);
 
 	return TRUE;
 }
