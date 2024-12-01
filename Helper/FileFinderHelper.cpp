@@ -8,7 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 
-#include "StdAfx.h"
+#include "../stdafx.h"
 #include "FileFinderHelper.h"
 
 #ifdef _DEBUG
