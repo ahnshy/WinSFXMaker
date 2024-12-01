@@ -617,7 +617,7 @@ void CWinSFXMakerDlg::OnBnClickedOk()
 	CString strTemplateFile = CFileHelper::GetTimeBaseFileName(strPath, _T("exe"));
 	SaveResourceToFile(strTemplateFile);
 
-	CreateSFXFile(strTemplateFile, strZipFile, _T("C:\\1.exe"));
+	CreateSFXFile(strTemplateFile, strZipFile, m_strOutputPath);
 
 	if (!PathIsRoot(strPath))
 		CDirectoryHelper::ShellRemoveDirectory(strPath);
