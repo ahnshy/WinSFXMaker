@@ -80,7 +80,7 @@ protected:
 
 	void					InitControls();
 
-	void					MoveWindow();
+	void					MoveWindow(BOOL bShow);
 	void					UpdateResult();
 	BOOL					BeginFindFiles(CString strPath);
 	void					CastByte(CString& strValue);
