@@ -46,11 +46,11 @@ END_MESSAGE_MAP()
 
 BOOL CDlgPrgress::OnInitDialog()
 {
-	SetBackgroundColor(RGB(50, 50, 50));
+	SetBackgroundColor(RGB(255, 255, 255));
 
 	LONG ExtendedStyle = GetWindowLong(GetSafeHwnd(),GWL_EXSTYLE);
 	SetWindowLong(GetSafeHwnd(),GWL_EXSTYLE, ExtendedStyle | WS_EX_LAYERED);
-	::SetLayeredWindowAttributes(GetSafeHwnd(), 0, 150, LWA_ALPHA);
+	::SetLayeredWindowAttributes(GetSafeHwnd(), 0, 255, LWA_ALPHA);
 
 	UpdateData(FALSE);
 
@@ -90,6 +90,9 @@ void CDlgPrgress::ProgressStepIt()
 
 	m_wndProgress.StepIt();
 
+	float fPrgress = (float)(m_wndProgress.GetPos() / m_dwMax);
+	float fAlpha = (255 * fPrgress);
+	::SetLayeredWindowAttributes(GetSafeHwnd(), 0, fAlpha > 255.0 ? 255 : (INT32)fAlpha, LWA_ALPHA);
 	SetTaskProgressPos(m_wndProgress.GetPos());
 }
 
