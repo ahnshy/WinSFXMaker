@@ -3,7 +3,7 @@
 // CFileHelper class
 // Bug Report :: ahnshy@naver.com
 
-#include "stdafx.h"
+#include "../stdafx.h"
 #include "FileHelper.h"
 
 #include <Rpc.h>
