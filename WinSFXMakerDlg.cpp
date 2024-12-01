@@ -53,12 +53,12 @@ COLORREF CFileListCtrl::OnGetCellBkColor(int nRow, int nColum)
 {
 	//if (nColum == m_iSortedColumn)
 	//{
-		return(nRow % 2) == 0 ? RGB(233, 221, 229) : RGB(176, 218, 234);
+		//return(nRow % 2) == 0 ? RGB(233, 221, 229) : RGB(176, 218, 234);
 	//}
 
 	//return(nRow % 2) == 0 ? RGB(253, 241, 249) : RGB(196, 238, 254);
 	//return(nRow % 2) == 0 ? RGB(241, 244, 247) : RGB(250, 250, 250);
-	//return(nRow % 2) == 0 ? RGB(250, 250, 250) : RGB(223, 230, 238);
+	return(nRow % 2) == 0 ? RGB(249, 249, 249) : RGB(223, 230, 238);
 }
 
 // CAboutDlg dialog used for App About
@@ -386,7 +386,7 @@ void CWinSFXMakerDlg::OnWindowPosChanged(WINDOWPOS* lpwndpos)
 	GetClientRect(&m_rtTab);
 	rtScreen.CopyRect(m_rtTab);
 	this->ClientToScreen(rtScreen);
-	m_pDlgProgress->SetWindowPos(&wndTop, rtScreen.left, rtScreen.top, m_rtTab.right, m_rtTab.bottom, SWP_SHOWWINDOW);
+	//m_pDlgProgress->SetWindowPos(&wndTop, rtScreen.left, rtScreen.top, m_rtTab.right, m_rtTab.bottom, SWP_SHOWWINDOW);
 
 	CDialogEx::OnWindowPosChanged(lpwndpos);
 }
