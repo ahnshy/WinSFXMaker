@@ -408,6 +408,9 @@ HBRUSH CWinSFXMakerDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 void CWinSFXMakerDlg::OnBnClickedButtonPath()
 {
 	CWaitCursor cw;
+
+	m_strInputPath.Empty();
+	GetDlgItem(IDC_COMBO_INPUT_PATH)->SetWindowText(m_strInputPath);
 	
 	CDlgShellTreeExplore dlg;
 	if (IDOK != dlg.DoModal())
@@ -633,5 +636,22 @@ void CWinSFXMakerDlg::OnBnClickedOk()
 
 void CWinSFXMakerDlg::OnBnClickedButtonOuputPath()
 {
+	CWaitCursor cw;
 
+	m_strOutputPath.Empty();
+	GetDlgItem(IDC_COMBO_OUTPUT_PATH)->SetWindowText(m_strOutputPath);
+
+	CFileDialog dlg(FALSE, _T("exe"), _T("*.exe"), OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, _T("Executable File(*.exe)|*.exe|All Files(*.*)|*.*||"));
+	//CString strAppPath = CPathManager::GetInstance()->GetBinPath();
+	//CString reportPath = strAppPath + _T("\\Export");
+	//dlg.m_ofn.lpstrInitialDir = reportPath;
+	
+	if (IDOK != dlg.DoModal())
+		return;
+
+	m_strOutputPath = dlg.GetPathName();
+	if (m_strOutputPath.IsEmpty())
+		return;
+
+	GetDlgItem(IDC_COMBO_OUTPUT_PATH)->SetWindowText(m_strOutputPath);
 }
