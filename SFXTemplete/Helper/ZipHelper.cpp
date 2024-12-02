@@ -5,7 +5,7 @@
 
 #pragma comment(lib, "..\\lib\\ZipArchive.lib")
 
-const long	MAX_VOLUME_SIZE_BYTES	= 100000000;
+const long	MAX_VOLUME_SIZE_BYTES	= 1024*1024*1024;
 const int	ZIP_COMPRESS_LEVEL		= 9;
 /////////////////////////////////////////////////////////////////////////////
 // CZip
@@ -16,16 +16,6 @@ CZipHelper::CZipHelper()
 
 CZipHelper::~CZipHelper()
 {
-}
-
-BOOL CZipHelper::AddCompressTarget(CString strTargetPath)
-{
-	if(IsTargetExist(strTargetPath))
-		return TRUE;
-
-	m_arrTarget.Add(strTargetPath);
-
-	return TRUE;
 }
 
 BOOL CZipHelper::Decompress(CString strDecompressTarget, CString strDestPath)
@@ -62,17 +52,4 @@ BOOL CZipHelper::Decompress(CString strDecompressTarget, CString strDestPath)
 
 	m_zip.Close();
 	return TRUE;
-}
-
-BOOL CZipHelper::IsTargetExist(LPCTSTR lpszTarget)
-{
-	int nCount = (int)m_arrTarget.GetSize();
-	for(int i = 0; i < nCount; i++)
-	{
-		CString strTemp = m_arrTarget.GetAt(i);
-		if(!strTemp.CompareNoCase(lpszTarget))
-			return TRUE;
-	}
-
-	return FALSE;
 }
