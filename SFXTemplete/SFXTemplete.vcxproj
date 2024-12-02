@@ -113,6 +113,66 @@
     <ClInclude Include="SFXTemplete.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="ZipArchive\Aes.h" />
+    <ClInclude Include="ZipArchive\BytesWriter.h" />
+    <ClInclude Include="ZipArchive\DeflateCompressor.h" />
+    <ClInclude Include="ZipArchive\DirEnumerator.h" />
+    <ClInclude Include="ZipArchive\FileFilter.h" />
+    <ClInclude Include="ZipArchive\FileInfo.h" />
+    <ClInclude Include="ZipArchive\Hmac.h" />
+    <ClInclude Include="ZipArchive\RandomPool.h" />
+    <ClInclude Include="ZipArchive\resource.h" />
+    <ClInclude Include="ZipArchive\Sha1.h" />
+    <ClInclude Include="ZipArchive\stdafx.h" />
+    <ClInclude Include="ZipArchive\std_mfc.h" />
+    <ClInclude Include="ZipArchive\std_stl.h" />
+    <ClInclude Include="ZipArchive\Wildcard.h" />
+    <ClInclude Include="ZipArchive\ZipAbstractFile.h" />
+    <ClInclude Include="ZipArchive\ZipAesCryptograph.h" />
+    <ClInclude Include="ZipArchive\ZipArchive.h" />
+    <ClInclude Include="ZipArchive\ZipAutoBuffer.h" />
+    <ClInclude Include="ZipArchive\ZipBaseException.h" />
+    <ClInclude Include="ZipArchive\ZipCallback.h" />
+    <ClInclude Include="ZipArchive\ZipCallbackProvider.h" />
+    <ClInclude Include="ZipArchive\ZipCentralDir.h" />
+    <ClInclude Include="ZipArchive\ZipCollections.h" />
+    <ClInclude Include="ZipArchive\ZipCollections_mfc.h" />
+    <ClInclude Include="ZipArchive\ZipCollections_stl.h" />
+    <ClInclude Include="ZipArchive\ZipCompatibility.h" />
+    <ClInclude Include="ZipArchive\ZipCompressor.h" />
+    <ClInclude Include="ZipArchive\ZipCrc32Cryptograph.h" />
+    <ClInclude Include="ZipArchive\ZipCryptograph.h" />
+    <ClInclude Include="ZipArchive\ZipException.h" />
+    <ClInclude Include="ZipArchive\ZipExport.h" />
+    <ClInclude Include="ZipArchive\ZipExtraData.h" />
+    <ClInclude Include="ZipArchive\ZipExtraField.h" />
+    <ClInclude Include="ZipArchive\ZipFile.h" />
+    <ClInclude Include="ZipArchive\ZipFileHeader.h" />
+    <ClInclude Include="ZipArchive\ZipFileMapping.h" />
+    <ClInclude Include="ZipArchive\ZipFileMapping_lnx.h" />
+    <ClInclude Include="ZipArchive\ZipFileMapping_win.h" />
+    <ClInclude Include="ZipArchive\ZipFile_mfc.h" />
+    <ClInclude Include="ZipArchive\ZipFile_stl.h" />
+    <ClInclude Include="ZipArchive\ZipMemFile.h" />
+    <ClInclude Include="ZipArchive\ZipPathComponent.h" />
+    <ClInclude Include="ZipArchive\ZipPlatform.h" />
+    <ClInclude Include="ZipArchive\ZipStorage.h" />
+    <ClInclude Include="ZipArchive\ZipString.h" />
+    <ClInclude Include="ZipArchive\ZipStringStoreSettings.h" />
+    <ClInclude Include="ZipArchive\ZipString_mfc.h" />
+    <ClInclude Include="ZipArchive\ZipString_stl.h" />
+    <ClInclude Include="ZipArchive\zlib\crc32.h" />
+    <ClInclude Include="ZipArchive\zlib\deflate.h" />
+    <ClInclude Include="ZipArchive\zlib\inffast.h" />
+    <ClInclude Include="ZipArchive\zlib\inffixed.h" />
+    <ClInclude Include="ZipArchive\zlib\inflate.h" />
+    <ClInclude Include="ZipArchive\zlib\inftrees.h" />
+    <ClInclude Include="ZipArchive\zlib\trees.h" />
+    <ClInclude Include="ZipArchive\zlib\zconf.h" />
+    <ClInclude Include="ZipArchive\zlib\zlib.h" />
+    <ClInclude Include="ZipArchive\zlib\zutil.h" />
+    <ClInclude Include="ZipArchive\_features.h" />
+    <ClInclude Include="ZipArchive\_platform.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Helper\ZipHelper.cpp" />
@@ -122,12 +182,55 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="ZipArchive\Aes.cpp" />
+    <ClCompile Include="ZipArchive\DeflateCompressor.cpp" />
+    <ClCompile Include="ZipArchive\DirEnumerator.cpp" />
+    <ClCompile Include="ZipArchive\FileFilter.cpp" />
+    <ClCompile Include="ZipArchive\Hmac.cpp" />
+    <ClCompile Include="ZipArchive\RandomPool.cpp" />
+    <ClCompile Include="ZipArchive\Sha1.cpp" />
+    <ClCompile Include="ZipArchive\Wildcard.cpp" />
+    <ClCompile Include="ZipArchive\ZipAesCryptograph.cpp" />
+    <ClCompile Include="ZipArchive\ZipArchive.cpp" />
+    <ClCompile Include="ZipArchive\ZipAutoBuffer.cpp" />
+    <ClCompile Include="ZipArchive\ZipCentralDir.cpp" />
+    <ClCompile Include="ZipArchive\ZipCompatibility.cpp" />
+    <ClCompile Include="ZipArchive\ZipCompressor.cpp" />
+    <ClCompile Include="ZipArchive\ZipCrc32Cryptograph.cpp" />
+    <ClCompile Include="ZipArchive\ZipCryptograph.cpp" />
+    <ClCompile Include="ZipArchive\ZipException.cpp" />
+    <ClCompile Include="ZipArchive\ZipExtraData.cpp" />
+    <ClCompile Include="ZipArchive\ZipExtraField.cpp" />
+    <ClCompile Include="ZipArchive\ZipFileHeader.cpp" />
+    <ClCompile Include="ZipArchive\ZipFile_mfc.cpp" />
+    <ClCompile Include="ZipArchive\ZipFile_stl.cpp" />
+    <ClCompile Include="ZipArchive\ZipMemFile.cpp" />
+    <ClCompile Include="ZipArchive\ZipPathComponent_lnx.cpp" />
+    <ClCompile Include="ZipArchive\ZipPathComponent_win.cpp" />
+    <ClCompile Include="ZipArchive\ZipPlatformComm.cpp" />
+    <ClCompile Include="ZipArchive\ZipPlatform_lnx.cpp" />
+    <ClCompile Include="ZipArchive\ZipPlatform_win.cpp" />
+    <ClCompile Include="ZipArchive\ZipStorage.cpp" />
+    <ClCompile Include="ZipArchive\ZipString.cpp" />
+    <ClCompile Include="ZipArchive\zlib\adler32.c" />
+    <ClCompile Include="ZipArchive\zlib\compress.c" />
+    <ClCompile Include="ZipArchive\zlib\crc32.c" />
+    <ClCompile Include="ZipArchive\zlib\deflate.c" />
+    <ClCompile Include="ZipArchive\zlib\infback.c" />
+    <ClCompile Include="ZipArchive\zlib\inffast.c" />
+    <ClCompile Include="ZipArchive\zlib\inflate.c" />
+    <ClCompile Include="ZipArchive\zlib\inftrees.c" />
+    <ClCompile Include="ZipArchive\zlib\trees.c" />
+    <ClCompile Include="ZipArchive\zlib\uncompr.c" />
+    <ClCompile Include="ZipArchive\zlib\zutil.c" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SFXTemplete.rc" />
+    <ResourceCompile Include="ZipArchive\ZipArchive.rc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\SFXTemplete.rc2" />
+    <None Include="ZipArchive\ZipArchive.vcproj" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\SFXTemplete.ico" />
