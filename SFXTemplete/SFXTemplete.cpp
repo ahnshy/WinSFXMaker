@@ -8,6 +8,8 @@
 #include <fstream>
 #include <vector>
 
+#include "Helper/ZipHelper.h"
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
