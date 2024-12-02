@@ -6,7 +6,7 @@
 
 #pragma comment(lib, "lib\\ZipArchive.lib")
 
-const long	MAX_VOLUME_SIZE_BYTES	= 100000000;
+const long	MAX_VOLUME_SIZE_BYTES = = 1024 * 1024 * 1024;;
 const int	ZIP_COMPRESS_LEVEL		= 9;
 /////////////////////////////////////////////////////////////////////////////
 // CZip
