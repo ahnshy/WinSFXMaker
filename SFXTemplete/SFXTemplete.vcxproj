@@ -107,6 +107,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Helper\DirectoryHelper.h" />
     <ClInclude Include="Helper\ZipHelper.h" />
     <ClInclude Include="Parser\CommandLineParser.h" />
     <ClInclude Include="Resource.h" />
@@ -175,6 +176,7 @@
     <ClInclude Include="ZipArchive\_platform.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Helper\DirectoryHelper.cpp" />
     <ClCompile Include="Helper\ZipHelper.cpp" />
     <ClCompile Include="Parser\CommandLineParser.cpp" />
     <ClCompile Include="SFXTemplete.cpp" />
