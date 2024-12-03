@@ -9,6 +9,7 @@
 #include <vector>
 
 #include "Helper/ZipHelper.h"
+#include "Helper/DirectoryHelper.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -100,8 +101,16 @@ BOOL CSFXTempleteApp::ExtractEmbeddedZip(LPCTSTR outputPath)
 	outFile.write(zipData.data(), zipSize);
 	outFile.close();
 
+	CString strPath = CDirectoryHelper::GetTempPath();
+	PathAddBackslash(strPath.GetBuffer(BUFSIZ));
+	strPath.ReleaseBuffer();
+
+	CZipHelper helper;
+	helper.Decompress(outputPath, strPath);
+	DeleteFile(outputPath);
+
 	CString msg;
-	msg.Format(_T("압축 파일이 추출되었습니다: %s"), outputPath);
+	msg.Format(_T("압축 파일이 추출되었습니다: %s"), strPath);
 	AfxMessageBox(msg);
 
 	return TRUE;
