@@ -512,6 +512,10 @@ void CWinSFXMakerDlg::FindFiles(CString strPath)
 		pItem->m_strPath = ff.GetFilePath();
 		pItem->m_strFileName = ff.GetFileName();
 
+		LPTSTR lpszExtension = PathFindExtension(pItem->m_strFileName);
+		if (lpszExtension != NULL && (_tcsicmp(lpszExtension, _T(".exe")) == 0 || _tcsicmp(lpszExtension, _T(".bat")) == 0 || _tcsicmp(lpszExtension, _T(".com")) == 0))
+			m_arPeFiles.Add(pItem->m_strPath);
+
 		HANDLE hFile = NULL;
 		hFile = CreateFile(pItem->m_strPath, GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 		if (hFile != INVALID_HANDLE_VALUE)
@@ -540,6 +544,7 @@ void CWinSFXMakerDlg::InitFileInfo()
 		pItem = NULL;
 	}
 	m_arFiles.RemoveAll();
+	m_arPeFiles.RemoveAll();
 }
 
 void CWinSFXMakerDlg::AddFiles()
@@ -590,6 +595,20 @@ void CWinSFXMakerDlg::AddFiles()
 		if (m_bTaskFinish)
 			return;
 	}
+
+	//CComboBox* pCombo = (CComboBox*)GetDlgItem(IDC_COMBO_OUTPUT_PATH);
+	//if (pCombo == NULL || !pCombo->GetSafeHwnd())
+	//	return;
+
+	//pCombo->ResetContent();
+	//for (int nIdnex = 0; nIdnex < m_arPeFiles.GetSize(); ++nIdnex)
+	//{
+	//	strBuffer = m_arPeFiles.GetAt(nIdnex);
+	//	if (strBuffer.IsEmpty())
+	//		continue;
+
+	//	pCombo->AddString(strBuffer);
+	//}
 }
 
 INT32 CWinSFXMakerDlg::Initialize()
