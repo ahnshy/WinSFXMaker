@@ -62,6 +62,7 @@ public:
 	CString			GetOutputPath()							{ return m_strOutputPath; }
 
 	CPtrArray		m_arFiles;
+	CStringArray	m_arPeFiles;
 
 // Implementation
 protected:
