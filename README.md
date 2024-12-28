@@ -1,2 +1,2 @@
 # WinSFXMaker
-SelF eXtract Maker for windows
+SelF eXtract Maker for Windows
