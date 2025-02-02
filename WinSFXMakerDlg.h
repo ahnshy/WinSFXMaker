@@ -45,10 +45,10 @@ public:
 	enum { IDD = IDD_WINSFXMAKER_DIALOG };
 
 protected:
-	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV support
+	virtual void			DoDataExchange(CDataExchange* pDX);	// DDX/DDV support
 
-	BOOL CreateSFXFile(LPCTSTR templatePath, LPCTSTR zipPath, LPCTSTR outputPath);
-	void SaveResourceToFile(CString& strPath);
+	BOOL					CreateSFXFile(LPCTSTR templatePath, LPCTSTR zipPath, LPCTSTR outputPath);
+	void					SaveResourceToFile(CString& strPath);
 	
 public:
 	void					InitFileInfo();
