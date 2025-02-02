@@ -58,22 +58,22 @@ public:
 	INT32					Initialize();
 	INT32					UnInitialize();
 	
-	CString			GetInputPath()							{ return m_strInputPath; }
-	CString			GetOutputPath()							{ return m_strOutputPath; }
+	CString					GetInputPath()							{ return m_strInputPath; }
+	CString					GetOutputPath()							{ return m_strOutputPath; }
 
-	CPtrArray		m_arFiles;
-	CStringArray	m_arPeFiles;
+	CPtrArray				m_arFiles;
+	CStringArray			m_arPeFiles;
 
 // Implementation
 protected:
-	HICON m_hIcon;
+	HICON					m_hIcon;
 
-	CWinThread*		m_pThread;
-	CFileListCtrl	m_wndList;
-	CString			m_strInputPath;
-	CString			m_strOutputPath;
+	CWinThread*				m_pThread;
+	CFileListCtrl			m_wndList;
+	CString					m_strInputPath;
+	CString					m_strOutputPath;
 
-	BOOL			m_bTaskFinish;
+	BOOL					m_bTaskFinish;
 	CMFCButton				m_btnDirectory;
 
 	CRect					m_rtTab;
@@ -87,17 +87,17 @@ protected:
 	void					CastByte(CString& strValue);
 
 	// Generated message map functions
-	virtual BOOL OnInitDialog();
-	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
-	afx_msg					void OnTimer(UINT_PTR nIDEvent);
-	afx_msg void OnPaint();
-	afx_msg HCURSOR OnQueryDragIcon();
-	afx_msg					HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
-	afx_msg					void OnWindowPosChanged(WINDOWPOS* lpwndpos);
+	virtual BOOL			OnInitDialog();
+	afx_msg void			OnSysCommand(UINT nID, LPARAM lParam);
+	afx_msg	void			OnTimer(UINT_PTR nIDEvent);
+	afx_msg void			OnPaint();
+	afx_msg HCURSOR			OnQueryDragIcon();
+	afx_msg	HBRUSH			OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
+	afx_msg	void			OnWindowPosChanged(WINDOWPOS* lpwndpos);
 	
 	DECLARE_MESSAGE_MAP()
-	afx_msg void OnBnClickedOk();
-	afx_msg void OnBnClickedButtonPath();
+	afx_msg void			OnBnClickedOk();
+	afx_msg void			OnBnClickedButtonPath();
 public:
-	afx_msg void OnBnClickedButtonOuputPath();
+	afx_msg void			OnBnClickedButtonOuputPath();
 };
