@@ -29,6 +29,8 @@ UINT TaskFindFilesFunc(LPVOID pParam)
 	pDlg->FindFiles(pDlg->GetInputPath());
 	pDlg->AddFiles();
 
+	pDlg->UpdateControls();
+
 	return 1;
 }
 
@@ -133,6 +135,8 @@ BEGIN_MESSAGE_MAP(CWinSFXMakerDlg, CDialogEx)
 	ON_WM_WINDOWPOSCHANGED()
 	ON_BN_CLICKED(ID_BUTTON_INPUT_PATH, &CWinSFXMakerDlg::OnBnClickedButtonPath)
 	ON_BN_CLICKED(ID_BUTTON_OUPUT_PATH, &CWinSFXMakerDlg::OnBnClickedButtonOuputPath)
+	ON_CBN_EDITCHANGE(IDC_COMBO_INPUT_PATH, &CWinSFXMakerDlg::OnCbnEditchangeComboInputPath)
+	ON_NOTIFY(LVN_ITEMCHANGED, IDC_LIST_ARCHIVE, &CWinSFXMakerDlg::OnLvnItemchangedListArchive)
 END_MESSAGE_MAP()
 
 
@@ -174,6 +178,7 @@ BOOL CWinSFXMakerDlg::OnInitDialog()
 	//m_listFiles.SetExtendedStyle(LVS_EX_GRIDLINES | LVS_EX_FULLROWSELECT | LVS_EX_SUBITEMIMAGES);
 
 	InitControls();
+	UpdateControls();
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
@@ -442,6 +447,52 @@ void CWinSFXMakerDlg::UpdateResult()
 {
 }
 
+void CWinSFXMakerDlg::UpdateControls()
+{
+	CString strPath;
+	GetDlgItemText(IDC_COMBO_INPUT_PATH, strPath);
+
+	if (strPath.IsEmpty() || !PathIsDirectory(strPath) || PathIsRoot(strPath))
+	{
+		GetDlgItem(IDC_COMBO_EXECUTABLE_PATH)->EnableWindow(FALSE);
+		GetDlgItem(IDC_LIST_ARCHIVE)->EnableWindow(FALSE);
+	}
+	else
+	{
+		GetDlgItem(IDC_COMBO_EXECUTABLE_PATH)->EnableWindow(TRUE);
+		GetDlgItem(IDC_LIST_ARCHIVE)->EnableWindow(TRUE);
+	}
+
+	if (m_wndList.GetItemCount() <= 0 || m_wndList.IsWindowEnabled() == FALSE)
+	{
+		GetDlgItem(IDC_COMBO_OUTPUT_PATH)->EnableWindow(FALSE);
+		GetDlgItem(ID_BUTTON_OUPUT_PATH)->EnableWindow(FALSE);
+
+		GetDlgItem(IDC_EDIT_COMPANY_NAME)->EnableWindow(FALSE);
+		GetDlgItem(IDC_EDIT_PRODUCT_NAME)->EnableWindow(FALSE);
+		GetDlgItem(IDC_EDIT_VERSION)->EnableWindow(FALSE);
+		GetDlgItem(IDC_EDIT_COPYRIGHT)->EnableWindow(FALSE);
+		GetDlgItem(IDC_EDIT_DESCRIPT)->EnableWindow(FALSE);
+		GetDlgItem(IDC_STATIC_MAIN_ICON)->EnableWindow(FALSE);
+
+		GetDlgItem(IDOK)->EnableWindow(FALSE);
+	}
+	else
+	{
+		GetDlgItem(IDC_COMBO_OUTPUT_PATH)->EnableWindow(TRUE);
+		GetDlgItem(ID_BUTTON_OUPUT_PATH)->EnableWindow(TRUE);
+
+		GetDlgItem(IDC_EDIT_COMPANY_NAME)->EnableWindow(TRUE);
+		GetDlgItem(IDC_EDIT_PRODUCT_NAME)->EnableWindow(TRUE);
+		GetDlgItem(IDC_EDIT_VERSION)->EnableWindow(TRUE);
+		GetDlgItem(IDC_EDIT_COPYRIGHT)->EnableWindow(TRUE);
+		GetDlgItem(IDC_EDIT_DESCRIPT)->EnableWindow(TRUE);
+		GetDlgItem(IDC_STATIC_MAIN_ICON)->EnableWindow(TRUE);
+
+		GetDlgItem(IDOK)->EnableWindow(TRUE);
+	}
+}
+
 void CWinSFXMakerDlg::CastByte(CString& strValue)
 {
 	DWORD dwSize = _ttoi(strValue);
@@ -680,4 +731,18 @@ void CWinSFXMakerDlg::OnBnClickedButtonOuputPath()
 		return;
 
 	GetDlgItem(IDC_COMBO_OUTPUT_PATH)->SetWindowText(m_strOutputPath);
+}
+
+
+void CWinSFXMakerDlg::OnCbnEditchangeComboInputPath()
+{
+	UpdateControls();
+}
+
+void CWinSFXMakerDlg::OnLvnItemchangedListArchive(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMLISTVIEW pNMLV = reinterpret_cast<LPNMLISTVIEW>(pNMHDR);
+	// TODO: Add your control notification handler code here
+	UpdateControls();
+	*pResult = 0;
 }

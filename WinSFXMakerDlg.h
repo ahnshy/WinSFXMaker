@@ -57,6 +57,8 @@ public:
 
 	INT32					Initialize();
 	INT32					UnInitialize();
+
+	void					UpdateControls();
 	
 	CString					GetInputPath()							{ return m_strInputPath; }
 	CString					GetOutputPath()							{ return m_strOutputPath; }
@@ -83,6 +85,7 @@ protected:
 
 	void					MoveWindow(BOOL bShow);
 	void					UpdateResult();
+
 	BOOL					BeginFindFiles(CString strPath);
 	void					CastByte(CString& strValue);
 
@@ -100,4 +103,6 @@ protected:
 	afx_msg void			OnBnClickedButtonPath();
 public:
 	afx_msg void			OnBnClickedButtonOuputPath();
+	afx_msg void			OnCbnEditchangeComboInputPath();
+	afx_msg void			OnLvnItemchangedListArchive(NMHDR *pNMHDR, LRESULT *pResult);
 };
