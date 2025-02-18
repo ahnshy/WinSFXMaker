@@ -137,6 +137,7 @@ BEGIN_MESSAGE_MAP(CWinSFXMakerDlg, CDialogEx)
 	ON_BN_CLICKED(ID_BUTTON_OUPUT_PATH, &CWinSFXMakerDlg::OnBnClickedButtonOuputPath)
 	ON_CBN_EDITCHANGE(IDC_COMBO_INPUT_PATH, &CWinSFXMakerDlg::OnCbnEditchangeComboInputPath)
 	ON_NOTIFY(LVN_ITEMCHANGED, IDC_LIST_ARCHIVE, &CWinSFXMakerDlg::OnLvnItemchangedListArchive)
+	ON_CBN_EDITCHANGE(IDC_COMBO_OUTPUT_PATH, &CWinSFXMakerDlg::OnCbnEditchangeComboOutputPath)
 END_MESSAGE_MAP()
 
 
@@ -474,8 +475,6 @@ void CWinSFXMakerDlg::UpdateControls()
 		GetDlgItem(IDC_EDIT_COPYRIGHT)->EnableWindow(FALSE);
 		GetDlgItem(IDC_EDIT_DESCRIPT)->EnableWindow(FALSE);
 		GetDlgItem(IDC_STATIC_MAIN_ICON)->EnableWindow(FALSE);
-
-		GetDlgItem(IDOK)->EnableWindow(FALSE);
 	}
 	else
 	{
@@ -488,9 +487,15 @@ void CWinSFXMakerDlg::UpdateControls()
 		GetDlgItem(IDC_EDIT_COPYRIGHT)->EnableWindow(TRUE);
 		GetDlgItem(IDC_EDIT_DESCRIPT)->EnableWindow(TRUE);
 		GetDlgItem(IDC_STATIC_MAIN_ICON)->EnableWindow(TRUE);
-
-		GetDlgItem(IDOK)->EnableWindow(TRUE);
 	}
+
+	strPath.Empty();
+	GetDlgItemText(IDC_COMBO_OUTPUT_PATH, strPath);
+
+	if (strPath.IsEmpty())
+		GetDlgItem(IDOK)->EnableWindow(FALSE);
+	else
+		GetDlgItem(IDOK)->EnableWindow(TRUE);
 }
 
 void CWinSFXMakerDlg::CastByte(CString& strValue)
@@ -724,15 +729,21 @@ void CWinSFXMakerDlg::OnBnClickedButtonOuputPath()
 	dlg.m_ofn.lpstrInitialDir = szPath;
 	
 	if (IDOK != dlg.DoModal())
+	{
+		UpdateControls();
 		return;
+	}
 
 	m_strOutputPath = dlg.GetPathName();
 	if (m_strOutputPath.IsEmpty())
+	{
+		UpdateControls();
 		return;
+	}
 
 	GetDlgItem(IDC_COMBO_OUTPUT_PATH)->SetWindowText(m_strOutputPath);
+	UpdateControls();
 }
-
 
 void CWinSFXMakerDlg::OnCbnEditchangeComboInputPath()
 {
@@ -745,4 +756,11 @@ void CWinSFXMakerDlg::OnLvnItemchangedListArchive(NMHDR *pNMHDR, LRESULT *pResul
 	// TODO: Add your control notification handler code here
 	UpdateControls();
 	*pResult = 0;
+}
+
+
+void CWinSFXMakerDlg::OnCbnEditchangeComboOutputPath()
+{
+	// TODO: Add your control notification handler code here
+	UpdateControls();
 }
