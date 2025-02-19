@@ -419,7 +419,7 @@ HBRUSH CWinSFXMakerDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 
 void CWinSFXMakerDlg::OnBnClickedButtonPath()
 {
-	KillTimer(IDT_UPDATE_RESULT);
+	KillTimer(IDT_UPDATE_SCREEN);
 	CWaitCursor cw;
 
 	m_strInputPath.Empty();
@@ -435,6 +435,7 @@ void CWinSFXMakerDlg::OnBnClickedButtonPath()
 
 	GetDlgItem(IDC_COMBO_INPUT_PATH)->SetWindowText(m_strInputPath);
 	BeginFindFiles(m_strInputPath);
+	SetTimer(IDT_UPDATE_SCREEN, 5, NULL);
 }
 
 void CWinSFXMakerDlg::OnTimer(UINT_PTR nIDEvent)
