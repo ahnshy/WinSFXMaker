@@ -419,6 +419,7 @@ HBRUSH CWinSFXMakerDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 
 void CWinSFXMakerDlg::OnBnClickedButtonPath()
 {
+	KillTimer(IDT_UPDATE_RESULT);
 	CWaitCursor cw;
 
 	m_strInputPath.Empty();
