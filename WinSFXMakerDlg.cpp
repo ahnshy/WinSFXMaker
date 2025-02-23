@@ -460,7 +460,6 @@ void CWinSFXMakerDlg::ShowResultWnd(BOOL bShow)
 	GetClientRect(&rt);
 	ClientToScreen(&rt);
 	m_pDlgProgress->MoveWindow(rt);
-	//m_pDlgProgress->SetWindowPos(&wndTop, rt.left, rt.top, rt.right, rt.bottom, SWP_SHOWWINDOW);
 }
 
 void CWinSFXMakerDlg::OnTimer(UINT_PTR nIDEvent)
