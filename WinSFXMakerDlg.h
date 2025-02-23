@@ -55,6 +55,8 @@ public:
 	void					FindFiles(CString strPath);
 	void					AddFiles();
 
+	void					ShowResultWnd(BOOL bShow = TRUE);
+
 	INT32					Initialize();
 	INT32					UnInitialize();
 
