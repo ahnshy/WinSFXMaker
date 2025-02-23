@@ -30,6 +30,7 @@ UINT TaskFindFilesFunc(LPVOID pParam)
 	pDlg->AddFiles();
 
 	pDlg->UpdateControls();
+	pDlg->ShowResultWnd(FALSE);
 
 	return 1;
 }
@@ -433,9 +434,33 @@ void CWinSFXMakerDlg::OnBnClickedButtonPath()
 	if (m_strInputPath.IsEmpty())
 		return;
 
+	ShowResultWnd(TRUE);
+	SetTimer(IDT_UPDATE_SCREEN, 5, NULL);
 	GetDlgItem(IDC_COMBO_INPUT_PATH)->SetWindowText(m_strInputPath);
 	BeginFindFiles(m_strInputPath);
-	SetTimer(IDT_UPDATE_SCREEN, 5, NULL);
+}
+
+void CWinSFXMakerDlg::ShowResultWnd(BOOL bShow)
+{
+	if (!m_pDlgProgress)
+	{
+		m_pDlgProgress = new CDlgPrgress();
+		m_pDlgProgress->Create(IDD_PROGRESS, this);
+	}
+
+	if (bShow)
+		m_pDlgProgress->ShowWindow(SW_SHOW);
+	else
+	{
+		m_pDlgProgress->ShowWindow(SW_HIDE);
+		return;
+	}
+
+	CRect rt;
+	GetClientRect(&rt);
+	ClientToScreen(&rt);
+	m_pDlgProgress->MoveWindow(rt);
+	//m_pDlgProgress->SetWindowPos(&wndTop, rt.left, rt.top, rt.right, rt.bottom, SWP_SHOWWINDOW);
 }
 
 void CWinSFXMakerDlg::OnTimer(UINT_PTR nIDEvent)
