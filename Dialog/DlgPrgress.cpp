@@ -46,11 +46,11 @@ END_MESSAGE_MAP()
 
 BOOL CDlgPrgress::OnInitDialog()
 {
-	SetBackgroundColor(RGB(255, 255, 255));
+	SetBackgroundColor(RGB(50, 50, 50));
 
 	LONG ExtendedStyle = GetWindowLong(GetSafeHwnd(),GWL_EXSTYLE);
 	SetWindowLong(GetSafeHwnd(),GWL_EXSTYLE, ExtendedStyle | WS_EX_LAYERED);
-	::SetLayeredWindowAttributes(GetSafeHwnd(), 0, 255, LWA_ALPHA);
+	::SetLayeredWindowAttributes(GetSafeHwnd(), 0, 150, LWA_ALPHA);
 
 	UpdateData(FALSE);
 
