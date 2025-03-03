@@ -25,11 +25,13 @@ UINT TaskFindFilesFunc(LPVOID pParam)
 	if (pDlg == NULL)
 		return 0;
 
+	pDlg->EnableWindow(FALSE);
 	pDlg->InitFileInfo();
 	pDlg->FindFiles(pDlg->GetInputPath());
 	pDlg->AddFiles();
 
 	pDlg->UpdateControls();
+	pDlg->EnableWindow(TRUE);
 	pDlg->ShowResultWnd(FALSE);
 
 	return 1;
@@ -434,6 +436,7 @@ void CWinSFXMakerDlg::OnBnClickedButtonPath()
 	if (m_strInputPath.IsEmpty())
 		return;
 
+	EnableWindow(FALSE);
 	ShowResultWnd(TRUE);
 	SetTimer(IDT_UPDATE_SCREEN, 5, NULL);
 	GetDlgItem(IDC_COMBO_INPUT_PATH)->SetWindowText(m_strInputPath);
