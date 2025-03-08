@@ -634,6 +634,10 @@ void CWinSFXMakerDlg::InitFileInfo()
 
 void CWinSFXMakerDlg::AddFiles()
 {
+	CComboBox* pCombo = (CComboBox*)GetDlgItem(IDC_COMBO_EXECUTABLE_PATH);
+	if (pCombo)
+		pCombo->ResetContent();
+
 	if (!m_wndList.GetSafeHwnd())
 		return;
 
@@ -681,6 +685,22 @@ void CWinSFXMakerDlg::AddFiles()
 			return;
 	}
 
+	for (int nCnt = 0; nCnt < (int)m_arPeFiles.GetCount(); nCnt++)
+	{
+		if (m_bTaskFinish)
+			return;
+
+		strBuffer = m_arPeFiles.GetAt(nCnt);
+		if (!pItem || strBuffer.IsEmpty())
+			continue;
+
+		if (pCombo)
+			pCombo->AddString(strBuffer);
+
+		if (m_bTaskFinish)
+			return;
+	}
+	
 	//CComboBox* pCombo = (CComboBox*)GetDlgItem(IDC_COMBO_OUTPUT_PATH);
 	//if (pCombo == NULL || !pCombo->GetSafeHwnd())
 	//	return;
