@@ -107,5 +107,5 @@ public:
 	afx_msg void			OnBnClickedButtonOuputPath();
 	afx_msg void			OnCbnEditchangeComboInputPath();
 	afx_msg void			OnLvnItemchangedListArchive(NMHDR *pNMHDR, LRESULT *pResult);
-	afx_msg void OnCbnEditchangeComboOutputPath();
+	afx_msg void			OnCbnEditchangeComboOutputPath();
 };
