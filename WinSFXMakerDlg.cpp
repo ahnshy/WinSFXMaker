@@ -438,7 +438,7 @@ void CWinSFXMakerDlg::OnBnClickedButtonPath()
 
 	EnableWindow(FALSE);
 	ShowResultWnd(TRUE);
-	SetTimer(IDT_UPDATE_SCREEN, 5, NULL);
+	SetTimer(IDT_UPDATE_SCREEN, 10, NULL);
 	GetDlgItem(IDC_COMBO_INPUT_PATH)->SetWindowText(m_strInputPath);
 	BeginFindFiles(m_strInputPath);
 }
@@ -475,6 +475,8 @@ void CWinSFXMakerDlg::OnTimer(UINT_PTR nIDEvent)
 
 void CWinSFXMakerDlg::UpdateResult()
 {
+	if (m_pDlgProgress && m_pDlgProgress->GetSafeHwnd())
+		m_pDlgProgress->UpdateWindow();
 }
 
 void CWinSFXMakerDlg::UpdateControls()
@@ -641,6 +643,9 @@ void CWinSFXMakerDlg::AddFiles()
 		pCombo->AddString(_T(""));
 	}
 
+	if (m_pDlgProgress && m_pDlgProgress->GetSafeHwnd())
+		m_pDlgProgress->InitProgessRange(m_arFiles.GetCount());
+
 	if (!m_wndList.GetSafeHwnd())
 		return;
 
@@ -668,6 +673,12 @@ void CWinSFXMakerDlg::AddFiles()
 		item.mask = LVIF_TEXT;
 		if (m_wndList.GetSafeHwnd())
 			m_wndList.InsertItem(&item);
+
+		if (m_pDlgProgress && m_pDlgProgress->GetSafeHwnd())
+		{
+			m_pDlgProgress->SetProgressStep();
+			m_pDlgProgress->UpdateText(pItem->m_strFileName);
+		}
 
 		strBuffer = pItem->m_strPath;
 		PathRemoveFileSpec(strBuffer.GetBuffer(BUFSIZ));
