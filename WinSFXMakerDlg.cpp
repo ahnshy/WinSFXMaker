@@ -452,7 +452,11 @@ void CWinSFXMakerDlg::ShowResultWnd(BOOL bShow)
 	}
 
 	if (bShow)
+	{
+		m_pDlgProgress->InitProgessRange(0);
+		//m_pDlgProgress->UpdateText(_T("Searching for files..."));
 		m_pDlgProgress->ShowWindow(SW_SHOW);
+	}
 	else
 	{
 		m_pDlgProgress->ShowWindow(SW_HIDE);
@@ -676,7 +680,7 @@ void CWinSFXMakerDlg::AddFiles()
 
 		if (m_pDlgProgress && m_pDlgProgress->GetSafeHwnd())
 		{
-			m_pDlgProgress->SetProgressStep();
+			m_pDlgProgress->ProgressStepIt();
 			m_pDlgProgress->UpdateText(pItem->m_strFileName);
 		}
 
