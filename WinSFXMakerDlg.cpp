@@ -636,7 +636,10 @@ void CWinSFXMakerDlg::AddFiles()
 {
 	CComboBox* pCombo = (CComboBox*)GetDlgItem(IDC_COMBO_EXECUTABLE_PATH);
 	if (pCombo)
+	{
 		pCombo->ResetContent();
+		pCombo->AddString(_T(""));
+	}
 
 	if (!m_wndList.GetSafeHwnd())
 		return;
@@ -701,19 +704,19 @@ void CWinSFXMakerDlg::AddFiles()
 			return;
 	}
 	
-	//CComboBox* pCombo = (CComboBox*)GetDlgItem(IDC_COMBO_OUTPUT_PATH);
-	//if (pCombo == NULL || !pCombo->GetSafeHwnd())
-	//	return;
+	pCombo = (CComboBox*)GetDlgItem(IDC_COMBO_OUTPUT_PATH);
+	if (pCombo == NULL || !pCombo->GetSafeHwnd())
+		return;
 
-	//pCombo->ResetContent();
-	//for (int nIdnex = 0; nIdnex < m_arPeFiles.GetSize(); ++nIdnex)
-	//{
-	//	strBuffer = m_arPeFiles.GetAt(nIdnex);
-	//	if (strBuffer.IsEmpty())
-	//		continue;
+	strBuffer = m_strInputPath;
+	PathAddBackslash(strBuffer.GetBuffer(BUFSIZ));
+	strBuffer.ReleaseBuffer();
+	strBuffer.Append(PathFindFileName(m_strInputPath));
 
-	//	pCombo->AddString(strBuffer);
-	//}
+	PathAddExtension(strBuffer.GetBuffer(BUFSIZ), _T(".exe"));
+	strBuffer.ReleaseBuffer();
+	pCombo->AddString(strBuffer);
+	pCombo->SetCurSel(0);
 }
 
 INT32 CWinSFXMakerDlg::Initialize()
