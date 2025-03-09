@@ -50,7 +50,7 @@ BOOL CDlgPrgress::OnInitDialog()
 
 	LONG ExtendedStyle = GetWindowLong(GetSafeHwnd(),GWL_EXSTYLE);
 	SetWindowLong(GetSafeHwnd(),GWL_EXSTYLE, ExtendedStyle | WS_EX_LAYERED);
-	::SetLayeredWindowAttributes(GetSafeHwnd(), 0, 150, LWA_ALPHA);
+	::SetLayeredWindowAttributes(GetSafeHwnd(), 0, 220, LWA_ALPHA);
 
 	UpdateData(FALSE);
 
@@ -114,6 +114,16 @@ void CDlgPrgress::UpdateText(LPCTSTR lpszText)
 	pWnd->GetWindowRect(&rt);
 	pDC->SetTextColor(RGB(255, 0, 0));
 	pDC->DrawText(lpszText, _tcslen(lpszText), &rt, DT_CENTER | DT_SINGLELINE | DT_VCENTER);
+}
+
+void CDlgPrgress::UpdateWindow()
+{
+	CWnd *pWnd = GetDlgItem(IDC_STATIC);
+	if (pWnd)
+		pWnd->InvalidateRect(NULL);
+
+	if (m_wndProgress.GetSafeHwnd())
+		m_wndProgress.InvalidateRect(NULL);
 }
 
 void CDlgPrgress::InitTaskProgress()

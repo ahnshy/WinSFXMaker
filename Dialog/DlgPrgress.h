@@ -16,6 +16,7 @@ public:
 	void			ProgressStepIt();
 	void			UpdateText(UINT uID);
 	void			UpdateText(LPCTSTR lpszText);
+	void			UpdateWindow();
 
 	void			CleanTaskProgress();
 
