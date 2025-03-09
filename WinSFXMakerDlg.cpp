@@ -30,9 +30,10 @@ UINT TaskFindFilesFunc(LPVOID pParam)
 	pDlg->FindFiles(pDlg->GetInputPath());
 	pDlg->AddFiles();
 
+	pDlg->ShowResultWnd(FALSE);
+
 	pDlg->UpdateControls();
 	pDlg->EnableWindow(TRUE);
-	pDlg->ShowResultWnd(FALSE);
 
 	return 1;
 }
@@ -471,8 +472,8 @@ void CWinSFXMakerDlg::ShowResultWnd(BOOL bShow)
 
 void CWinSFXMakerDlg::OnTimer(UINT_PTR nIDEvent)
 {
-	if (nIDEvent == IDT_UPDATE_SCREEN)
-		UpdateResult();
+	//if (nIDEvent == IDT_UPDATE_SCREEN)
+		//UpdateResult();
 
 	CDialogEx::OnTimer(nIDEvent);
 }
