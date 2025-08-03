@@ -4,7 +4,7 @@
 <br/><br/>
 
 ## 📖 Overview
-**WinSFXMaker** is a GUI tool for creating **self-extracting (SFX) executables** on Windows. It allows users to bundle ZIP archives into standalone `.exe` files that automatically extract and optionally run an installer or other program.<br/>
+`WinSFXMaker` is a very super simple install-sheild GUI tool for creating **self-extracting (SFX) executables** on Windows. It allows users to bundle ZIP archives into standalone `.exe` files that automatically extract and optionally run an installer or other program.<br/>
 <br/><br/>
 
 ## 🔑 Key Features
@@ -75,7 +75,7 @@
 <br/><br/>
 
 ## 🔍 Acknowledgements
-- Product Design and Developed by **ahnshy**
+- Product Design and Developed by `ahnshy`
 
 - Built with:
   - Microsoft Win32 / MFC & GDI+
