@@ -36,7 +36,6 @@
 ├── WinSFXMaker.*          # Core application logic
 └── README.md              # Project documentation
 ```
-<br/><br/>
 
 ## 📤 How to build (Visual Studio 2013 on Windows 10)
 1. Clone the repository:
