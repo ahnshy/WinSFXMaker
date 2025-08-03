@@ -86,5 +86,9 @@
 <br/><br/>
 
 ## 📝 License
- No explicit license file was found in the repository. This project includes components like `log4cpp` and `minizip`, which are licensed under their respective open-source licenses. Please verify usage rights before redistribution.
+ This project includes components like `log4cpp` and `minizip`, which are licensed under their respective open-source licenses. <br/>
+ Please verify usage rights before redistribution.<br/>
+<br/>
+ `log4cpp` LGPL 2.1 (Lesser General Public License v2.1)<br/>
+ `minizip` zlib/libpng License
 <br/><br/>
