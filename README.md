@@ -1,10 +1,10 @@
 # 📦 WinSFXMaker
  SelF eXtract Maker for Windows.<br/>
  ✅ Tested on Windows 10 / Visual Studio 2013 (Minimum build WindowsXP)
-<br/>
+<br/><br/>
 
 ## 📖 Overview
-**WinSFXMaker** is a GUI tool for creating **self-extracting (SFX) executables** on Windows. It allows users to bundle ZIP archives into standalone `.exe` files that automatically extract and optionally run an installer or other program.
+**WinSFXMaker** is a GUI tool for creating **self-extracting (SFX) executables** on Windows. It allows users to bundle ZIP archives into standalone `.exe` files that automatically extract and optionally run an installer or other program.<br/>
 <br/><br/>
 
 ## 🔑 Key Features
@@ -71,7 +71,9 @@
 <br/><br/>
 
 ## 💻 [Preview]
-<br/>
+<img width="576" height="581" alt="image" src="https://github.com/user-attachments/assets/8ae6901e-29f8-42b7-92a7-be63d0f192b7" />
+<img width="578" height="608" alt="image" src="https://github.com/user-attachments/assets/09f1f970-4d3a-4848-9791-259acaf084cd" />
+<br/><br/>
 
 ## 🔍 Acknowledgements
 - Product Design and Developed by **ahnshy**
