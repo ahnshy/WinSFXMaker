@@ -4,8 +4,12 @@
 <br/><br/>
 
 ## 📖 Overview
-`WinSFXMaker` is a very super simple install-sheild GUI tool for creating **self-extracting (SFX) executables** on Windows. It allows users to bundle ZIP archives into standalone `.exe` files that automatically extract and optionally run an installer or other program.<br/>
+`WinSFXMaker` is a very super simple install-sheild GUI tool for creating **self-extracting (SFX) executables** on Windows. It allows users to bundle ZIP archives into standalone `.exe` files that automatically extract and optionally run an installer or other program.
 <br/><br/>
+
+## 🛠️ Stacks
+![C++14](https://img.shields.io/badge/C%2B%2B14-00599C?logo=c%2B%2B&logoColor=white) ![log4cpp](https://img.shields.io/badge/log4cpp-logger-blue?logo=log4cpp&logoColor=white) ![minizip](https://img.shields.io/badge/minizip-zip-green?logo=minizip&logoColor=white)
+![MFC](https://img.shields.io/badge/MFC-GUI--framework-0078D7)<br/><br/>
 
 ## 🔑 Key Features
 - ✅ Easy-to-use SFX archive generator
@@ -16,6 +20,10 @@
 - ✅ Custom post-extraction execution (e.g., launch installer.exe)
 - ✅ Logging support via log4cpp
 - ✅ Resource management using `SFXTemplate` and `res/`
+<br/><br/>
+
+## 🛠️ Stacks
+<img src="https://img.shields.io/badge/-C++-000000?logo=c%2B%2B" /> <img src="https://img.shields.io/badge/Spring-6DB33F?logo=Spring&logoColor=white"/> <img src="https://img.shields.io/badge/MariaDB-003545?logo=mariaDB&logoColor=white"/><br/><br/>
 <br/><br/>
 
 ## ⚙️ Dev Environment
