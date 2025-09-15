@@ -821,6 +821,7 @@ void CWinSFXMakerDlg::OnCbnEditchangeComboInputPath()
 void CWinSFXMakerDlg::OnLvnItemchangedListArchive(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMLISTVIEW pNMLV = reinterpret_cast<LPNMLISTVIEW>(pNMHDR);
+
 	// TODO: Add your control notification handler code here
 	UpdateControls();
 	*pResult = 0;
@@ -829,6 +830,5 @@ void CWinSFXMakerDlg::OnLvnItemchangedListArchive(NMHDR *pNMHDR, LRESULT *pResul
 
 void CWinSFXMakerDlg::OnCbnEditchangeComboOutputPath()
 {
-	// TODO: Add your control notification handler code here
 	UpdateControls();
 }
