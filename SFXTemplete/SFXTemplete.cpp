@@ -17,7 +17,6 @@
 
 // CSFXTempleteApp
 BEGIN_MESSAGE_MAP(CSFXTempleteApp, CWinApp)
-	//ON_COMMAND(ID_HELP, &CWinApp::OnHelp)
 END_MESSAGE_MAP()
 
 // CSFXTempleteApp construction
