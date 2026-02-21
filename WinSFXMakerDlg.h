@@ -51,6 +51,7 @@ struct SFX_THREAD_PARAM
 	CString strInputPath;
 	CString strOutputPath;
 	CString strIconPath;
+	CString strExecutablePath;  // Executable to run after extraction
 	CString strCompanyName;
 	CString strProductName;
 	CString strVersion;

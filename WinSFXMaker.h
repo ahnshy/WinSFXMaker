@@ -1,4 +1,3 @@
-
 // WinSFXMaker.h : main header file for the PROJECT_NAME application
 //
 
@@ -9,13 +8,13 @@
 #endif
 
 #include "resource.h"		// main symbols
-
+#include "Helper/CLIHelper.h"
 
 // CWinSFXMakerApp:
 // See WinSFXMaker.cpp for the implementation of this class
 //
 
-class CWinSFXMakerApp : public CWinApp
+class CWinSFXMakerApp : public CWinAppEx
 {
 public:
 	CWinSFXMakerApp();
@@ -25,8 +24,13 @@ public:
 	virtual BOOL InitInstance();
 
 // Implementation
-
 	DECLARE_MESSAGE_MAP()
+
+protected:
+	// CLI support
+	CCLIHelper m_cliHelper;
+	CLI_PARAMS m_cliParams;
+	BOOL ProcessCommandLine();
 };
 
 extern CWinSFXMakerApp theApp;
