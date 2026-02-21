@@ -91,7 +91,6 @@ BOOL CSFXTempleteApp::ExtractEmbeddedZip(LPCTSTR outputPath)
 	exeFile.read(zipData.data(), zipSize);
 	exeFile.close();
 
-	// 압축 파일을 outputPath에 저장
 	std::ofstream outFile(outputPath, std::ios::binary);
 	if (!outFile) {
 		AfxMessageBox(_T("압축 파일을 저장할 수 없습니다."));
