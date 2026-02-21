@@ -21,6 +21,7 @@
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEUD)
 LANGUAGE LANG_NEUTRAL, SUBLANG_DEFAULT
+#pragma code_page(949)
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -37,6 +38,7 @@ IDR_TEMPLATE_BINARY     BINARY                  "res\\SFXTemplete.bin"
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_KOR)
 LANGUAGE LANG_KOREAN, SUBLANG_DEFAULT
+#pragma code_page(949)
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -105,6 +107,7 @@ IDB_BITMAP_DIRECTORY_HOT BITMAP                  "res\\Folder_Hot.bmp"
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
 LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -136,8 +139,8 @@ BEGIN
     DEFPUSHBUTTON   "OK",IDOK,113,41,50,14,WS_GROUP
 END
 
-IDD_WINSFXMAKER_DIALOG DIALOGEX 0, 0, 329, 310
-STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+IDD_WINSFXMAKER_DIALOG DIALOGEX 0, 0, 329, 298
+STYLE DS_SETFONT | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
 EXSTYLE WS_EX_APPWINDOW
 CAPTION "WinSFXMaker"
 FONT 9, "Segoe UI", 400, 0, 0x0
@@ -154,7 +157,7 @@ BEGIN
     LTEXT           "Output Pat&h :",IDC_STATIC_OUPUT_PATH,13,174,43,8
     COMBOBOX        IDC_COMBO_OUTPUT_PATH,70,171,221,30,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
     PUSHBUTTON      "...",ID_BUTTON_OUPUT_PATH,296,170,19,14
-    GROUPBOX        "",IDC_STATIC,7,192,206,85
+    GROUPBOX        "",IDC_STATIC,7,192,206,73
     LTEXT           "&Version :",IDC_STATIC_VERSION,14,204,28,8
     EDITTEXT        IDC_EDIT_VERSION,70,202,136,12,ES_AUTOHSCROLL
     LTEXT           "Product &Name :",IDC_STATIC_PRODUCT_NAME,13,218,50,8
@@ -163,13 +166,13 @@ BEGIN
     EDITTEXT        IDC_EDIT_COPYRIGHT,70,230,136,12,ES_AUTOHSCROLL
     LTEXT           "&Description :",IDC_STATIC_DESCRIPTION,13,246,40,8
     EDITTEXT        IDC_EDIT_DESCRIPT,70,244,136,12,ES_AUTOHSCROLL
-    GROUPBOX        "",IDC_STATIC,219,192,103,85
+    GROUPBOX        "",IDC_STATIC,219,192,103,73
     LTEXT           "Icon :",IDC_STATIC_ICON_LABEL,225,204,18,8
-    CONTROL         "",IDC_STATIC_MAIN_ICON,"Static",SS_ICON | SS_CENTERIMAGE | SS_REALSIZEIMAGE,249,207,46,35
-    PUSHBUTTON      "Select...",IDC_BUTTON_ICON,249,248,46,14
-    CONTROL         "",IDC_STATIC_HORZ3,"Static",SS_ETCHEDHORZ | NOT WS_VISIBLE,5,282,320,1
-    DEFPUSHBUTTON   "&Create",IDOK,219,286,50,14
-    PUSHBUTTON      "Canc&el",IDCANCEL,272,286,50,14
+    ICON            "",IDC_STATIC_MAIN_ICON,249,207,20,20,SS_CENTERIMAGE | SS_REALSIZEIMAGE
+    PUSHBUTTON      "Select...",IDC_BUTTON_ICON,249,243,46,14
+    CONTROL         "",IDC_STATIC_HORZ3,"Static",SS_ETCHEDHORZ,5,271,320,1
+    DEFPUSHBUTTON   "&Create",IDOK,219,277,50,14
+    PUSHBUTTON      "Canc&el",IDCANCEL,272,277,50,14
 END
 
 IDD_PROGRESS DIALOGEX 0, 0, 309, 176
@@ -221,7 +224,7 @@ BEGIN
         VERTGUIDE, 70
         VERTGUIDE, 315
         TOPMARGIN, 7
-        BOTTOMMARGIN, 303
+        BOTTOMMARGIN, 291
         HORZGUIDE, 14
         HORZGUIDE, 26
     END
@@ -243,8 +246,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,0,0
- PRODUCTVERSION 1,0,0,0
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -261,12 +264,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "https://github.com/ahnshy"
             VALUE "FileDescription", "Window Self Extract Maker Application"
-            VALUE "FileVersion", "1.0.0.0"
+            VALUE "FileVersion", "1.0.0.1"
             VALUE "InternalName", "WinSFXMaker.exe"
             VALUE "LegalCopyright", "COPYRIGHT (c) ahnshy ALL RIGHTS RESERVED."
             VALUE "OriginalFilename", "WinSFXMaker.exe"
             VALUE "ProductName", "WinSFXMaker Application"
-            VALUE "ProductVersion", "1.0.0.0"
+            VALUE "ProductVersion", "1.0.0.1"
         END
     END
     BLOCK "VarFileInfo"
@@ -309,5 +312,7 @@ LANGUAGE 9, 1
 #include "afxribbon.rc"   // MFC ribbon and control bar resources
 #endif
 #endif
+
 /////////////////////////////////////////////////////////////////////////////
 #endif    // not APSTUDIO_INVOKED
+
