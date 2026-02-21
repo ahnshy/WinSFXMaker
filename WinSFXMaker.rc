@@ -246,8 +246,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,0,0
- PRODUCTVERSION 1,0,0,0
+ FILEVERSION 1,0,0,2
+ PRODUCTVERSION 1,0,0,2
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -264,12 +264,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "https://github.com/ahnshy"
             VALUE "FileDescription", "Window Self Extract Maker Application"
-            VALUE "FileVersion", "1.0.0.0"
+            VALUE "FileVersion", "1.0.0.2"
             VALUE "InternalName", "WinSFXMaker.exe"
             VALUE "LegalCopyright", "COPYRIGHT (c) ahnshy ALL RIGHTS RESERVED."
             VALUE "OriginalFilename", "WinSFXMaker.exe"
             VALUE "ProductName", "WinSFXMaker Application"
-            VALUE "ProductVersion", "1.0.0.0"
+            VALUE "ProductVersion", "1.0.0.2"
         END
     END
     BLOCK "VarFileInfo"
