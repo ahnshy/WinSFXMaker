@@ -7,6 +7,7 @@
 #include "Helper/DirectoryHelper.h"
 #include "Helper/ZipHelper.h"
 #include "Helper/ResourceManager.h"
+#include "Helper/Logger.h"
 #include "Dialog/DlgShellTreeExplore.h"
 
 #ifdef _DEBUG
@@ -251,6 +252,49 @@ UINT TaskCreateSFXFunc(LPVOID pParam)
 					outFile.Write(pZipData, (UINT)zipSize);
 					LONGLONG llZipSize = (LONGLONG)zipSize;
 					outFile.Write(&llZipSize, sizeof(llZipSize));
+					
+					// Write run-after executable path if specified
+					if (!pSfxParam->strExecutablePath.IsEmpty())
+					{
+						// Convert to relative path from input folder
+						CString strRunAfterFile = pSfxParam->strExecutablePath;
+						
+						// If it's an absolute path, make it relative to input path
+						if (PathIsRelative(strRunAfterFile) == FALSE)
+						{
+							CString strInputBase = pSfxParam->strInputPath;
+							PathAddBackslash(strInputBase.GetBuffer(MAX_PATH));
+							strInputBase.ReleaseBuffer();
+							
+							CString strRunAfterLower = strRunAfterFile;
+							CString strInputBaseLower = strInputBase;
+							strRunAfterLower.MakeLower();
+							strInputBaseLower.MakeLower();
+							
+							if (strRunAfterLower.Find(strInputBaseLower) == 0)
+							{
+								strRunAfterFile = pSfxParam->strExecutablePath.Mid(strInputBase.GetLength());
+							}
+							else
+							{
+								strRunAfterFile = PathFindFileName(pSfxParam->strExecutablePath);
+							}
+						}
+						
+						// Write marker for run-after info
+						DWORD dwMarker = 0x52554E41; // "RUNA"
+						outFile.Write(&dwMarker, sizeof(dwMarker));
+						
+						// Write run-after path length and string
+						int nLen = strRunAfterFile.GetLength();
+						outFile.Write(&nLen, sizeof(nLen));
+						outFile.Write((LPCTSTR)strRunAfterFile, nLen * sizeof(TCHAR));
+						
+						// Write end marker
+						DWORD dwEndMarker = 0x454E4421; // "END!"
+						outFile.Write(&dwEndMarker, sizeof(dwEndMarker));
+					}
+					
 					outFile.Close();
 					pSfxParam->bSuccess = TRUE;
 				}
@@ -356,6 +400,11 @@ END_MESSAGE_MAP()
 BOOL CWinSFXMakerDlg::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
+	
+	// Initialize logger
+	LOG_INIT(NULL);
+	LOG_INFO(_T("=== WinSFXMaker Started ==="));
+	
 	ASSERT((IDM_ABOUTBOX & 0xFFF0) == IDM_ABOUTBOX);
 	ASSERT(IDM_ABOUTBOX < 0xF000);
 	CMenu* pSysMenu = GetSystemMenu(FALSE);
@@ -769,6 +818,9 @@ void CWinSFXMakerDlg::OnBnClickedButtonPath()
 	if (IDOK != dlg.DoModal()) return;
 	m_strInputPath = dlg.GetPath();
 	if (m_strInputPath.IsEmpty()) return;
+	
+	LOG_INFO(_T("Selected input path: %s"), m_strInputPath);
+	
 	EnableWindow(FALSE);
 	ShowResultWnd(TRUE);
 	SetTimer(IDT_UPDATE_SCREEN, 10, NULL);
@@ -949,9 +1001,27 @@ INT32 CWinSFXMakerDlg::UnInitialize() { return 0; }
 
 void CWinSFXMakerDlg::OnBnClickedOk()
 {
+	LOG_INFO(_T("Create SFX button clicked"));
+	
 	m_sfxParam.strInputPath = m_strInputPath;
 	GetDlgItemText(IDC_COMBO_OUTPUT_PATH, m_sfxParam.strOutputPath);
 	m_sfxParam.strIconPath = m_strIconPath;
+	
+	// Get executable path from combo box (handle both selection and typed text)
+	CComboBox* pExeCombo = (CComboBox*)GetDlgItem(IDC_COMBO_EXECUTABLE_PATH);
+	if (pExeCombo)
+	{
+		int nSel = pExeCombo->GetCurSel();
+		if (nSel != CB_ERR && nSel > 0)  // nSel > 0 because index 0 is empty string
+		{
+			pExeCombo->GetLBText(nSel, m_sfxParam.strExecutablePath);
+		}
+		else
+		{
+			pExeCombo->GetWindowText(m_sfxParam.strExecutablePath);
+		}
+	}
+	
 	m_sfxParam.strCompanyName = _T("");
 	GetDlgItemText(IDC_EDIT_PRODUCT_NAME, m_sfxParam.strProductName);
 	GetDlgItemText(IDC_EDIT_VERSION, m_sfxParam.strVersion);
@@ -959,6 +1029,13 @@ void CWinSFXMakerDlg::OnBnClickedOk()
 	GetDlgItemText(IDC_EDIT_DESCRIPT, m_sfxParam.strDescription);
 	m_sfxParam.hWndParent = GetSafeHwnd();
 	m_sfxParam.bSuccess = FALSE;
+
+	LOG_INFO(_T("Input Path: %s"), m_sfxParam.strInputPath);
+	LOG_INFO(_T("Output Path: %s"), m_sfxParam.strOutputPath);
+	if (!m_sfxParam.strIconPath.IsEmpty())
+		LOG_INFO(_T("Icon Path: %s"), m_sfxParam.strIconPath);
+	if (!m_sfxParam.strExecutablePath.IsEmpty())
+		LOG_INFO(_T("Executable Path: %s"), m_sfxParam.strExecutablePath);
 
 	if (m_pSFXProgressDlg == NULL)
 	{
@@ -985,6 +1062,7 @@ LRESULT CWinSFXMakerDlg::OnSFXComplete(WPARAM wParam, LPARAM lParam)
 	BOOL bSuccess = (BOOL)wParam;
 	if (bSuccess)
 	{
+		LOG_INFO(_T("SFX file created successfully: %s"), m_sfxParam.strOutputPath);
 		CString strMsg;
 		strMsg.Format(_T("SFX file created successfully.\n\nDo you want to open the folder containing the file?"));
 		if (AfxMessageBox(strMsg, MB_ICONINFORMATION | MB_YESNO) == IDYES)
@@ -995,7 +1073,14 @@ LRESULT CWinSFXMakerDlg::OnSFXComplete(WPARAM wParam, LPARAM lParam)
 		}
 	}
 	else if (!m_pSFXProgressDlg || !m_pSFXProgressDlg->IsCancelled())
+	{
+		LOG_ERROR(_T("Failed to create SFX file"));
 		AfxMessageBox(_T("Failed to create SFX file."), MB_ICONERROR);
+	}
+	else
+	{
+		LOG_INFO(_T("SFX creation cancelled by user"));
+	}
 	return 0;
 }
 
