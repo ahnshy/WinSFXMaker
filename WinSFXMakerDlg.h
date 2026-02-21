@@ -96,6 +96,21 @@ protected:
 	CString m_strOutputPath;
 	CString m_strIconPath;
 	BOOL m_bTaskFinish;
+	CSize m_szMinSize;
+	
+	// Control position info for resizing
+	struct CTRL_POS {
+		HWND hWnd;
+		UINT nID;
+		CRect rect;
+	};
+	CArray<CTRL_POS, CTRL_POS&> m_arrCtrlPos;
+	void SaveControlPositions();
+	
+	// List column width ratios
+	double m_dColRatio[3];
+	int m_nInitListWidth;
+	
 	CMFCButton m_btnDirectory;
 	CRect m_rtTab;
 	CDlgPrgress* m_pDlgProgress;
@@ -114,6 +129,8 @@ protected:
 	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg void OnPaint();
+	afx_msg void OnSize(UINT nType, int cx, int cy);
+	afx_msg void OnGetMinMaxInfo(MINMAXINFO* lpMMI);
 	afx_msg HCURSOR OnQueryDragIcon();
 	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 	afx_msg void OnWindowPosChanged(WINDOWPOS* lpwndpos);

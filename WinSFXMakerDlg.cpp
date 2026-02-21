@@ -53,8 +53,6 @@ BOOL CDlgSFXProgress::OnInitDialog()
 	SetLayeredWindowAttributes(RGB(0, 0, 0), 200, LWA_ALPHA);
 	SetBackgroundColor(RGB(0, 0, 0));
 	
-	// Center controls will be done in OnSize
-	
 	return TRUE;
 }
 
@@ -64,33 +62,23 @@ void CDlgSFXProgress::OnSize(UINT nType, int cx, int cy)
 	
 	if (cx <= 0 || cy <= 0) return;
 	
-	// Control dimensions - progress bar 30% wider
-	int nControlWidth = 370;  // 222 * 1.3 = ~290
+	int nControlWidth = 370;
 	int nControlX = (cx - nControlWidth) / 2;
 	int nCenterY = cy / 2;
-	
-	// Spacing between controls
 	int nSpacing = 10;
 	
-	// Status label - above progress bar with 10px spacing
 	if (m_ctrlStatus.GetSafeHwnd())
-	{
 		m_ctrlStatus.SetWindowPos(NULL, nControlX, nCenterY - 14 - nSpacing - 10, nControlWidth, 16, SWP_NOZORDER);
-	}
 	
-	// Progress bar - at center
 	if (m_ctrlProgress.GetSafeHwnd())
-	{
 		m_ctrlProgress.SetWindowPos(NULL, nControlX, nCenterY - 7, nControlWidth, 21, SWP_NOZORDER);
-	}
 	
-	// Cancel button - below progress bar with 10px spacing
 	CWnd* pBtnCancel = GetDlgItem(IDC_BUTTON_CANCEL);
 	if (pBtnCancel && pBtnCancel->GetSafeHwnd())
 	{
 		int nBtnWidth = 75;
 		int nBtnX = (cx - nBtnWidth) / 2;
-		pBtnCancel->SetWindowPos(NULL, nBtnX, nCenterY + 7 + nSpacing*4, nBtnWidth, 23, SWP_NOZORDER);
+		pBtnCancel->SetWindowPos(NULL, nBtnX, nCenterY + 7 + nSpacing * 4, nBtnWidth, 23, SWP_NOZORDER);
 	}
 	
 	Invalidate();
@@ -102,8 +90,8 @@ HBRUSH CDlgSFXProgress::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 	
 	if (pWnd->GetDlgCtrlID() == IDC_STATIC_STATUS)
 	{
-		pDC->SetTextColor(RGB(135, 206, 250)); // Sky blue color
-		pDC->SetBkColor(RGB(0, 0, 0)); // Black background
+		pDC->SetTextColor(RGB(135, 206, 250));
+		pDC->SetBkColor(RGB(0, 0, 0));
 		pDC->SetBkMode(OPAQUE);
 		return m_brBackground;
 	}
@@ -138,8 +126,6 @@ void CDlgSFXProgress::OnBnClickedButtonCancel()
 	m_bCancel = TRUE;
 }
 
-// End of CDlgSFXProgress implementation
-
 UINT TaskFindFilesFunc(LPVOID pParam)
 {
 	CWinSFXMakerDlg *pDlg = (CWinSFXMakerDlg*)pParam;
@@ -167,7 +153,6 @@ UINT TaskCreateSFXFunc(LPVOID pParam)
 	CString strTemplateFile;
 	BOOL bCancelled = FALSE;
 
-	// Step 1: ZIP compression (30%)
 	if (pProgress) { pProgress->SetStatus(_T("Compressing files...")); pProgress->SetProgress(0); }
 	if (pProgress && pProgress->IsCancelled()) { bCancelled = TRUE; }
 
@@ -175,16 +160,12 @@ UINT TaskCreateSFXFunc(LPVOID pParam)
 	{
 		CZipHelper zipHelper;
 		zipHelper.AddCompressTarget(pSfxParam->strInputPath);
-
 		strTempPath = CDirectoryHelper::GetTempPath();
 		PathAddBackslash(strTempPath.GetBuffer(MAX_PATH));
 		strTempPath.ReleaseBuffer();
-
 		strZipFile = CFileHelper::GetTimeBaseFileName(strTempPath, _T("zip"));
-		
 		if (pProgress) pProgress->SetProgress(10);
 		if (pProgress && pProgress->IsCancelled()) { bCancelled = TRUE; }
-		
 		if (!bCancelled)
 		{
 			zipHelper.Compress(strZipFile);
@@ -193,11 +174,9 @@ UINT TaskCreateSFXFunc(LPVOID pParam)
 		}
 	}
 
-	// Step 2: Extract template file (40%)
 	if (!bCancelled)
 	{
 		if (pProgress) pProgress->SetStatus(_T("Preparing template..."));
-		
 		strTemplateFile = CFileHelper::GetTimeBaseFileName(strTempPath, _T("exe"));
 		HRSRC hRes = FindResource(AfxGetResourceHandle(), MAKEINTRESOURCE(IDR_TEMPLATE_BINARY), _T("BINARY"));
 		if (hRes)
@@ -219,18 +198,15 @@ UINT TaskCreateSFXFunc(LPVOID pParam)
 				}
 			}
 		}
-
 		if (pProgress) pProgress->SetProgress(40);
 		if (pProgress && pProgress->IsCancelled()) { bCancelled = TRUE; }
 	}
 
-	// Step 3: Apply icon (50%)
 	if (!bCancelled && !pSfxParam->strIconPath.IsEmpty())
 	{
 		if (pProgress) pProgress->SetStatus(_T("Applying icon..."));
 		CResourceManager resMgr;
 		resMgr.ChangeExeIcon(strTemplateFile, pSfxParam->strIconPath);
-
 		if (pProgress) pProgress->SetProgress(50);
 		if (pProgress && pProgress->IsCancelled()) { bCancelled = TRUE; }
 	}
@@ -239,7 +215,6 @@ UINT TaskCreateSFXFunc(LPVOID pParam)
 		if (pProgress) pProgress->SetProgress(50);
 	}
 
-	// Step 4: Apply version info (60%)
 	if (!bCancelled)
 	{
 		if (!pSfxParam->strCompanyName.IsEmpty() || !pSfxParam->strProductName.IsEmpty() ||
@@ -250,16 +225,13 @@ UINT TaskCreateSFXFunc(LPVOID pParam)
 			resMgr.UpdateVersionInfo(strTemplateFile, pSfxParam->strCompanyName, pSfxParam->strProductName,
 				pSfxParam->strVersion, pSfxParam->strCopyright, pSfxParam->strDescription);
 		}
-
 		if (pProgress) pProgress->SetProgress(60);
 		if (pProgress && pProgress->IsCancelled()) { bCancelled = TRUE; }
 	}
 
-	// Step 5: Create SFX file (90%)
 	if (!bCancelled)
 	{
 		if (pProgress) pProgress->SetStatus(_T("Creating SFX file..."));
-		
 		CFile templateFile, zipFile, outFile;
 		if (templateFile.Open(strTemplateFile, CFile::modeRead | CFile::typeBinary))
 		{
@@ -267,14 +239,12 @@ UINT TaskCreateSFXFunc(LPVOID pParam)
 			BYTE* pTemplateData = new BYTE[(size_t)templateSize];
 			templateFile.Read(pTemplateData, (UINT)templateSize);
 			templateFile.Close();
-
 			if (zipFile.Open(strZipFile, CFile::modeRead | CFile::typeBinary))
 			{
 				ULONGLONG zipSize = zipFile.GetLength();
 				BYTE* pZipData = new BYTE[(size_t)zipSize];
 				zipFile.Read(pZipData, (UINT)zipSize);
 				zipFile.Close();
-
 				if (outFile.Open(pSfxParam->strOutputPath, CFile::modeCreate | CFile::modeWrite | CFile::typeBinary))
 				{
 					outFile.Write(pTemplateData, (UINT)templateSize);
@@ -288,18 +258,14 @@ UINT TaskCreateSFXFunc(LPVOID pParam)
 			}
 			delete[] pTemplateData;
 		}
-
 		if (pProgress) pProgress->SetProgress(90);
 	}
 
-	// Step 6: Cleanup temp files (100%)
 	if (pProgress) pProgress->SetStatus(_T("Cleaning up..."));
 	if (!strZipFile.IsEmpty()) DeleteFile(strZipFile);
 	if (!strTemplateFile.IsEmpty()) DeleteFile(strTemplateFile);
-
 	if (pProgress) pProgress->SetProgress(100);
 
-	// Send completion message
 	if (pSfxParam->hWndParent)
 		::PostMessage(pSfxParam->hWndParent, WM_SFX_COMPLETE, (WPARAM)pSfxParam->bSuccess, 0);
 
@@ -345,6 +311,12 @@ CWinSFXMakerDlg::CWinSFXMakerDlg(CWnd* pParent)
 	m_strInputPath.Empty();
 	m_strOutputPath.Empty();
 	m_strIconPath.Empty();
+	m_szMinSize.cx = 0;
+	m_szMinSize.cy = 0;
+	m_nInitListWidth = 0;
+	m_dColRatio[0] = 0.25;
+	m_dColRatio[1] = 0.57;
+	m_dColRatio[2] = 0.14;
 	InitFileInfo();
 }
 
@@ -367,6 +339,8 @@ BEGIN_MESSAGE_MAP(CWinSFXMakerDlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_TIMER()
 	ON_WM_QUERYDRAGICON()
+	ON_WM_SIZE()
+	ON_WM_GETMINMAXINFO()
 	ON_BN_CLICKED(IDOK, &CWinSFXMakerDlg::OnBnClickedOk)
 	ON_WM_CTLCOLOR()
 	ON_WM_WINDOWPOSCHANGED()
@@ -401,7 +375,14 @@ BOOL CWinSFXMakerDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);
 	SetBackgroundColor(RGB(255, 255, 255));
 	
-	// Hide Company Name controls if they exist
+	CRect rtClient;
+	GetClientRect(&rtClient);
+	m_szMinSize.cx = rtClient.Width();
+	m_szMinSize.cy = rtClient.Height();
+	
+	// Save initial control positions
+	SaveControlPositions();
+	
 	CWnd* pCompanyLabel = GetDlgItem(IDC_STATIC_COMPANY_NAME);
 	CWnd* pCompanyEdit = GetDlgItem(IDC_EDIT_COMPANY_NAME);
 	if (pCompanyLabel) pCompanyLabel->ShowWindow(SW_HIDE);
@@ -411,6 +392,176 @@ BOOL CWinSFXMakerDlg::OnInitDialog()
 	UpdateControls();
 	LoadDefaultIcon();
 	return TRUE;
+}
+
+void CWinSFXMakerDlg::OnGetMinMaxInfo(MINMAXINFO* lpMMI)
+{
+	CDialogEx::OnGetMinMaxInfo(lpMMI);
+	
+	// Convert client size to window size for minimum tracking
+	if (m_szMinSize.cx > 0 && m_szMinSize.cy > 0)
+	{
+		CRect rcClient(0, 0, m_szMinSize.cx, m_szMinSize.cy);
+		CRect rcWindow;
+		GetWindowRect(&rcWindow);
+		CRect rcClientActual;
+		GetClientRect(&rcClientActual);
+		
+		int frameW = rcWindow.Width() - rcClientActual.Width();
+		int frameH = rcWindow.Height() - rcClientActual.Height();
+		
+		lpMMI->ptMinTrackSize.x = m_szMinSize.cx + frameW;
+		lpMMI->ptMinTrackSize.y = m_szMinSize.cy + frameH;
+	}
+}
+
+void CWinSFXMakerDlg::SaveControlPositions()
+{
+	m_arrCtrlPos.RemoveAll();
+	
+	CWnd* pChild = GetWindow(GW_CHILD);
+	while (pChild)
+	{
+		CTRL_POS pos;
+		pos.hWnd = pChild->GetSafeHwnd();
+		pos.nID = pChild->GetDlgCtrlID();
+		pChild->GetWindowRect(&pos.rect);
+		ScreenToClient(&pos.rect);
+		m_arrCtrlPos.Add(pos);
+		pChild = pChild->GetNextWindow();
+	}
+}
+
+void CWinSFXMakerDlg::OnSize(UINT nType, int cx, int cy)
+{
+	CDialogEx::OnSize(nType, cx, cy);
+	
+	if (cx <= 0 || cy <= 0) return;
+	if (m_szMinSize.cx <= 0 || m_szMinSize.cy <= 0) return;
+	if (m_arrCtrlPos.GetCount() == 0) return;
+	
+	int dW = cx - m_szMinSize.cx;
+	int dH = cy - m_szMinSize.cy;
+	if (dW < 0) dW = 0;
+	if (dH < 0) dH = 0;
+	
+	for (int i = 0; i < m_arrCtrlPos.GetCount(); i++)
+	{
+		CTRL_POS& pos = m_arrCtrlPos[i];
+		if (!::IsWindow(pos.hWnd)) continue;
+		
+		CRect rc = pos.rect;
+		int newX = rc.left;
+		int newY = rc.top;
+		int newW = rc.Width();
+		int newH = rc.Height();
+		
+		// Identify group boxes by size (width > 80, height > 20)
+		BOOL bIsGroupBox = (pos.nID == IDC_STATIC && rc.Width() > 80 && rc.Height() > 20);
+		
+		if (bIsGroupBox)
+		{
+			// Top group box: starts near top, large height (contains list)
+			if (rc.top < 20 && rc.Height() > 80)
+			{
+				newW = rc.Width() + dW;
+				newH = rc.Height() + dH;
+			}
+			// Output Path group box: small height (~28)
+			else if (rc.Height() < 50 && rc.Height() > 15)
+			{
+				newY = rc.top + dH;
+				newW = rc.Width() + dW;
+			}
+			// Version/Icon group boxes: larger height (~85)
+			else if (rc.Height() >= 50)
+			{
+				newY = rc.top + dH;
+				// Icon group box is on right side (X > 150)
+				if (rc.left > 150)
+				{
+					newX = rc.left + dW;
+				}
+				else
+				{
+					// Version group box expands width
+					newW = rc.Width() + dW;
+				}
+			}
+		}
+		// Separator lines
+		else if (pos.nID == IDC_STATIC_HORZ2 || pos.nID == IDC_STATIC_HORZ3)
+		{
+			newY = rc.top + dH;
+			newW = rc.Width() + dW;
+		}
+		// Top area controls (Y < 150)
+		else if (rc.top < 150)
+		{
+			if (pos.nID == IDC_COMBO_INPUT_PATH || pos.nID == IDC_COMBO_EXECUTABLE_PATH)
+			{
+				newW = rc.Width() + dW;
+			}
+			else if (pos.nID == ID_BUTTON_INPUT_PATH)
+			{
+				newX = rc.left + dW;
+			}
+			else if (pos.nID == IDC_LIST_ARCHIVE)
+			{
+				newW = rc.Width() + dW;
+				newH = rc.Height() + dH;
+			}
+		}
+		// Bottom area controls (Y >= 150)
+		else
+		{
+			// Move down
+			newY = rc.top + dH;
+			
+			// Output Path area
+			if (pos.nID == IDC_COMBO_OUTPUT_PATH)
+			{
+				newW = rc.Width() + dW;
+			}
+			else if (pos.nID == ID_BUTTON_OUPUT_PATH)
+			{
+				newX = rc.left + dW;
+			}
+			// Version edit boxes
+			else if (pos.nID == IDC_EDIT_VERSION || pos.nID == IDC_EDIT_PRODUCT_NAME ||
+					 pos.nID == IDC_EDIT_COPYRIGHT || pos.nID == IDC_EDIT_DESCRIPT)
+			{
+				newW = rc.Width() + dW;
+			}
+			// Icon area controls (right side)
+			else if (pos.nID == IDC_STATIC_MAIN_ICON || pos.nID == IDC_BUTTON_ICON ||
+					 pos.nID == IDC_STATIC_ICON_LABEL)
+			{
+				newX = rc.left + dW;
+			}
+			// Create/Cancel buttons
+			else if (pos.nID == IDOK || pos.nID == IDCANCEL)
+			{
+				newX = rc.left + dW;
+			}
+		}
+		
+		::SetWindowPos(pos.hWnd, NULL, newX, newY, newW, newH, SWP_NOZORDER);
+	}
+	
+	// Adjust list column widths proportionally
+	if (m_wndList.GetSafeHwnd() && m_nInitListWidth > 0)
+	{
+		CRect rtList;
+		m_wndList.GetClientRect(&rtList);
+		int nListWidth = rtList.Width();
+		
+		m_wndList.SetColumnWidth(0, (int)(nListWidth * m_dColRatio[0]));
+		m_wndList.SetColumnWidth(1, (int)(nListWidth * m_dColRatio[1]));
+		m_wndList.SetColumnWidth(2, (int)(nListWidth * m_dColRatio[2]));
+	}
+	
+	Invalidate();
 }
 
 void CWinSFXMakerDlg::OnSysCommand(UINT nID, LPARAM lParam)
@@ -495,11 +646,9 @@ void CWinSFXMakerDlg::UpdateIconPreview()
 
 void CWinSFXMakerDlg::LoadDefaultIcon()
 {
-	// Extract template exe to temp file
 	CString strTempPath = CDirectoryHelper::GetTempPath();
 	PathAddBackslash(strTempPath.GetBuffer(MAX_PATH));
 	strTempPath.ReleaseBuffer();
-	
 	CString strTemplateFile = strTempPath + _T("_sfx_template_icon.exe");
 	
 	HRSRC hRes = FindResource(AfxGetResourceHandle(), MAKEINTRESOURCE(IDR_TEMPLATE_BINARY), _T("BINARY"));
@@ -517,28 +666,19 @@ void CWinSFXMakerDlg::LoadDefaultIcon()
 				{
 					file.Write(pData, dwSize);
 					file.Close();
-					
-					// Extract icon from template exe
 					if (m_hPreviewIcon != NULL) { DestroyIcon(m_hPreviewIcon); m_hPreviewIcon = NULL; }
 					m_hPreviewIcon = ExtractIcon(AfxGetInstanceHandle(), strTemplateFile, 0);
-					
 					CWnd* pIconWnd = GetDlgItem(IDC_STATIC_MAIN_ICON);
 					if (pIconWnd)
 					{
 						CStatic* pStatic = (CStatic*)pIconWnd;
 						if (m_hPreviewIcon && m_hPreviewIcon != (HICON)1)
-						{
 							pStatic->SetIcon(m_hPreviewIcon);
-						}
 						else
-						{
-							// Fallback: use app icon
 							pStatic->SetIcon(m_hIcon);
-						}
 						pIconWnd->Invalidate();
 						pIconWnd->UpdateWindow();
 					}
-					
 					DeleteFile(strTemplateFile);
 				}
 				UnlockResource(hGlobal);
@@ -566,19 +706,25 @@ void CWinSFXMakerDlg::InitControls()
 
 	CRect rt;
 	GetClientRect(&rt);
+	
+	// Save initial list width for column ratio calculation
+	CRect rtList;
+	m_wndList.GetClientRect(&rtList);
+	m_nInitListWidth = rtList.Width();
+	
 	LVCOLUMN item;
 	item.mask = LVCF_FMT | LVCF_WIDTH | LVCF_TEXT | LVCF_SUBITEM;
 	item.fmt = LVCFMT_LEFT;
-	item.cx = (int)(rt.Width() * 0.25);
+	item.cx = (int)(m_nInitListWidth * m_dColRatio[0]);
 	item.pszText = _T("File");
 	item.iSubItem = 0;
 	m_wndList.InsertColumn(0, &item);
-	item.cx = (int)(rt.Width() * 0.52);
+	item.cx = (int)(m_nInitListWidth * m_dColRatio[1]);
 	item.pszText = _T("Path");
 	item.iSubItem = 1;
 	m_wndList.InsertColumn(1, &item);
 	item.fmt = LVCFMT_RIGHT;
-	item.cx = (int)(rt.Width() * 0.14);
+	item.cx = (int)(m_nInitListWidth * m_dColRatio[2]);
 	item.pszText = _T("Size");
 	item.iSubItem = 2;
 	m_wndList.InsertColumn(2, &item);
@@ -706,7 +852,6 @@ void CWinSFXMakerDlg::FindFiles(CString strPath)
 	PathAddBackslash(strPath.GetBuffer(BUFSIZ));
 	strPath.ReleaseBuffer();
 	strPath.Append(_T("*.*"));
-
 	CFileFind ff;
 	BOOL bContinue = ff.FindFile(strPath);
 	CFileInfo* pItem = NULL;
@@ -749,7 +894,6 @@ void CWinSFXMakerDlg::AddFiles()
 	if (m_pDlgProgress && m_pDlgProgress->GetSafeHwnd()) m_pDlgProgress->InitProgessRange((int)m_arFiles.GetCount());
 	if (!m_wndList.GetSafeHwnd()) return;
 	m_wndList.DeleteAllItems();
-
 	CString strBuffer;
 	DWORD dwColumn = 0;
 	CFileInfo* pItem = NULL;
@@ -780,7 +924,6 @@ void CWinSFXMakerDlg::AddFiles()
 		if (m_wndList.GetSafeHwnd()) m_wndList.SetItem(&item);
 		if (m_bTaskFinish) return;
 	}
-
 	for (nCnt = 0; nCnt < (int)m_arPeFiles.GetCount(); nCnt++)
 	{
 		if (m_bTaskFinish) return;
@@ -789,7 +932,6 @@ void CWinSFXMakerDlg::AddFiles()
 		if (pCombo) pCombo->AddString(strBuffer);
 		if (m_bTaskFinish) return;
 	}
-	
 	pCombo = (CComboBox*)GetDlgItem(IDC_COMBO_OUTPUT_PATH);
 	if (pCombo == NULL || !pCombo->GetSafeHwnd()) return;
 	strBuffer = m_strInputPath;
@@ -807,7 +949,6 @@ INT32 CWinSFXMakerDlg::UnInitialize() { return 0; }
 
 void CWinSFXMakerDlg::OnBnClickedOk()
 {
-	// Set parameters
 	m_sfxParam.strInputPath = m_strInputPath;
 	GetDlgItemText(IDC_COMBO_OUTPUT_PATH, m_sfxParam.strOutputPath);
 	m_sfxParam.strIconPath = m_strIconPath;
@@ -819,7 +960,6 @@ void CWinSFXMakerDlg::OnBnClickedOk()
 	m_sfxParam.hWndParent = GetSafeHwnd();
 	m_sfxParam.bSuccess = FALSE;
 
-	// Create progress dialog
 	if (m_pSFXProgressDlg == NULL)
 	{
 		m_pSFXProgressDlg = new CDlgSFXProgress(this);
@@ -830,14 +970,11 @@ void CWinSFXMakerDlg::OnBnClickedOk()
 	m_pSFXProgressDlg->SetStatus(_T("Preparing..."));
 	m_pSFXProgressDlg->m_bCancel = FALSE;
 	
-	// Resize progress dialog to match parent window
 	CRect rtParent;
 	GetWindowRect(&rtParent);
 	m_pSFXProgressDlg->SetWindowPos(&wndTop, rtParent.left, rtParent.top, rtParent.Width(), rtParent.Height(), SWP_SHOWWINDOW);
 	
 	EnableWindow(FALSE);
-
-	// Start thread
 	m_pSFXThread = AfxBeginThread(TaskCreateSFXFunc, &m_sfxParam);
 }
 
@@ -845,7 +982,6 @@ LRESULT CWinSFXMakerDlg::OnSFXComplete(WPARAM wParam, LPARAM lParam)
 {
 	EnableWindow(TRUE);
 	if (m_pSFXProgressDlg) m_pSFXProgressDlg->ShowWindow(SW_HIDE);
-
 	BOOL bSuccess = (BOOL)wParam;
 	if (bSuccess)
 	{
@@ -853,7 +989,6 @@ LRESULT CWinSFXMakerDlg::OnSFXComplete(WPARAM wParam, LPARAM lParam)
 		strMsg.Format(_T("SFX file created successfully.\n\nDo you want to open the folder containing the file?"));
 		if (AfxMessageBox(strMsg, MB_ICONINFORMATION | MB_YESNO) == IDYES)
 		{
-			// Open explorer and select the file
 			CString strParam;
 			strParam.Format(_T("/select,\"%s\""), m_sfxParam.strOutputPath);
 			ShellExecute(NULL, _T("open"), _T("explorer.exe"), strParam, NULL, SW_SHOWNORMAL);
@@ -861,7 +996,6 @@ LRESULT CWinSFXMakerDlg::OnSFXComplete(WPARAM wParam, LPARAM lParam)
 	}
 	else if (!m_pSFXProgressDlg || !m_pSFXProgressDlg->IsCancelled())
 		AfxMessageBox(_T("Failed to create SFX file."), MB_ICONERROR);
-
 	return 0;
 }
 
