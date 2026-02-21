@@ -204,8 +204,8 @@ When the program runs, it creates a log file **next to the executable**.
 <br/><br/>
 
 ## 💻 [Preview]
-<img width="576" height="581" alt="image" src="https://github.com/user-attachments/assets/8ae6901e-29f8-42b7-92a7-be63d0f192b7" />
-<img width="578" height="608" alt="image" src="https://github.com/user-attachments/assets/09f1f970-4d3a-4848-9791-259acaf084cd" />
+<img width="578" height="591" alt="image" src="https://github.com/user-attachments/assets/f2212d41-db01-41e9-ba9c-7e562aff1774" />
+<img width="582" height="588" alt="image" src="https://github.com/user-attachments/assets/5121f400-59f1-43b8-8ea9-6136c2544501" />
 <br/><br/>
 
 ## 🔍 Acknowledgements
